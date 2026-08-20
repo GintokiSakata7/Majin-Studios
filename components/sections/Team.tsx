@@ -239,11 +239,16 @@ export function Team() {
               ACTIVE TEAM
             </TechnicalLabel>
 
+            <h3 className="mt-8 text-5xl sm:text-6xl lg:text-7xl font-black leading-none tracking-tighter uppercase whitespace-nowrap">
             <h3 className="mt-5 text-display">
               {activeMember?.name}
             </h3>
 
-            <div className="mt-3 text-os-value text-accent-current">
+            <div className="mt-4 text-lg sm:text-xl font-mono text-white tracking-widest uppercase opacity-90">
+              {activeMember?.fullName}
+            </div>
+
+            <div className="mt-2 text-os-value text-accent-current">
               {activeMember?.role}
             </div>
 
