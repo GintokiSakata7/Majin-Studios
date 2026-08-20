@@ -176,13 +176,14 @@ export function NetworkScene({ active }: NetworkSceneProps) {
     }
 
     switch (whyStage) {
+      case 'complexity':
       case 'systems':
         targets.current.nodePos.forEach((p, i) => p.copy(initialNodes[i]));
         targets.current.nodeOpacity.fill(0.8);
         targets.current.edgeOpacity.fill(0.4);
         break;
       
-      case 'production':
+      case 'build':
         // Cluster into 4 groups
         targets.current.nodePos.forEach((p, i) => {
           const clusterId = i % 4;
@@ -197,7 +198,8 @@ export function NetworkScene({ active }: NetworkSceneProps) {
         targets.current.edgeOpacity = edges.map(([a, b]) => (a % 4 === b % 4 ? 0.5 : 0.1));
         break;
 
-      case 'workflows':
+      case 'ai':
+      case 'problem':
         targets.current.nodeOpacity = targets.current.nodeOpacity.map((_, i) => {
           if (i >= 16) return 0;
           return i % 4 === 1 ? 1 : 0.3; // Highlight second cluster (AI)
@@ -208,7 +210,7 @@ export function NetworkScene({ active }: NetworkSceneProps) {
         });
         break;
 
-      case 'studio':
+      case 'resolve':
         // Perfect line
         targets.current.nodePos.forEach((p, i) => {
           if (i < 4) p.copy(RESOLVE_POSITIONS[i]);

@@ -94,17 +94,16 @@ function UniverseCamera({
       let trx = THREE.MathUtils.lerp(0, -0.06, p);
       let try_ = THREE.MathUtils.lerp(0.08, -0.12, p);
 
-      // Adjustments for WHY_MAJIN stage
       if (currentScene === 'WHY_MAJIN') {
-        if (whyStage === 'systems') {
+        if (whyStage === 'complexity' || whyStage === 'systems') {
           tz = 12.0; 
-        } else if (whyStage === 'production') {
+        } else if (whyStage === 'build') {
           tz = 10.5; 
           tx += 0.5;
-        } else if (whyStage === 'workflows') {
+        } else if (whyStage === 'ai' || whyStage === 'problem') {
           tx -= 1.0; 
           tz = 10.5;
-        } else if (whyStage === 'studio') {
+        } else if (whyStage === 'resolve') {
           tz = 9.0; 
           tx += 1.0;
           ty += 0.5;

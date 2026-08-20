@@ -25,10 +25,12 @@ export type AccentColor =
   | 'VIOLET';
 
 export type WhyStage =
+  | 'complexity'
   | 'systems'
-  | 'production'
-  | 'workflows'
-  | 'studio';
+  | 'build'
+  | 'ai'
+  | 'problem'
+  | 'resolve';
 
 export type CapabilitiesStage = 'ai' | 'agents' | 'products' | 'custom' | 'data' | 'cloud' | null;
 

@@ -7,7 +7,7 @@ import styles from './SectionHeading.module.css';
 import { TechnicalLabel } from './TechnicalLabel';
 
 interface SectionHeadingProps {
-  title: string;
+  title: React.ReactNode;
 
   metadata?: string;
 
