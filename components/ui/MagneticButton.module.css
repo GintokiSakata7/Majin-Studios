@@ -1,0 +1,44 @@
+.magneticWrap {
+  display: inline-flex;
+
+  position: relative;
+
+  transform:
+    translate3d(0, 0, 0);
+
+  will-change: transform;
+}
+
+.magneticWrap::after {
+  content: '';
+
+  position: absolute;
+
+  inset: -10px;
+
+  border: 1px solid transparent;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  transition:
+    opacity 300ms var(--ease-out),
+    border-color 300ms var(--ease-out);
+}
+
+.magneticWrap:hover::after {
+  opacity: 0.45;
+
+  border-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .magneticWrap {
+    transform: none !important;
+  }
+
+  .magneticWrap::after {
+    display: none;
+  }
+}

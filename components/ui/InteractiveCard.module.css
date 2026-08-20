@@ -1,0 +1,194 @@
+.card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.025),
+      rgba(255, 255, 255, 0)
+    );
+
+  border: 1px solid transparent;
+
+  overflow: hidden;
+
+  transition:
+    transform 500ms var(--ease-out),
+    border-color 450ms var(--ease-out),
+    background 450ms var(--ease-out);
+}
+
+/*
+ * Very subtle structural boundary.
+ */
+.card::before {
+  content: '';
+
+  position: absolute;
+  inset: 0;
+
+  border: 1px solid var(--line-structural);
+
+  pointer-events: none;
+
+  opacity: 0.8;
+
+  transition:
+    border-color 400ms var(--ease-out);
+}
+
+/*
+ * Mouse-following atmosphere.
+ */
+.card::after {
+  content: '';
+
+  position: absolute;
+  inset: -1px;
+
+  background:
+    radial-gradient(
+      380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      var(--accent-dim),
+      transparent 55%
+    );
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition:
+    opacity 500ms var(--ease-out);
+}
+
+/*
+ * Content stays above effects.
+ */
+.content {
+  position: relative;
+  z-index: 3;
+
+  flex: 1;
+}
+
+.header {
+  position: relative;
+
+  z-index: 3;
+
+  padding:
+    var(--space-5)
+    var(--space-6);
+
+  border-bottom: 1px solid transparent;
+
+  transition:
+    border-color 350ms var(--ease-out);
+}
+
+/*
+ * Technical corner marks.
+ */
+.marker {
+  position: absolute;
+
+  width: 8px;
+  height: 8px;
+
+  z-index: 5;
+
+  pointer-events: none;
+
+  opacity: 0.65;
+
+  transition:
+    border-color 350ms var(--ease-out),
+    background-color 350ms var(--ease-out),
+    transform 350ms var(--ease-out);
+}
+
+.tl {
+  top: -1px;
+  left: -1px;
+
+  border-top: 1px solid var(--line-active);
+  border-left: 1px solid var(--line-active);
+}
+
+.tr {
+  top: -1px;
+  right: -1px;
+
+  border-top: 1px solid var(--line-active);
+  border-right: 1px solid var(--line-active);
+}
+
+.bl {
+  bottom: -1px;
+  left: -1px;
+
+  border-bottom: 1px solid var(--line-active);
+  border-left: 1px solid var(--line-active);
+}
+
+.br {
+  bottom: -1px;
+  right: -1px;
+
+  border-bottom: 1px solid var(--line-active);
+  border-right: 1px solid var(--line-active);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card:hover::before {
+  border-color: var(--line-active);
+}
+
+.card:hover::after {
+  opacity: 0.55;
+}
+
+.card:hover .header {
+  border-bottom-color: var(--line-structural);
+}
+
+.card:hover .marker {
+  border-color: var(--accent);
+  opacity: 1;
+}
+
+.card:hover .tl {
+  transform: translate(-2px, -2px);
+}
+
+.card:hover .tr {
+  transform: translate(2px, -2px);
+}
+
+.card:hover .bl {
+  transform: translate(-2px, 2px);
+}
+
+.card:hover .br {
+  transform: translate(2px, 2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .marker,
+  .header {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+}

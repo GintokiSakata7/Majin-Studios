@@ -1,0 +1,212 @@
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 22px;
+  height: 22px;
+
+  pointer-events: none;
+  z-index: var(--z-cursor);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform: translate3d(-100px, -100px, 0);
+  will-change: transform;
+
+  color: var(--text-primary);
+
+  mix-blend-mode: difference;
+
+  transition:
+    width 320ms var(--ease-out),
+    height 320ms var(--ease-out);
+}
+
+.core {
+  width: 3px;
+  height: 3px;
+
+  border-radius: 50%;
+
+  background: currentColor;
+
+  transition:
+    opacity 240ms var(--ease-out),
+    transform 240ms var(--ease-out);
+}
+
+.cross {
+  position: absolute;
+
+  width: 18px;
+  height: 18px;
+
+  opacity: 0;
+  transform: scale(0.5);
+
+  transition:
+    opacity 240ms var(--ease-out),
+    transform 320ms var(--ease-out);
+}
+
+.cross::before,
+.cross::after {
+  content: '';
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 100%;
+  height: 1px;
+
+  background: currentColor;
+
+  transform-origin: center;
+}
+
+.cross::before {
+  transform: translate(-50%, -50%);
+}
+
+.cross::after {
+  transform:
+    translate(-50%, -50%)
+    rotate(90deg);
+}
+
+.ring {
+  position: absolute;
+
+  width: 28px;
+  height: 28px;
+
+  border: 1px solid currentColor;
+  border-radius: 50%;
+
+  opacity: 0;
+  transform: scale(0.55);
+
+  transition:
+    opacity 260ms var(--ease-out),
+    transform 360ms var(--ease-out);
+}
+
+.hudMark {
+  position: absolute;
+
+  bottom: -18px;
+  left: 50%;
+
+  transform:
+    translateX(-50%)
+    translateY(3px);
+
+  white-space: nowrap;
+
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: var(--weight-medium);
+
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  opacity: 0;
+
+  transition:
+    opacity 240ms var(--ease-out),
+    transform 240ms var(--ease-out);
+}
+
+/* Interactive */
+
+.interactive {
+  width: 34px;
+  height: 34px;
+}
+
+.interactive .core {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.interactive .cross {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.interactive .hudMark {
+  opacity: 0.7;
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+/* 3D */
+
+.threeD {
+  width: 42px;
+  height: 42px;
+}
+
+.threeD .core {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.threeD .ring {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.threeD .hudMark {
+  opacity: 0.75;
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+/* Active */
+
+.active {
+  width: 46px;
+  height: 46px;
+}
+
+.active .ring {
+  opacity: 1;
+  transform: scale(1);
+
+  animation: cursorRing 2s ease-in-out infinite;
+}
+
+@keyframes cursorRing {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .active .ring {
+    animation: none;
+  }
+
+  .cursor {
+    transition: none;
+  }
+}

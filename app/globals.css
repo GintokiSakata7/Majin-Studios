@@ -1,49 +1,805 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
+/* =========================================================
+   MAJIN STUDIOS — GLOBAL EXPERIENCE SYSTEM
+   ========================================================= */
+
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* -----------------------------------------------------
+       ENVIRONMENT
+       ----------------------------------------------------- */
+
+    --bg-primary: #050607;
+    --bg-universe: #050607;
+    --bg-elevated: #0a0c0f;
+    --bg-surface: rgba(15, 18, 22, 0.58);
+    --bg-surface-hover: rgba(20, 24, 29, 0.72);
+
+    /* -----------------------------------------------------
+       STRUCTURAL SYSTEM
+       ----------------------------------------------------- */
+
+    --line-structural: #20252c;
+    --line-base: #252b32;
+    --line-active: #46515d;
+    --line-bright: #697580;
+
+    /* -----------------------------------------------------
+       TEXT
+       ----------------------------------------------------- */
+
+    --text-primary: #f4f6f8;
+    --text-secondary: #9ca4ae;
+    --text-metadata: #626a74;
+    --text-disabled: #444b54;
+
+    /* -----------------------------------------------------
+       CONTEXTUAL ACCENTS
+       ----------------------------------------------------- */
+
+    --accent-mono: #f4f6f8;
+    --accent-lime: #b8ff3d;
+    --accent-cyan: #00e5ff;
+    --accent-amber: #ffb347;
+    --accent-violet: #b46cff;
+
+    /* Current active scene accent */
+    --accent-current: var(--accent-mono);
+
+    /*
+     * Used throughout the DOM and atmospheric layers.
+     */
+    --accent-dim: color-mix(
+      in srgb,
+      var(--accent-current) 8%,
+      transparent
+    );
+
+    --accent-glow: color-mix(
+      in srgb,
+      var(--accent-current) 24%,
+      transparent
+    );
+
+    --accent-text: var(--accent-current);
+
+    /* -----------------------------------------------------
+       FONTS
+       ----------------------------------------------------- */
+
+    --font-display:
+      'Inter Tight',
+      var(--font-inter),
+      sans-serif;
+
+    --font-body:
+      var(--font-inter),
+      sans-serif;
+
+    --font-mono:
+      var(--font-ibm-plex-mono),
+      monospace;
+
+    /* -----------------------------------------------------
+       LAYOUT
+       ----------------------------------------------------- */
+
+    --nav-height: 72px;
+
+    --content-max: 1600px;
+
+    /* -----------------------------------------------------
+       SPACING
+       ----------------------------------------------------- */
+
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    --space-24: 6rem;
+    --space-32: 8rem;
+
+    /* -----------------------------------------------------
+       TYPOGRAPHY
+       ----------------------------------------------------- */
+
+    --text-xs: 0.65rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 2rem;
+
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+    --weight-extrabold: 800;
+
+    --leading-tight: 0.95;
+    --leading-body: 1.6;
+
+    --tracking-tight: -0.04em;
+    --tracking-wider: 0.12em;
+
+    /* -----------------------------------------------------
+       MOTION
+       ----------------------------------------------------- */
+
+    --duration-fast: 220ms;
+    --duration-normal: 400ms;
+    --duration-slow: 700ms;
+
+    --ease-out: cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+
+    --ease-in-out: cubic-bezier(
+      0.65,
+      0,
+      0.35,
+      1
+    );
+
+    /* -----------------------------------------------------
+       Z LAYERS
+       ----------------------------------------------------- */
+
+    --z-atmosphere: 0;
+    --z-3d: 10;
+    --z-ui-panels: 20;
+    --z-svg-motion: 30;
+    --z-dom: 40;
+    --z-hud: 50;
+    --z-nav: 80;
+    --z-cursor: 100;
+  }
+
+  /*
+   * -------------------------------------------------------
+   * CONTEXTUAL ACCENT STATES
+   * -------------------------------------------------------
+   */
+
+  html[data-accent='monochrome'] {
+    --accent-current: var(--accent-mono);
+  }
+
+  html[data-accent='lime'] {
+    --accent-current: var(--accent-lime);
+  }
+
+  html[data-accent='cyan'] {
+    --accent-current: var(--accent-cyan);
+  }
+
+  html[data-accent='amber'] {
+    --accent-current: var(--accent-amber);
+  }
+
+  html[data-accent='violet'] {
+    --accent-current: var(--accent-violet);
   }
 }
 
-html {
-  height: 100%;
-}
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
   html {
-    color-scheme: dark;
+    background: var(--bg-universe);
+    color: var(--text-primary);
+
+    /*
+     * Do not globally force smooth scrolling.
+     * GSAP / ScrollTrigger controls cinematic motion.
+     */
+    scroll-behavior: auto;
+
+    overscroll-behavior-x: none;
   }
+
+  body {
+    margin: 0;
+    padding: 0;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    background:
+      radial-gradient(
+        70% 50% at 50% 0%,
+        rgba(255, 255, 255, 0.018),
+        transparent 70%
+      ),
+      var(--bg-universe);
+
+    color: var(--text-primary);
+
+    font-family: var(--font-body);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    text-rendering: optimizeLegibility;
+  }
+
+  /*
+   * Root elements.
+   */
+  body,
+  #__next {
+    min-height: 100vh;
+  }
+
+  /*
+   * Next App Router does not require a flex root,
+   * but keeping this harmlessly fills the viewport.
+   */
+  #__next {
+    width: 100%;
+  }
+
+  /*
+   * Selection.
+   */
+  ::selection {
+    background: var(--accent-current);
+    color: var(--bg-universe);
+  }
+
+  /*
+   * Scrollbar.
+   */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg-universe);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--line-base);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--line-active);
+  }
+
+  /*
+   * Form controls.
+   */
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+}
+
+@layer utilities {
+  /* =======================================================
+     TYPOGRAPHY
+     ======================================================= */
+
+  .text-display-giant {
+    font-family: var(--font-display);
+
+    font-size:
+      clamp(
+        3.5rem,
+        7vw,
+        7.5rem
+      );
+
+    font-weight: var(--weight-extrabold);
+
+    letter-spacing: -0.065em;
+
+    line-height: 0.82;
+
+    color: var(--text-primary);
+
+    text-transform: uppercase;
+
+    text-wrap: balance;
+  }
+
+  .text-display {
+    font-family: var(--font-display);
+
+    font-size:
+      clamp(
+        2.5rem,
+        5.5vw,
+        5.5rem
+      );
+
+    font-weight: var(--weight-bold);
+
+    letter-spacing: -0.045em;
+
+    line-height: 0.9;
+
+    color: var(--text-primary);
+
+    text-wrap: balance;
+  }
+
+  .text-heading-1 {
+    font-family: var(--font-display);
+
+    font-size:
+      clamp(
+        2.75rem,
+        5vw,
+        5rem
+      );
+
+    font-weight: var(--weight-bold);
+
+    letter-spacing: -0.045em;
+
+    line-height: 0.92;
+
+    color: var(--text-primary);
+
+    text-wrap: balance;
+  }
+
+  .text-heading-2 {
+    font-family: var(--font-display);
+
+    font-size:
+      clamp(
+        2rem,
+        4vw,
+        4rem
+      );
+
+    font-weight: var(--weight-bold);
+
+    letter-spacing: -0.04em;
+
+    line-height: 0.95;
+
+    color: var(--text-primary);
+
+    text-wrap: balance;
+  }
+
+  .text-heading-3 {
+    font-family: var(--font-display);
+
+    font-size:
+      clamp(
+        1.5rem,
+        2.5vw,
+        2.5rem
+      );
+
+    font-weight: var(--weight-semibold);
+
+    letter-spacing: -0.025em;
+
+    line-height: 0.95;
+
+    color: var(--text-primary);
+  }
+
+  .text-body-lg {
+    font-family: var(--font-body);
+
+    font-size:
+      clamp(
+        1rem,
+        1.6vw,
+        1.3rem
+      );
+
+    line-height: 1.55;
+
+    color: var(--text-secondary);
+  }
+
+  .text-body {
+    font-family: var(--font-body);
+
+    font-size: 1rem;
+
+    line-height: var(--leading-body);
+
+    color: var(--text-secondary);
+  }
+
+  .text-body-sm {
+    font-family: var(--font-body);
+
+    font-size: 0.875rem;
+
+    line-height: 1.55;
+
+    color: var(--text-secondary);
+  }
+
+  .text-os-label {
+    font-family: var(--font-mono);
+
+    font-size: 0.625rem;
+
+    font-weight: var(--weight-medium);
+
+    line-height: 1;
+
+    letter-spacing: 0.13em;
+
+    text-transform: uppercase;
+
+    color: var(--text-metadata);
+  }
+
+  .text-os-value {
+    font-family: var(--font-mono);
+
+    font-size: 0.75rem;
+
+    font-weight: var(--weight-medium);
+
+    line-height: 1;
+
+    letter-spacing: 0.06em;
+
+    text-transform: uppercase;
+
+    color: var(--accent-current);
+  }
+
+  /* =======================================================
+     ACCENTS
+     ======================================================= */
+
+  .text-accent-current {
+    color: var(--accent-current) !important;
+  }
+
+  .bg-accent-current {
+    background-color: var(--accent-current) !important;
+  }
+
+  .border-accent-current {
+    border-color: var(--accent-current) !important;
+  }
+
+  .text-primary {
+    color: var(--text-primary);
+  }
+
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+
+  .text-metadata {
+    color: var(--text-metadata);
+  }
+
+  .bg-universe {
+    background-color: var(--bg-universe);
+  }
+
+  .bg-surface {
+    background-color: var(--bg-surface);
+  }
+
+  .bg-surface-hover {
+    background-color: var(--bg-surface-hover);
+  }
+
+  .border-line-structural {
+    border-color: var(--line-structural);
+  }
+
+  .border-line-active {
+    border-color: var(--line-active);
+  }
+
+  .bg-line-active {
+    background-color: var(--line-active);
+  }
+
+  .bg-line-structural {
+    background-color: var(--line-structural);
+  }
+
+  /* =======================================================
+     LAYOUT
+     ======================================================= */
+
+  .page-container {
+    width: 100%;
+
+    max-width: var(--content-max);
+
+    margin-inline: auto;
+
+    padding-inline: 5vw;
+  }
+
+  .section {
+    position: relative;
+
+    z-index: var(--z-dom);
+  }
+
+  /* =======================================================
+     EXPERIENCE LAYERS
+     ======================================================= */
+
+  .layer-atmosphere {
+    position: relative;
+    z-index: var(--z-atmosphere);
+  }
+
+  .layer-3d {
+    position: relative;
+    z-index: var(--z-3d);
+  }
+
+  .layer-panels {
+    position: relative;
+    z-index: var(--z-ui-panels);
+  }
+
+  .layer-svg {
+    position: relative;
+    z-index: var(--z-svg-motion);
+  }
+
+  .layer-dom {
+    position: relative;
+    z-index: var(--z-dom);
+  }
+
+  .layer-hud {
+    position: relative;
+    z-index: var(--z-hud);
+
+    pointer-events: none;
+  }
+
+  /* =======================================================
+     MOTION HELPERS
+     ======================================================= */
+
+  .motion-trace,
+  .motion-connect,
+  .motion-node,
+  .motion-assemble,
+  .motion-activate,
+  .motion-transform,
+  .motion-resolve {
+    will-change:
+      transform,
+      opacity;
+  }
+
+  /*
+   * Prevent hidden animation elements from flashing
+   * before GSAP initializes.
+   */
+  .motion-assemble {
+    backface-visibility: hidden;
+  }
+
+  /* =======================================================
+     INTERACTIVE CURSOR HELPERS
+     ======================================================= */
+
+  [data-cursor='interactive'],
+  [data-cursor='active'],
+  [data-cursor='3d'] {
+    cursor: none;
+  }
+
+  /* =======================================================
+     ATMOSPHERIC UTILITIES
+     ======================================================= */
+
+  .atmosphere {
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+      radial-gradient(
+        circle at 50% 50%,
+        var(--accent-dim),
+        transparent 62%
+      );
+
+    opacity: 0.8;
+  }
+
+  .scanlines {
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0,
+        transparent 3px,
+        rgba(255,255,255,0.008) 4px
+      );
+
+    opacity: 0.25;
+  }
+
+  /* =======================================================
+     MOBILE
+     ======================================================= */
+
+  @media (max-width: 768px) {
+    .page-container {
+      padding-inline: 6vw;
+    }
+
+    .text-display-giant {
+      font-size:
+        clamp(
+          3.6rem,
+          17vw,
+          7rem
+        );
+    }
+
+    [data-cursor='interactive'],
+    [data-cursor='active'],
+    [data-cursor='3d'] {
+      cursor: auto;
+    }
+  }
+
+  /* =======================================================
+     REDUCED MOTION
+     ======================================================= */
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* =========================================================
+   GLOBAL THREE.JS CANVAS
+   ========================================================= */
+
+#canvas-container {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  z-index: var(--z-3d);
+
+  pointer-events: none;
+
+  overflow: hidden;
+}
+
+#canvas-container canvas {
+  display: block;
+
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/*
+ * Global cinematic overlays.
+ */
+#canvas-container::before {
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at center,
+      transparent 35%,
+      rgba(0,0,0,0.32) 100%
+    );
+
+  z-index: 1;
+}
+
+#canvas-container::after {
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.015),
+      transparent 20%,
+      transparent 80%,
+      rgba(0,0,0,0.22)
+    );
+
+  z-index: 2;
+}
+
+/* =========================================================
+   MAIN CONTENT POSITIONING
+   ========================================================= */
+
+main.layer-dom {
+  position: relative;
+
+  z-index: var(--z-dom);
+}
+
+/*
+ * Keep Footer above the persistent world.
+ */
+footer {
+  position: relative;
+
+  z-index: var(--z-dom);
 }

@@ -1,0 +1,175 @@
+.nav {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: var(--nav-height);
+
+  z-index: var(--z-nav);
+
+  display: flex;
+  align-items: center;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(5, 6, 7, 0.82),
+      rgba(5, 6, 7, 0.42)
+    );
+
+  backdrop-filter:
+    blur(18px);
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,0.06);
+}
+
+.container {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+.brand {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  font-family: var(--font-display);
+
+  font-weight: var(--weight-bold);
+
+  font-size: var(--text-lg);
+
+  letter-spacing: 0.08em;
+
+  color: var(--text-primary);
+}
+
+.brandMark {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background:
+    var(--accent);
+
+  box-shadow:
+    0 0 12px
+    var(--accent-glow);
+}
+
+.links {
+  display: flex;
+
+  align-items: center;
+
+  gap: var(--space-8);
+}
+
+.link {
+  position: relative;
+
+  font-family: var(--font-mono);
+
+  font-size: 9px;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+  color: var(--text-secondary);
+
+  transition:
+    color 250ms var(--ease-out);
+}
+
+.link::after {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: -7px;
+
+  height: 1px;
+
+  background: var(--accent);
+
+  transform:
+    scaleX(0);
+
+  transform-origin:
+    left center;
+
+  transition:
+    transform 300ms var(--ease-out);
+}
+
+.link:hover {
+  color: var(--text-primary);
+}
+
+.link:hover::after {
+  transform:
+    scaleX(1);
+}
+
+.status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  font-family: var(--font-mono);
+
+  font-size: 8px;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+  color: var(--text-metadata);
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background:
+    var(--accent);
+
+  box-shadow:
+    0 0 10px
+    var(--accent-glow);
+}
+
+@media (max-width: 900px) {
+  .links {
+    gap: var(--space-5);
+  }
+
+  .status {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .links {
+    display: none;
+  }
+}

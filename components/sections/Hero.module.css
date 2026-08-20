@@ -1,0 +1,181 @@
+.hero {
+  position: relative;
+
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  background:
+    radial-gradient(
+      45% 70% at 70% 50%,
+      var(--accent-dim),
+      transparent 68%
+    );
+}
+
+.container {
+  position: relative;
+
+  z-index: var(--z-above);
+
+  width: 100%;
+}
+
+.content {
+  width: min(
+    820px,
+    68vw
+  );
+
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--space-6);
+}
+
+.label {
+  margin-bottom: var(--space-2);
+}
+
+.headline {
+  font-family: var(--font-display);
+
+  font-size: clamp(
+    3.5rem,
+    7vw,
+    7.5rem
+  );
+
+  font-weight: var(--weight-bold);
+
+  line-height: 0.82;
+
+  letter-spacing: -0.065em;
+
+  color: var(--text-primary);
+
+  text-wrap: balance;
+}
+
+.headlineAccent {
+  color: var(--accent);
+}
+
+.description {
+  max-width: 650px;
+
+  color: var(--text-secondary);
+
+  font-size: clamp(
+    1rem,
+    1.6vw,
+    1.35rem
+  );
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+
+  gap: var(--space-5);
+
+  margin-top: var(--space-4);
+}
+
+.systemReadout {
+  position: absolute;
+
+  right: 6%;
+  bottom: 12%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, auto);
+
+  gap:
+    8px 28px;
+
+  font-family: var(--font-mono);
+
+  font-size: 9px;
+
+  letter-spacing: 0.12em;
+
+  color: var(--text-metadata);
+
+  text-transform: uppercase;
+
+  pointer-events: none;
+}
+
+.readoutAccent {
+  color: var(--accent);
+}
+
+.corner {
+  position: absolute;
+
+  width: 26px;
+  height: 26px;
+
+  z-index: 4;
+
+  pointer-events: none;
+}
+
+.cornerTL {
+  top: calc(var(--nav-height) + 30px);
+  left: 30px;
+
+  border-top: 1px solid var(--line-active);
+  border-left: 1px solid var(--line-active);
+}
+
+.cornerBR {
+  right: 30px;
+  bottom: 30px;
+
+  border-right: 1px solid var(--line-active);
+  border-bottom: 1px solid var(--line-active);
+}
+
+@media (max-width: 900px) {
+  .content {
+    width: 100%;
+    max-width: 760px;
+  }
+
+  .systemReadout {
+    right: 5%;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    min-height: 100svh;
+  }
+
+  .headline {
+    font-size: clamp(
+      3.8rem,
+      18vw,
+      7rem
+    );
+  }
+
+  .actions {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .systemReadout {
+    display: none;
+  }
+}

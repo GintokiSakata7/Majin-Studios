@@ -1,0 +1,316 @@
+.section {
+  position: relative;
+  z-index: var(--z-above);
+
+  min-height: 140vh;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      50% 60% at 70% 45%,
+      var(--accent-dim),
+      transparent 68%
+    );
+}
+
+.inner {
+  position: relative;
+  min-height: 140vh;
+
+  display: flex;
+  flex-direction: column;
+
+  padding-top: calc(var(--nav-height) + var(--space-16));
+  padding-bottom: var(--space-32);
+}
+
+.header {
+  position: relative;
+  z-index: 5;
+
+  margin-bottom: var(--space-20);
+}
+
+.visualField {
+  position: relative;
+
+  min-height: 820px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.network {
+  position: absolute;
+  inset: 4% 7%;
+
+  pointer-events: none;
+
+  opacity: 0.9;
+}
+
+.orbit {
+  position: absolute;
+
+  border: 1px solid var(--line-structural);
+  border-radius: 50%;
+
+  transform: rotate(-12deg);
+}
+
+.orbitOne {
+  width: 620px;
+  height: 260px;
+}
+
+.orbitTwo {
+  width: 820px;
+  height: 380px;
+
+  transform:
+    rotate(27deg)
+    scaleY(0.7);
+}
+
+.core {
+  position: absolute;
+
+  width: 170px;
+  height: 170px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--line-active);
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,0.045),
+      rgba(255,255,255,0.01) 65%,
+      transparent
+    );
+
+  box-shadow:
+    0 0 80px var(--accent-glow);
+}
+
+.core::before,
+.core::after {
+  content: '';
+
+  position: absolute;
+
+  width: 12px;
+  height: 12px;
+
+  border: 1px solid var(--accent);
+
+  transition:
+    transform 700ms var(--ease-out),
+    background 500ms var(--ease-out);
+}
+
+.core::before {
+  top: -7px;
+  left: 50%;
+
+  transform: translateX(-50%);
+}
+
+.core::after {
+  bottom: -7px;
+  left: 50%;
+
+  transform: translateX(-50%);
+}
+
+.core:hover::before {
+  transform:
+    translateX(-50%)
+    scale(1.8);
+}
+
+.core:hover::after {
+  transform:
+    translateX(-50%)
+    scale(1.8);
+}
+
+.coreLabel {
+  position: absolute;
+
+  bottom: -34px;
+
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+
+  color: var(--text-metadata);
+}
+
+.capabilities {
+  position: absolute;
+  inset: 0;
+}
+
+.capability {
+  position: absolute;
+
+  max-width: 360px;
+
+  cursor: pointer;
+
+  pointer-events: auto;
+
+  transition:
+    transform 500ms var(--ease-out),
+    opacity 400ms var(--ease-out);
+}
+
+.capability:hover {
+  transform: translateY(-6px);
+}
+
+.ai {
+  top: 10%;
+  right: 4%;
+}
+
+.agents {
+  top: 37%;
+  left: 1%;
+}
+
+.products {
+  right: 5%;
+  bottom: 15%;
+}
+
+.custom {
+  bottom: 8%;
+  left: 13%;
+}
+
+.number {
+  margin-bottom: var(--space-3);
+}
+
+.title {
+  margin: 0;
+
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+
+  color: var(--text-primary);
+}
+
+.description {
+  margin-top: var(--space-4);
+
+  max-width: 340px;
+
+  color: var(--text-secondary);
+}
+
+.connector {
+  position: absolute;
+
+  background: var(--line-structural);
+}
+
+.connectorHorizontal {
+  height: 1px;
+}
+
+.connectorVertical {
+  width: 1px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: var(--space-4);
+
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+
+  color: var(--text-metadata);
+}
+
+.statusDot {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: var(--accent);
+
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+@media (max-width: 1100px) {
+  .visualField {
+    min-height: 900px;
+  }
+
+  .orbitTwo {
+    width: 720px;
+    height: 330px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section,
+  .inner {
+    min-height: auto;
+  }
+
+  .visualField {
+    min-height: 1000px;
+
+    display: block;
+  }
+
+  .network {
+    inset: 15% 0;
+  }
+
+  .orbitOne {
+    width: 500px;
+    height: 210px;
+  }
+
+  .orbitTwo {
+    width: 560px;
+    height: 260px;
+  }
+
+  .core {
+    width: 120px;
+    height: 120px;
+  }
+
+  .capability {
+    position: relative;
+
+    inset: auto !important;
+    right: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    top: auto !important;
+
+    max-width: none;
+
+    margin-bottom: var(--space-12);
+  }
+}

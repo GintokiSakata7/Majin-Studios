@@ -1,0 +1,76 @@
+.connector {
+  position: relative;
+  display: block;
+  flex: 1;
+  pointer-events: none;
+}
+
+.horizontal {
+  width: 100%;
+  height: 24px;
+}
+
+.vertical {
+  width: 24px;
+  height: 100%;
+  min-height: 24px;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.path {
+  fill: none;
+  stroke: var(--connector-color, var(--line-structural));
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  opacity: 0.7;
+  transition:
+    stroke var(--duration-fast) var(--ease-out),
+    opacity var(--duration-fast) var(--ease-out);
+}
+
+.node {
+  fill: var(--connector-color, var(--line-active));
+  opacity: 0.95;
+}
+
+.accent {
+  --connector-color: var(--accent);
+}
+
+.active {
+  --connector-color: var(--line-active);
+}
+
+.structural {
+  --connector-color: var(--line-structural);
+}
+
+.animated .path {
+  animation: connectorPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes connectorPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+
+  50% {
+    opacity: 0.95;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated .path {
+    animation: none;
+  }
+}

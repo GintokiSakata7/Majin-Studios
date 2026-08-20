@@ -1,0 +1,170 @@
+.section {
+  position: relative;
+
+  min-height: 120vh;
+
+  background:
+    radial-gradient(
+      40% 50% at 50% 45%,
+      var(--accent-dim),
+      transparent 70%
+    );
+}
+
+.processList {
+  position: relative;
+
+  max-width: 900px;
+
+  margin:
+    0
+    auto;
+
+  padding-left: 80px;
+}
+
+.track {
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  left: 24px;
+
+  width: 1px;
+}
+
+.line {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      var(--line-structural) 7%,
+      var(--line-structural) 93%,
+      transparent
+    );
+}
+
+.activeLine {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 1px;
+  height: 0;
+
+  background: var(--accent);
+
+  box-shadow:
+    0 0 18px var(--accent-glow);
+}
+
+.step {
+  position: relative;
+
+  min-height: 170px;
+
+  padding-bottom:
+    var(--space-16);
+}
+
+.node {
+  position: absolute;
+
+  top: 5px;
+  left: -62px;
+
+  width: 14px;
+  height: 14px;
+
+  border:
+    1px solid
+    var(--line-active);
+
+  background:
+    var(--bg-primary);
+
+  transition:
+    background 400ms var(--ease-out),
+    border-color 400ms var(--ease-out),
+    transform 500ms var(--ease-out),
+    box-shadow 500ms var(--ease-out);
+}
+
+.node::after {
+  content: '';
+
+  position: absolute;
+
+  inset: 4px;
+
+  background: var(--line-active);
+
+  transition:
+    background 400ms var(--ease-out);
+}
+
+.stepActive .node {
+  border-color: var(--accent);
+
+  transform: scale(1.35);
+
+  box-shadow:
+    0 0 16px var(--accent-glow);
+}
+
+.stepActive .node::after {
+  background: var(--accent);
+}
+
+.content {
+  position: relative;
+}
+
+.stepNum {
+  margin-bottom: var(--space-3);
+}
+
+.title {
+  margin: 0;
+
+  font-family: var(--font-display);
+
+  font-size:
+    clamp(
+      2rem,
+      5vw,
+      5rem
+    );
+
+  line-height: 0.9;
+
+  letter-spacing: -0.045em;
+
+  color: var(--text-primary);
+}
+
+.desc {
+  max-width: 600px;
+
+  margin-top: var(--space-4);
+
+  color: var(--text-secondary);
+}
+
+@media (max-width: 640px) {
+  .processList {
+    padding-left: 52px;
+  }
+
+  .track {
+    left: 16px;
+  }
+
+  .node {
+    left: -44px;
+  }
+}

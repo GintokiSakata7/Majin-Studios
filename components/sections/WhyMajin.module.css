@@ -1,0 +1,18 @@
+.section {
+  position: relative;
+  background-color: var(--bg-primary);
+  padding: calc(var(--section-gap) * 1.5) 0;
+}
+
+.statements {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  align-items: center;
+  text-align: center;
+}
+
+.statement {
+  max-width: 1000px;
+  /* Will be animated with GSAP in Phase 4 */
+}

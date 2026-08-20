@@ -1,0 +1,52 @@
+.section {
+  position: relative;
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--line-structural);
+}
+
+.header {
+  margin-bottom: var(--space-16);
+}
+
+.architectureMap {
+  padding: var(--space-12) 0;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+.nodes {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  min-width: max-content;
+}
+
+.node {
+  padding: var(--space-4) var(--space-6);
+  border: 1px solid var(--line-structural);
+  background-color: var(--bg-surface);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  letter-spacing: var(--tracking-wider);
+}
+
+.accentNode {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.nodeGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border: 1px dashed var(--line-structural);
+}
+
+.connector {
+  font-family: var(--font-mono);
+  color: var(--line-active);
+}

@@ -1,0 +1,122 @@
+.container {
+  position: relative;
+
+  overflow: hidden;
+
+  flex-shrink: 0;
+}
+
+.line {
+  position: absolute;
+
+  background: var(--line-structural);
+
+  transform-origin: left center;
+
+  will-change: transform;
+
+  pointer-events: none;
+}
+
+.horizontal .line {
+  top: 50%;
+  left: 0;
+
+  width: 100%;
+  height: 1px;
+
+  transform:
+    scaleX(0)
+    translateY(-50%);
+}
+
+.vertical .line {
+  top: 0;
+  left: 50%;
+
+  width: 1px;
+  height: 100%;
+
+  transform:
+    scaleY(0)
+    translateX(-50%);
+
+  transform-origin: top center;
+}
+
+.structural {
+  background-color: var(--line-structural);
+}
+
+.active {
+  background-color: var(--line-active);
+}
+
+.accent {
+  background-color: var(--accent);
+
+  box-shadow:
+    0 0 12px var(--accent-glow);
+}
+
+.animated.horizontal .line {
+  animation:
+    lineDrawHorizontal
+    1.1s
+    var(--ease-out)
+    forwards;
+}
+
+.animated.vertical .line {
+  animation:
+    lineDrawVertical
+    1.1s
+    var(--ease-out)
+    forwards;
+}
+
+@keyframes lineDrawHorizontal {
+  from {
+    transform:
+      scaleX(0)
+      translateY(-50%);
+  }
+
+  to {
+    transform:
+      scaleX(1)
+      translateY(-50%);
+  }
+}
+
+@keyframes lineDrawVertical {
+  from {
+    transform:
+      scaleY(0)
+      translateX(-50%);
+  }
+
+  to {
+    transform:
+      scaleY(1)
+      translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated.horizontal .line {
+    animation: none;
+
+    transform:
+      scaleX(1)
+      translateY(-50%);
+  }
+
+  .animated.vertical .line {
+    animation: none;
+
+    transform:
+      scaleY(1)
+      translateX(-50%);
+  }
+}
