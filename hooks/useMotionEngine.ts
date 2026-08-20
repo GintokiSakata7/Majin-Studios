@@ -157,12 +157,14 @@ export function useMotionEngine() {
         '.motion-assemble'
       );
 
-      gsap.set(assemblyElements, {
-        opacity: 0,
-        y: 18,
-        scale: 0.985,
-        transformOrigin: 'center center',
-      });
+      if (assemblyElements.length) {
+        gsap.set(assemblyElements, {
+          opacity: 0,
+          y: 18,
+          scale: 0.985,
+          transformOrigin: 'center center',
+        });
+      }
 
       /*
        * -----------------------------------------------------
@@ -175,11 +177,13 @@ export function useMotionEngine() {
         '.motion-node'
       );
 
-      gsap.set(nodes, {
-        opacity: 0,
-        scale: 0,
-        transformOrigin: 'center center',
-      });
+      if (nodes.length) {
+        gsap.set(nodes, {
+          opacity: 0,
+          scale: 0,
+          transformOrigin: 'center center',
+        });
+      }
 
       /*
        * -----------------------------------------------------
@@ -193,9 +197,11 @@ export function useMotionEngine() {
         '.motion-activate'
       );
 
-      gsap.set(activateElements, {
-        opacity: 0.55,
-      });
+      if (activateElements.length) {
+        gsap.set(activateElements, {
+          opacity: 0.55,
+        });
+      }
 
       /*
        * -----------------------------------------------------
@@ -219,9 +225,11 @@ export function useMotionEngine() {
         '.motion-resolve'
       );
 
-      gsap.set(resolveElements, {
-        opacity: 0,
-      });
+      if (resolveElements.length) {
+        gsap.set(resolveElements, {
+          opacity: 0,
+        });
+      }
 
       /*
        * -----------------------------------------------------

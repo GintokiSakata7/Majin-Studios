@@ -1,7 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import Image from 'next/image';
+import emailjs from '@emailjs/browser';
 import styles from './Footer.module.css';
 
 import {
@@ -12,6 +13,30 @@ import {
 } from '../ui';
 
 export function Footer() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!formRef.current) return;
+
+    setStatus('submitting');
+    try {
+      await emailjs.sendForm(
+        'service_wmrsyml',
+        'template_48fvrme',
+        formRef.current,
+        '8fJxCzFEsIZ75m-59'
+      );
+      setStatus('success');
+      formRef.current.reset();
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      setStatus('idle');
+      alert('Failed to send message. Please try again.');
+    }
+  };
+
   return (
     <footer
       id="contact"
@@ -73,42 +98,60 @@ export function Footer() {
                 <OSLabel label="SYSTEM" value="COMMUNICATIONS" />
               </div>
 
-              <div className="flex flex-col gap-4">
-                <div>
-                  <p className="text-body text-secondary mb-4">
-                    Ready to build your next system? Send us an outline of your project, requirements, or general inquiry.
+              {status === 'success' ? (
+                <div className="flex flex-col items-center justify-center text-center py-12">
+                  <div className="text-4xl text-accent-current mb-4">✓</div>
+                  <h3 className="text-display">SYSTEM INITIALIZED.</h3>
+                  <p className="mt-4 text-body text-secondary max-w-md">
+                    Your project parameters have been captured. The Majin team can now review the system.
                   </p>
-                  
-                  <form 
-                    className="flex flex-col gap-6 w-full max-w-xl"
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      console.log("Form submission triggered");
-                    }}
-                  >
-                    <div className={styles.field}>
-                      <label className={styles.label}>USER.NAME</label>
-                      <input required type="text" className={styles.input} placeholder="Your name" name="name" />
-                    </div>
-                    
-                    <div className={styles.field}>
-                      <label className={styles.label}>USER.EMAIL</label>
-                      <input required type="email" className={styles.input} placeholder="you@company.com" name="email" />
-                    </div>
-                    
-                    <div className={styles.field}>
-                      <label className={styles.label}>QUERY</label>
-                      <textarea required className={styles.textarea} placeholder="Describe your project, requirements, or inquiry..." name="query" />
-                    </div>
-
-                    <div className="mt-4">
-                      <Button type="submit" withArrow>
-                        INITIALIZE COMMS
-                      </Button>
-                    </div>
-                  </form>
+                  <div className="mt-8">
+                    <Button variant="outline" onClick={() => setStatus('idle')}>
+                      NEW SEQUENCE
+                    </Button>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="flex flex-col gap-4">
+                  <div>
+                    <p className="text-body text-secondary mb-4">
+                      Ready to build your next system? Send us an outline of your project, requirements, or general inquiry.
+                    </p>
+                    
+                    <form 
+                      ref={formRef}
+                      className="flex flex-col gap-6 w-full max-w-xl"
+                      onSubmit={handleSubmit}
+                    >
+                      <div className={styles.field}>
+                        <label className={styles.label}>USER.NAME</label>
+                        <input required type="text" className={styles.input} placeholder="Your name" name="name" />
+                      </div>
+                      
+                      <div className={styles.field}>
+                        <label className={styles.label}>USER.EMAIL</label>
+                        <input required type="email" className={styles.input} placeholder="you@company.com" name="email" />
+                      </div>
+                      
+                      <div className={styles.field}>
+                        <label className={styles.label}>COMPANY / INDIVIDUAL</label>
+                        <input type="text" className={styles.input} placeholder="Your company or just 'Individual'" name="company" />
+                      </div>
+
+                      <div className={styles.field}>
+                        <label className={styles.label}>QUERY</label>
+                        <textarea required className={styles.textarea} placeholder="Describe your project, requirements, or inquiry..." name="query" />
+                      </div>
+
+                      <div className="mt-4">
+                        <Button type="submit" disabled={status === 'submitting'} withArrow>
+                          {status === 'submitting' ? 'INITIALIZING...' : 'INITIALIZE COMMS'}
+                        </Button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
