@@ -109,7 +109,6 @@ export const teamData: TeamMember[] = [
     id: 'avinash',
     name: 'Avinash',
     fullName: 'Avinash Basani',
-    role: 'Full-Stack Software Engineer',
     role: 'Full Stack Software Developer',
     specialties: [
       'Full-Stack',
