@@ -33,7 +33,6 @@ export interface TeamMember {
 
   linkedin?: string;
 
-  github?: string;
 
   photo?: string;
 }
@@ -65,7 +64,6 @@ export const teamData: TeamMember[] = [
     },
 
     linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
   },
 
   {

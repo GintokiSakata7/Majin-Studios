@@ -14,6 +14,4 @@ export * from './Team';
 
 export * from './WhyMajin';
 
-export * from './Contact';
-
 export * from './Footer';

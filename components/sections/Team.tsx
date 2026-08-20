@@ -157,13 +157,7 @@ export function Team() {
                             ) *
                               260
                           )}px`,
-                          transform: `
-                            translateY(-50%)
-                            rotate(${Math.atan2(
-                              position.y,
-                              position.x
-                            )}rad)
-                          `,
+                          transform: `translateY(-50%) rotate(${Math.atan2(position.y, position.x)}rad)`,
                           opacity:
                             activeId ===
                             member.id
@@ -288,18 +282,7 @@ export function Team() {
                 </a>
               )}
 
-              {activeMember?.github && (
-                <a
-                  href={
-                    activeMember.github
-                  }
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-os-label hover:text-accent-current transition-colors"
-                >
-                  GITHUB →
-                </a>
-              )}
+
             </div>
           </div>
         </div>

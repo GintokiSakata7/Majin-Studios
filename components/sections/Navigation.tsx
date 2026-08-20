@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 
 import styles from './Navigation.module.css';
 
@@ -20,11 +21,13 @@ export function Navigation() {
           className={styles.brand}
           data-cursor="interactive"
         >
-          <span
-            className={styles.brandMark}
+          <Image 
+            src="/logo.jpg" 
+            alt="Majin Studios" 
+            width={140} 
+            height={45} 
+            className={styles.brandLogo} 
           />
-
-          MAJIN
         </a>
 
         <div className={styles.links}>
@@ -54,6 +57,13 @@ export function Navigation() {
             className={styles.link}
           >
             Studio
+          </a>
+
+          <a
+            href="#why-majin"
+            className={styles.link}
+          >
+            Why Us
           </a>
 
           <a

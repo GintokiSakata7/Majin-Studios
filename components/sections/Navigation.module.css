@@ -38,35 +38,15 @@
 
 .brand {
   position: relative;
-
   display: flex;
   align-items: center;
-
-  gap: 10px;
-
-  font-family: var(--font-display);
-
-  font-weight: var(--weight-bold);
-
-  font-size: var(--text-lg);
-
-  letter-spacing: 0.08em;
-
-  color: var(--text-primary);
 }
 
-.brandMark {
-  width: 6px;
-  height: 6px;
-
-  border-radius: 50%;
-
-  background:
-    var(--accent);
-
-  box-shadow:
-    0 0 12px
-    var(--accent-glow);
+.brandLogo {
+  width: 140px;
+  height: 45px;
+  object-fit: cover;
+  mix-blend-mode: screen;
 }
 
 .links {
