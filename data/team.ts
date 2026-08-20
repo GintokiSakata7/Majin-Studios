@@ -8,6 +8,7 @@ export type TeamAccent =
 export interface TeamMember {
   id: string;
   name: string;
+  fullName: string;
   role: string;
   title?: string;
   specialties: string[];
@@ -26,6 +27,7 @@ export const teamData: TeamMember[] = [
   {
     id: 'dhanush',
     name: 'Dhanush',
+    fullName: 'Dhanush A',
     role: 'Co-Founder & CPO',
     specialties: [
       'Product Strategy',
@@ -41,6 +43,7 @@ export const teamData: TeamMember[] = [
   {
     id: 'rishi',
     name: 'Rishi',
+    fullName: 'Rishivardhan Chepuri',
     role: 'Co-Founder & CTO',
     specialties: [
       'AI/ML',
@@ -57,6 +60,7 @@ export const teamData: TeamMember[] = [
   {
     id: 'koushik',
     name: 'Koushik',
+    fullName: 'Thalari Krishna Koushik',
     role: 'Co-Founder & COO',
     specialties: [
       'Operations',
@@ -72,6 +76,7 @@ export const teamData: TeamMember[] = [
   {
     id: 'rohith',
     name: 'Rohith',
+    fullName: 'Rohith Reddy Thalasani',
     role: 'Business Development Manager',
     specialties: [
       'Business Development',
@@ -87,6 +92,7 @@ export const teamData: TeamMember[] = [
   {
     id: 'saran',
     name: 'Saran',
+    fullName: 'Saran Sai Iyinakota',
     role: 'Sales And Marketing Specialist',
     specialties: [
       'Marketing',
@@ -102,6 +108,7 @@ export const teamData: TeamMember[] = [
   {
     id: 'avinash',
     name: 'Avinash',
+    fullName: 'Avinash Basani',
     role: 'Full Stack Developer Intern',
     specialties: [
       'Full-Stack',
