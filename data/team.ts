@@ -102,7 +102,7 @@ export const teamData: TeamMember[] = [
   {
     id: 'avinash',
     name: 'Avinash',
-    role: 'Full Stack Developer Intern',
+    role: 'Full Stack Software Developer',
     specialties: [
       'Full-Stack',
       'MERN Stack',

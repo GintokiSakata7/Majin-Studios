@@ -239,7 +239,7 @@ export function Team() {
               ACTIVE TEAM
             </TechnicalLabel>
 
-            <h3 className="mt-5 text-display-giant">
+            <h3 className="mt-5 text-display">
               {activeMember?.name}
             </h3>
 
