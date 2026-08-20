@@ -30,9 +30,9 @@ export function Contact() {
     try {
       await emailjs.sendForm(
         'service_wmrsyml',
-        'YOUR_TEMPLATE_ID',
+        'template_48fvrme',
         formRef.current,
-        'YOUR_PUBLIC_KEY'
+        '8fJxCzFEsIZ75m-59'
       );
       setStatus('success');
       formRef.current.reset();

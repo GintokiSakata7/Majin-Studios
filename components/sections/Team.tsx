@@ -152,20 +152,13 @@ export function Team() {
                         style={{
                           width: `${Math.max(
                             90,
-                            Math.abs(
-                              position.x
-                            ) *
-                              260
+                            Math.abs(position.x) * 260
                           )}px`,
                           transform: `translateY(-50%) rotate(${Math.atan2(
                             position.y,
                             position.x
-                          )}rad)`,
-                          opacity:
-                            activeId ===
-                            member.id
-                              ? 1
-                              : 0.35,
+                          ).toFixed(5)}rad)`,
+                          opacity: activeId === member.id ? 1 : 0.35,
                         }}
                       >
                         <div
