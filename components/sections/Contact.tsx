@@ -3,6 +3,7 @@
 import React, {
   useState,
 } from 'react';
+import emailjs from '@emailjs/browser';
 
 import styles from './Contact.module.css';
 
@@ -34,8 +35,14 @@ export function Contact() {
 
   const [projectType, setProjectType] =
     useState('AI SYSTEM');
+  const [description, setDescription] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [company, setCompany] = useState('');
+  const [budget, setBudget] = useState('');
+  const [timeline, setTimeline] = useState('');
 
-  const handleSubmit = (
+  const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
@@ -51,9 +58,27 @@ export function Contact() {
 
     setStatus('submitting');
 
-    window.setTimeout(() => {
+    try {
+      await emailjs.send(
+        'service_wmrsyml',
+        'YOUR_TEMPLATE_ID',
+        {
+          project_type: projectType,
+          description: description,
+          user_name: name,
+          user_email: email,
+          company: company,
+          budget: budget,
+          timeline: timeline,
+        },
+        'YOUR_PUBLIC_KEY'
+      );
       setStatus('success');
-    }, 1200);
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      setStatus('idle');
+      alert('Failed to send message. Please try again.');
+    }
   };
 
   const reset =
@@ -231,6 +256,8 @@ export function Contact() {
                             styles.textarea
                           }
                           placeholder="Describe the problem, product, or system you want to build..."
+                          value={description}
+                          onChange={(e) => setDescription(e.target.value)}
                         />
                       </div>
                     </div>
@@ -260,6 +287,8 @@ export function Contact() {
                             styles.input
                           }
                           placeholder="Your name"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
                         />
                       </div>
 
@@ -283,6 +312,8 @@ export function Contact() {
                             styles.input
                           }
                           placeholder="you@company.com"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
                         />
                       </div>
 
@@ -296,7 +327,7 @@ export function Contact() {
                             styles.label
                           }
                         >
-                          COMPANY
+                          COMPANY / INDIVIDUAL
                         </label>
 
                         <input
@@ -304,7 +335,9 @@ export function Contact() {
                           className={
                             styles.input
                           }
-                          placeholder="Optional"
+                          placeholder="Your company or just 'Individual'"
+                          value={company}
+                          onChange={(e) => setCompany(e.target.value)}
                         />
                       </div>
                     </div>
@@ -336,6 +369,8 @@ export function Contact() {
                             className={
                               styles.select
                             }
+                            value={budget}
+                            onChange={(e) => setBudget(e.target.value)}
                           >
                             <option>
                               SELECT
@@ -376,6 +411,8 @@ export function Contact() {
                             className={
                               styles.select
                             }
+                            value={timeline}
+                            onChange={(e) => setTimeline(e.target.value)}
                           >
                             <option>
                               SELECT

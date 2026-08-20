@@ -133,6 +133,11 @@
   cursor: pointer;
 }
 
+.select option {
+  background-color: #0f0f0f;
+  color: #ffffff;
+}
+
 .sequence {
   position: relative;
 
