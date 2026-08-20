@@ -4,6 +4,7 @@ import React, {
   Suspense,
   useEffect,
   useRef,
+  useState,
 } from 'react';
 
 import {
@@ -62,6 +63,8 @@ function UniverseCamera({
   const { camera } =
     useThree();
 
+  const { whyStage, currentScene } = useGlobalState();
+
   const target =
     useRef({
       x: 0,
@@ -77,23 +80,6 @@ function UniverseCamera({
       const progress =
         progressRef.current;
 
-      /*
-       * ------------------------------------------------------
-       * CAMERA PATH
-       * ------------------------------------------------------
-       *
-       * This is intentionally continuous.
-       * It is not a set of hard camera jumps.
-       *
-       * 0.00 → Core
-       * 0.20 → Capabilities
-       * 0.42 → Systems
-       * 0.60 → Agents
-       * 0.76 → Products
-       * 0.90 → Team
-       * 1.00 → Contact
-       */
-
       const p =
         THREE.MathUtils.clamp(
           progress,
@@ -101,80 +87,41 @@ function UniverseCamera({
           1
         );
 
-      target.current.x =
-        THREE.MathUtils.lerp(
-          -1.5,
-          1.2,
-          p
-        );
+      // Base path
+      let tx = THREE.MathUtils.lerp(-1.5, 1.2, p);
+      let ty = THREE.MathUtils.lerp(0.3, -0.35, p);
+      let tz = THREE.MathUtils.lerp(15, 10.5, p);
+      let trx = THREE.MathUtils.lerp(0, -0.06, p);
+      let try_ = THREE.MathUtils.lerp(0.08, -0.12, p);
 
-      target.current.y =
-        THREE.MathUtils.lerp(
-          0.3,
-          -0.35,
-          p
-        );
+      // Adjustments for WHY_MAJIN stage
+      if (currentScene === 'WHY_MAJIN') {
+        if (whyStage === 'systems') {
+          tz = 12.0; 
+        } else if (whyStage === 'production') {
+          tz = 10.5; 
+          tx += 0.5;
+        } else if (whyStage === 'workflows') {
+          tx -= 1.0; 
+          tz = 10.5;
+        } else if (whyStage === 'studio') {
+          tz = 9.0; 
+          tx += 1.0;
+          ty += 0.5;
+        }
+      }
 
-      target.current.z =
-        THREE.MathUtils.lerp(
-          15,
-          10.5,
-          p
-        );
+      target.current.x = tx;
+      target.current.y = ty;
+      target.current.z = tz;
+      target.current.rx = trx;
+      target.current.ry = try_;
 
-      target.current.rx =
-        THREE.MathUtils.lerp(
-          0,
-          -0.06,
-          p
-        );
-
-      target.current.ry =
-        THREE.MathUtils.lerp(
-          0.08,
-          -0.12,
-          p
-        );
-
-      camera.position.x =
-        THREE.MathUtils.damp(
-          camera.position.x,
-          target.current.x,
-          2.6,
-          delta
-        );
-
-      camera.position.y =
-        THREE.MathUtils.damp(
-          camera.position.y,
-          target.current.y,
-          2.6,
-          delta
-        );
-
-      camera.position.z =
-        THREE.MathUtils.damp(
-          camera.position.z,
-          target.current.z,
-          2.6,
-          delta
-        );
-
-      camera.rotation.x =
-        THREE.MathUtils.damp(
-          camera.rotation.x,
-          target.current.rx,
-          2.6,
-          delta
-        );
-
-      camera.rotation.y =
-        THREE.MathUtils.damp(
-          camera.rotation.y,
-          target.current.ry,
-          2.6,
-          delta
-        );
+      camera.position.x = THREE.MathUtils.damp(camera.position.x, target.current.x, 2.6, delta);
+      camera.position.y = THREE.MathUtils.damp(camera.position.y, target.current.y, 2.6, delta);
+      camera.position.z = THREE.MathUtils.damp(camera.position.z, target.current.z, 2.6, delta);
+      camera.rotation.x = THREE.MathUtils.damp(camera.rotation.x, target.current.rx, 2.6, delta);
+      camera.rotation.y = THREE.MathUtils.damp(camera.rotation.y, target.current.ry, 2.6, delta);
     }
   );
 
@@ -279,10 +226,8 @@ function UniverseController() {
 
         <NetworkScene
           active={
-            currentScene ===
-              'CAPABILITIES' ||
-            currentScene ===
-              'SYSTEMS'
+            currentScene === 'CAPABILITIES' ||
+            currentScene === 'WHY_MAJIN'
           }
         />
 
@@ -300,55 +245,50 @@ function UniverseController() {
 }
 
 export function UniverseScene() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <div
       id="canvas-container"
       data-cursor="3d"
       style={{
-        position:
-          'fixed',
-
+        position: 'fixed',
         inset: 0,
-
         width: '100%',
         height: '100%',
-
         zIndex: 0,
-
-        pointerEvents:
-          'none',
+        pointerEvents: 'none',
       }}
       aria-hidden="true"
     >
-      <Canvas
-        camera={{
-          position: [
-            0,
-            0,
-            15,
-          ],
-          fov: 44,
-          near: 0.1,
-          far: 100,
-        }}
-        gl={{
-          antialias: true,
-          alpha: true,
-          powerPreference:
-            'high-performance',
-        }}
-        dpr={[
-          1,
-          1.75,
-        ]}
-        frameloop="always"
-      >
-        <Suspense fallback={null}>
-          <SceneEnvironment />
-
-          <UniverseController />
-        </Suspense>
-      </Canvas>
+      {mounted && (
+        <Canvas
+          eventSource={document.body}
+          eventPrefix="client"
+          camera={{
+            position: [0, 0, 15],
+            fov: 44,
+            near: 0.1,
+            far: 100,
+          }}
+          gl={{
+            antialias: true,
+            alpha: true,
+            powerPreference: 'high-performance',
+          }}
+          dpr={[1, 1.75]}
+          frameloop="always"
+        >
+          <Suspense fallback={null}>
+            <SceneEnvironment />
+            <UniverseController />
+          </Suspense>
+        </Canvas>
+      )}
     </div>
   );
 }

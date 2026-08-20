@@ -243,7 +243,7 @@ export function Team() {
           {/* ACTIVE MEMBER */}
           <div className="col-span-12 lg:col-span-4 flex flex-col justify-center">
             <TechnicalLabel variant="accent">
-              ACTIVE NODE / TEAM
+              ACTIVE TEAM
             </TechnicalLabel>
 
             <h3 className="mt-5 text-display-giant">

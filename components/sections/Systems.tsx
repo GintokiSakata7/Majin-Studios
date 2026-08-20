@@ -1,16 +1,7 @@
 'use client';
 
-import React, {
-  useMemo,
-  useState,
-} from 'react';
-
-import {
-  SectionHeading,
-  OSLabel,
-  TechnicalLabel,
-} from '../ui';
-
+import React, { useState, useMemo } from 'react';
+import { SectionHeading } from '../ui';
 import { useMotionEngine } from '../../hooks/useMotionEngine';
 
 interface SystemNode {
@@ -20,296 +11,206 @@ interface SystemNode {
   x: number;
   y: number;
   accent?: boolean;
+  subsystems: string[];
 }
 
 const nodes: SystemNode[] = [
-  {
-    id: 'client',
-    label: 'CLIENT',
-    type: 'ENTRY',
-    x: 8,
-    y: 50,
-  },
-  {
-    id: 'frontend',
-    label: 'FRONTEND',
-    type: 'EXPERIENCE',
-    x: 25,
-    y: 50,
-  },
-  {
-    id: 'api',
-    label: 'API LAYER',
-    type: 'ORCHESTRATION',
-    x: 42,
-    y: 50,
-  },
-  {
-    id: 'backend',
-    label: 'BACKEND',
-    type: 'LOGIC',
-    x: 59,
-    y: 35,
-  },
-  {
-    id: 'database',
-    label: 'DATABASE',
-    type: 'STATE',
-    x: 59,
-    y: 68,
-  },
-  {
-    id: 'ai',
-    label: 'AI ENGINE',
-    type: 'INTELLIGENCE',
-    x: 76,
-    y: 35,
-    accent: true,
-  },
-  {
-    id: 'agents',
-    label: 'AGENTS',
-    type: 'EXECUTION',
-    x: 76,
-    y: 68,
-    accent: true,
-  },
-  {
-    id: 'result',
-    label: 'PRODUCT',
-    type: 'OUTPUT',
-    x: 94,
-    y: 50,
-    accent: true,
-  },
+  { id: 'client', label: 'CLIENT', type: 'ENTRY', x: 10, y: 50, subsystems: ['WEB', 'MOBILE', 'DESKTOP', 'API CONSUMERS'] },
+  { id: 'frontend', label: 'FRONTEND', type: 'EXPERIENCE', x: 25, y: 50, subsystems: ['REACT', 'THREE.JS', 'STATE', 'UI COMPONENTS'] },
+  { id: 'api', label: 'API LAYER', type: 'ORCHESTRATION', x: 40, y: 50, subsystems: ['GRAPHQL', 'REST', 'WEBSOCKETS', 'GATEWAY'] },
+  { id: 'backend', label: 'BACKEND', type: 'LOGIC', x: 55, y: 50, subsystems: ['APIs', 'AUTH', 'BUSINESS LOGIC', 'JOBS', 'INTEGRATIONS'] },
+  { id: 'data', label: 'DATA', type: 'PERSISTENCE', x: 75, y: 25, subsystems: ['DATABASES', 'CACHING', 'QUEUES', 'STREAMS'] },
+  { id: 'ai', label: 'AI ENGINE', type: 'INTELLIGENCE', x: 75, y: 50, accent: true, subsystems: ['LLM', 'RAG', 'TOOLS', 'MEMORY', 'EVALUATION'] },
+  { id: 'agents', label: 'AGENTS', type: 'EXECUTION', x: 75, y: 75, accent: true, subsystems: ['PLANNER', 'WORKERS', 'STATE', 'ORCHESTRATOR'] },
+  { id: 'product', label: 'PRODUCT', type: 'OUTPUT', x: 92, y: 50, accent: true, subsystems: ['DASHBOARD', 'WORKFLOWS', 'USER EXPERIENCE'] },
 ];
 
 export function Systems() {
-  const containerRef =
-    useMotionEngine();
-
-  const [activeNode, setActiveNode] =
-    useState('ai');
-
-  const activeDetails = useMemo(
-    () =>
-      nodes.find(
-        (node) =>
-          node.id === activeNode
-      ),
-    [activeNode]
-  );
+  const containerRef = useMotionEngine();
+  const [activeNode, setActiveNode] = useState('ai');
+  const activeDetails = useMemo(() => nodes.find((n) => n.id === activeNode), [activeNode]);
 
   return (
-    <section
-      className="section relative min-h-[130vh] py-32"
-      id="systems"
-    >
-      <div
-        ref={containerRef}
-        className="page-container"
-      >
+    <section className="section relative min-h-[120vh] py-32" id="systems">
+      <div ref={containerRef} className="page-container">
         <div className="mb-20">
           <SectionHeading
-            title="SOFTWARE IS MORE THAN AN INTERFACE."
-            metadata="FIG. 03 — SYSTEM ARCHITECTURE"
+            title="SYSTEM ARCHITECTURE"
+            metadata="FIG. 03 — PRECISION PIPELINE"
           />
         </div>
 
-        <div className="relative min-h-[760px] flex flex-col justify-between">
-          <div className="relative h-[560px] border border-line-structural overflow-hidden">
-            {/* Background grid */}
+        <div className="relative min-h-[700px] flex flex-col justify-between">
+          <div className="relative h-[600px] border border-line-structural overflow-hidden bg-universe">
+            {/* Background Grid */}
             <div
-              className="absolute inset-0 opacity-25"
+              className="absolute inset-0 opacity-15"
               style={{
-                backgroundImage: `
-                  linear-gradient(
-                    var(--line-structural) 1px,
-                    transparent 1px
-                  ),
-                  linear-gradient(
-                    90deg,
-                    var(--line-structural) 1px,
-                    transparent 1px
-                  )
-                `,
-                backgroundSize:
-                  '56px 56px',
+                backgroundImage: `linear-gradient(var(--line-structural) 1px, transparent 1px), linear-gradient(90deg, var(--line-structural) 1px, transparent 1px)`,
+                backgroundSize: '40px 40px',
               }}
             />
 
-            {/* Main architecture SVG */}
+            {/* SVG Data Pipeline */}
             <svg
-              className="absolute inset-0 w-full h-full"
-              viewBox="0 0 1000 500"
+              className="absolute inset-0 w-full h-full pointer-events-none"
+              viewBox="0 0 1000 600"
               preserveAspectRatio="none"
               fill="none"
               aria-hidden="true"
             >
+              {/* Static faint tracks */}
+              <path d="M100 300 H550" stroke="var(--line-structural)" strokeWidth="1" opacity="0.3" />
+              <path d="M550 300 C620 300 680 150 750 150" stroke="var(--line-structural)" strokeWidth="1" opacity="0.3" />
+              <path d="M550 300 H750" stroke="var(--line-structural)" strokeWidth="1" opacity="0.3" />
+              <path d="M550 300 C620 300 680 450 750 450" stroke="var(--line-structural)" strokeWidth="1" opacity="0.3" />
+              
+              <path d="M750 150 C820 150 880 300 920 300" stroke="var(--line-structural)" strokeWidth="1" opacity="0.3" />
+              <path d="M750 300 H920" stroke="var(--line-structural)" strokeWidth="1" opacity="0.3" />
+              <path d="M750 450 C820 450 880 300 920 300" stroke="var(--line-structural)" strokeWidth="1" opacity="0.3" />
+
+              {/* Animated glowing data flow */}
               <path
                 className="motion-trace"
-                d="M80 250 H250 H420 L590 175 H760 L930 250"
+                d="M100 300 H550"
                 stroke="var(--line-active)"
-                strokeWidth="1"
+                strokeWidth="2"
               />
-
               <path
                 className="motion-trace"
-                d="M420 250 L590 340 H760 L930 250"
-                stroke="var(--line-structural)"
-                strokeWidth="1"
+                d="M550 300 C620 300 680 150 750 150"
+                stroke="var(--line-active)"
+                strokeWidth="2"
+                style={{ animationDelay: '0.4s' }}
+              />
+              <path
+                className="motion-trace"
+                d="M550 300 H750"
+                stroke="var(--accent-current)"
+                strokeWidth="2"
+                style={{ animationDelay: '0.5s' }}
+              />
+              <path
+                className="motion-trace"
+                d="M550 300 C620 300 680 450 750 450"
+                stroke="var(--accent-current)"
+                strokeWidth="2"
+                style={{ animationDelay: '0.6s' }}
               />
 
+              {/* Output flow */}
               <path
-                className="motion-connect"
-                d="M590 175 V340"
-                stroke="var(--line-structural)"
-                strokeWidth="1"
-              />
-
-              <path
-                className="motion-connect"
-                d="M760 175 V340"
-                stroke="var(--accent)"
-                strokeWidth="1"
-                opacity="0.55"
-              />
-
-              <path
-                className="motion-connect"
-                d="M420 250 C500 180 520 145 590 175"
-                stroke="var(--line-structural)"
-                strokeWidth="1"
-                strokeDasharray="5 7"
+                className="motion-trace"
+                d="M750 300 H920"
+                stroke="var(--accent-current)"
+                strokeWidth="2"
+                style={{ animationDelay: '0.9s' }}
               />
             </svg>
 
             {/* Nodes */}
-            {nodes.map(
-              (node) => (
+            {nodes.map((node) => {
+              const isActive = activeNode === node.id;
+              
+              return (
                 <button
                   key={node.id}
                   type="button"
-                  className="absolute motion-node group"
+                  className="absolute motion-node group z-10"
                   style={{
                     left: `${node.x}%`,
                     top: `${node.y}%`,
-                    transform:
-                      'translate(-50%, -50%)',
+                    transform: 'translate(-50%, -50%)',
+                    opacity: isActive ? 1 : 0.6,
+                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
                   }}
-                  onMouseEnter={() =>
-                    setActiveNode(
-                      node.id
-                    )
-                  }
-                  onFocus={() =>
-                    setActiveNode(
-                      node.id
-                    )
-                  }
+                  onMouseEnter={() => setActiveNode(node.id)}
+                  onFocus={() => setActiveNode(node.id)}
                 >
                   <span
                     className={[
-                      'flex items-center justify-center',
-                      'w-10 h-10',
-                      'border',
-                      node.accent
-                        ? 'border-accent-current'
-                        : 'border-line-active',
-                      'bg-universe/90',
+                      'flex items-center justify-center relative',
+                      'w-12 h-12',
+                      'border bg-universe',
+                      node.accent ? 'border-accent-current' : 'border-line-active',
                       'transition-all duration-500',
-                      activeNode ===
-                      node.id
-                        ? 'scale-125'
-                        : '',
+                      isActive ? 'scale-110 shadow-[0_0_20px_rgba(var(--accent-current-rgb),0.2)]' : 'hover:scale-105',
                     ].join(' ')}
                   >
+                    {/* Inner spinning element for tech vibe */}
+                    <span 
+                      className="absolute inset-1 border border-dashed rounded-sm animate-[spin_12s_linear_infinite]"
+                      style={{ borderColor: node.accent ? 'var(--accent-current)' : 'var(--line-structural)' }}
+                    />
+                    {isActive && (
+                      <span 
+                        className="absolute inset-0 animate-ping opacity-25"
+                        style={{ background: node.accent ? 'var(--accent-current)' : 'var(--line-active)' }}
+                      />
+                    )}
                     <span
                       className={[
-                        'w-1.5 h-1.5 rounded-full',
-                        node.accent
-                          ? 'bg-accent-current'
-                          : 'bg-line-active',
+                        'w-2 h-2 z-10 shadow-sm',
+                        node.accent ? 'bg-accent-current' : 'bg-text-primary',
                       ].join(' ')}
                     />
                   </span>
-                </button>
-              )
-            )}
-
-            {/* Node labels */}
-            {nodes.map(
-              (node) => (
-                <div
-                  key={`${node.id}-label`}
-                  className="absolute pointer-events-none"
-                  style={{
-                    left: `${node.x}%`,
-                    top: `calc(${node.y}% + 28px)`,
-                    transform:
-                      'translateX(-50%)',
-                  }}
-                >
-                  <TechnicalLabel
-                    variant={
-                      node.accent
-                        ? 'accent'
-                        : 'secondary'
-                    }
-                  >
+                  
+                  {/* Static Label Below Node */}
+                  <span className="absolute top-[120%] left-1/2 -translate-x-1/2 whitespace-nowrap text-os-label font-mono text-[10px] tracking-widest text-text-secondary pointer-events-none transition-opacity duration-300">
                     {node.label}
-                  </TechnicalLabel>
-                </div>
-              )
-            )}
+                  </span>
+                </button>
+              );
+            })}
 
-            {/* Active inspection HUD */}
-            <div className="absolute top-6 right-6">
-              <div className="w-64 p-5 border border-line-structural bg-universe/70 backdrop-blur-md">
-                <TechnicalLabel variant="secondary">
-                  ACTIVE NODE
-                </TechnicalLabel>
-
-                <div className="mt-3">
-                  <OSLabel
-                    label={
-                      activeDetails?.type ??
-                      'SYSTEM'
-                    }
-                    value={
-                      activeDetails?.label ??
-                      'SYSTEM'
-                    }
-                    status={
-                      activeDetails?.accent
-                        ? 'active'
-                        : 'neutral'
-                    }
-                  />
+            {/* Small Anchored HUD */}
+            <div 
+              className="absolute z-20 pointer-events-none transition-all duration-400 ease-out flex items-center"
+              style={{
+                left: activeDetails && activeDetails.x > 70 
+                  ? `calc(${activeDetails.x}% - 14rem - 3rem)` // HUD is ~14rem wide, placed to the left
+                  : `calc(${activeDetails?.x ?? 50}% + 3rem)`, // placed to the right
+                top: `calc(${activeDetails?.y ?? 50}%)`,
+                transform: 'translateY(-50%)',
+                opacity: activeDetails ? 1 : 0,
+              }}
+            >
+              {/* Physical Line anchor */}
+              {activeDetails && activeDetails.x > 70 && (
+                <div className="h-px bg-line-active w-8 ml-auto mr-0 opacity-70" />
+              )}
+              
+              <div 
+                className="w-56 p-4 bg-universe/95 backdrop-blur-md border border-line-active shadow-2xl"
+              >
+                <div className="flex items-center gap-2 mb-3 pb-3 border-b border-line-structural">
+                  <span className="w-1.5 h-1.5 bg-accent-current" />
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-text-primary">
+                    {activeDetails?.label ?? 'SYSTEM'}
+                  </span>
                 </div>
+                
+                <ul className="space-y-2">
+                  {activeDetails?.subsystems.map((sub) => (
+                    <li key={sub} className="font-mono text-[9.5px] tracking-wide text-text-secondary flex items-center gap-2">
+                      <span className="text-accent-current/50 opacity-60">&gt;</span>
+                      {sub}
+                    </li>
+                  ))}
+                </ul>
               </div>
+
+              {activeDetails && activeDetails.x <= 70 && (
+                <div className="h-px bg-line-active w-8 ml-0 opacity-70" />
+              )}
             </div>
 
-            <div className="absolute bottom-6 left-6">
-              <TechnicalLabel>
-                SYS / ARCHITECTURE / 003
-              </TechnicalLabel>
-            </div>
           </div>
 
           <div className="grid grid-cols-12 gap-8 mt-16">
-            <div className="col-span-12 lg:col-span-7">
-              <h2 className="text-display-giant motion-assemble">
-                SOFTWARE
-                <br />
-                <span className="text-accent-current">
-                  THAT THINKS.
-                </span>
-              </h2>
-            </div>
-
-            <div className="col-span-12 lg:col-span-5 flex items-end">
-              <p className="text-body-lg text-secondary max-w-lg">
+            <div className="col-span-12 lg:col-span-6 flex items-end">
+              <p className="text-body-lg text-secondary">
                 We design systems across the full
                 stack — interface, APIs, data,
                 intelligence, agents, integrations,

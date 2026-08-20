@@ -41,6 +41,8 @@ export function CustomCursor() {
       '(prefers-reduced-motion: reduce)'
     ).matches;
 
+    gsap.set(cursor, { xPercent: -50, yPercent: -50 });
+
     const moveX = gsap.quickTo(cursor, 'x', {
       duration: reducedMotion ? 0 : 0.12,
       ease: 'power3.out',

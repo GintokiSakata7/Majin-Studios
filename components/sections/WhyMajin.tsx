@@ -1,179 +1,155 @@
 'use client';
 
-import React, {
-  useLayoutEffect,
-  useRef,
-} from 'react';
-
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import {
-  ScrollTrigger,
-} from 'gsap/dist/ScrollTrigger';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { useGlobalState, WhyStage } from '../../store/useGlobalState';
+import { TechnicalLabel } from '../ui';
+import styles from './WhyMajin.module.css';
 
-const statements = [
+const REASONS = [
   {
-    main: 'WE START WITH THE',
-    accent: 'PROBLEM.',
+    id: 'systems',
+    number: '01',
+    title: 'WE THINK IN SYSTEMS.',
+    description: 'Not isolated features. We consider the product, architecture, intelligence, and infrastructure as one continuous pipeline. Because a great interface fails if the data model doesn\'t support it, and a powerful AI fails if the UX doesn\'t guide it.',
   },
   {
-    main: 'NOT THE',
-    accent: 'TECHNOLOGY.',
+    id: 'production',
+    number: '02',
+    title: 'WE BUILD FOR PRODUCTION.',
+    description: 'Not just proofs of concept. Our background is in shipping enterprise software and complex platforms. We engineer for reliability, latency, scale, and maintainability from day one.',
   },
   {
-    main: 'WE DESIGN THE',
-    accent: 'SYSTEM.',
+    id: 'workflows',
+    number: '03',
+    title: 'WE DESIGN AGENTIC WORKFLOWS.',
+    description: 'Not basic wrappers. We go beyond simple chat interfaces. We design architectures where LLMs have memory, tools, planning capabilities, and autonomous execution loops to solve actual business problems.',
   },
   {
-    main: 'NOT JUST THE',
-    accent: 'SCREEN.',
-  },
-  {
-    main: 'WE BUILD FOR',
-    accent: 'PRODUCTION.',
+    id: 'studio',
+    number: '04',
+    title: 'WE ARE AN ENGINEERING STUDIO.',
+    description: 'Not a generic agency. We don\'t farm out work or use off-the-shelf templates. You work directly with senior engineers who understand both the deep technical constraints and the product vision.',
   },
 ];
 
 export function WhyMajin() {
-  const rootRef =
-    useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const statementsRef = useRef<HTMLDivElement>(null);
+  
+  const { setWhyStage } = useGlobalState();
+  const [activeId, setActiveId] = useState<string>('systems');
 
-  useLayoutEffect(() => {
-    const root =
-      rootRef.current;
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
 
-    if (!root) return;
+    gsap.registerPlugin(ScrollTrigger);
 
-    gsap.registerPlugin(
-      ScrollTrigger
-    );
+    const section = sectionRef.current;
+    if (!section) return;
 
-    const reduced =
-      window.matchMedia(
-        '(prefers-reduced-motion: reduce)'
-      ).matches;
+    const statements = gsap.utils.toArray<HTMLElement>('.why-statement');
 
-    if (reduced) return;
+    const trigger = ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: true,
+      onUpdate: (self) => {
+        const p = self.progress;
+        
+        let nextStage: WhyStage = 'systems';
+        
+        if (p < 0.25) {
+          nextStage = 'systems';
+        } else if (p < 0.50) {
+          nextStage = 'production';
+        } else if (p < 0.75) {
+          nextStage = 'workflows';
+        } else {
+          nextStage = 'studio';
+        }
 
-    const context =
-      gsap.context(() => {
-        const items =
-          gsap.utils.toArray<HTMLElement>(
-            '[data-statement]'
-          );
+        setWhyStage(nextStage);
+        setActiveId(nextStage);
 
-        const timeline =
-          gsap.timeline({
-            scrollTrigger: {
-              trigger: root,
-              start: 'top top',
-              end: 'bottom bottom',
-              scrub: 1,
-              pin: false,
-            },
-          });
+        statements.forEach((el, i) => {
+          const segmentSize = 0.25;
+          const peak = i * segmentSize + (segmentSize / 2);
+          const distance = Math.abs(p - peak);
+          
+          let opacity = 0;
+          let y = 30;
 
-        items.forEach(
-          (item, index) => {
-            if (index === 0) return;
+          // Crossfade radius
+          const fadeRadius = segmentSize * 0.8;
 
-            const previous =
-              items[index - 1];
-
-            timeline.to(
-              previous,
-              {
-                opacity: 0.08,
-                y: -60,
-                scale: 0.9,
-                filter:
-                  'blur(5px)',
-                duration: 1,
-                ease: 'power2.inOut',
-              }
-            );
-
-            timeline.fromTo(
-              item,
-              {
-                opacity: 0,
-                y: 60,
-                scale: 1.1,
-                filter:
-                  'blur(5px)',
-              },
-              {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                filter:
-                  'blur(0px)',
-                duration: 1,
-                ease: 'power3.out',
-              },
-              '<'
-            );
+          if (distance < fadeRadius) {
+             const normalizedDist = distance / fadeRadius; // 0 (center) to 1 (edge)
+             
+             // Smooth easing for opacity (sine wave)
+             opacity = Math.cos(normalizedDist * Math.PI / 2);
+             
+             // Y transform
+             const direction = p < peak ? 1 : -1;
+             y = direction * (normalizedDist * 40);
           }
-        );
-      }, root);
+
+          gsap.set(el, { 
+            opacity, 
+            y,
+            visibility: opacity > 0.01 ? 'visible' : 'hidden',
+            pointerEvents: opacity > 0.8 ? 'auto' : 'none'
+          });
+        });
+      },
+    });
 
     return () => {
-      context.revert();
+      trigger.kill();
     };
-  }, []);
+  }, [setWhyStage]);
 
   return (
-    <section
-      id="why-majin"
-      className="section relative min-h-[230vh] py-32"
-    >
-      <div
-        ref={rootRef}
-        className="page-container h-full"
-      >
-        <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                'radial-gradient(circle at center, var(--accent-dim), transparent 58%)',
-              opacity: 0.5,
-            }}
-          />
-
-          <div className="relative w-full max-w-7xl min-h-[420px]">
-            {statements.map(
-              (statement, index) => (
-                <div
-                  key={index}
-                  data-statement
-                  className="absolute inset-0 flex flex-col items-center justify-center text-center"
-                  style={{
-                    opacity:
-                      index === 0
-                        ? 1
-                        : 0,
-                  }}
-                >
-                  <span className="text-os-label mb-6">
-                    FIG. / {String(
-                      index + 1
-                    ).padStart(
-                      2,
-                      '0'
-                    )}
-                  </span>
-
-                  <h2 className="text-display-giant leading-[0.82]">
-                    {statement.main}
-                    <br />
-                    <span className="text-accent-current">
-                      {statement.accent}
-                    </span>
-                  </h2>
+    <section ref={sectionRef} id="why-majin" className={styles.section}>
+      <div ref={containerRef} className={styles.viewport}>
+        <div ref={statementsRef}>
+          {REASONS.map((reason) => (
+            <div 
+              key={reason.id} 
+              className={`why-statement ${styles.statement}`}
+              style={{ opacity: 0, visibility: 'hidden' }}
+            >
+              <h2 className={styles.statementText}>
+                {reason.title}
+              </h2>
+              {reason.description && (
+                <div className={styles.subline}>
+                  <div style={{ marginBottom: '12px' }}>
+                    <TechnicalLabel variant="default">
+                      {reason.number} — {reason.id.toUpperCase()}
+                    </TechnicalLabel>
+                  </div>
+                  <p>{reason.description}</p>
                 </div>
-              )
-            )}
-          </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className={styles.progress}>
+          {REASONS.map((reason) => (
+            <div 
+              key={`prog-${reason.id}`} 
+              className={
+                activeId === reason.id 
+                  ? `${styles.progressItem} ${styles.progressItemActive}` 
+                  : styles.progressItem
+              } 
+            />
+          ))}
         </div>
       </div>
     </section>

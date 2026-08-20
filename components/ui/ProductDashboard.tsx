@@ -23,6 +23,23 @@ export function ProductDashboard({
       }}
       data-cursor="3d"
     >
+      <style>
+        {`
+          @keyframes flowDash {
+            to { stroke-dashoffset: -20; }
+          }
+          .animate-flow {
+            stroke-dasharray: 4 4;
+            animation: flowDash 1s linear infinite;
+          }
+          .dashboard-path {
+            transition: stroke 0.5s ease;
+          }
+          .group:hover .dashboard-path {
+            stroke: var(--accent);
+          }
+        `}
+      </style>
       <div className="grid grid-cols-12 gap-3">
         {/* NAVIGATION */}
         <div className="col-span-12 md:col-span-3">
@@ -44,12 +61,13 @@ export function ProductDashboard({
                   key={item}
                   className={[
                     'text-os-label',
+                    'transition-all duration-300 cursor-pointer hover:text-text-primary hover:translate-x-1',
                     index === 0
                       ? 'text-accent-current'
                       : '',
                   ].join(' ')}
                 >
-                  <span className="mr-2 opacity-50">
+                  <span className="mr-2 opacity-50 transition-opacity group-hover/li:opacity-100">
                     0{index + 1}
                   </span>
 
@@ -74,7 +92,7 @@ export function ProductDashboard({
               >
                 <div className="flex flex-col gap-3">
                   <div
-                    className="text-display"
+                    className="text-display transition-transform duration-500 hover:scale-105 origin-left"
                     style={{
                       fontSize:
                         'clamp(2rem, 5vw, 3.4rem)',
@@ -108,7 +126,7 @@ export function ProductDashboard({
                   ].map((height, index) => (
                     <div
                       key={index}
-                      className="flex-1"
+                      className="flex-1 transition-all duration-500 hover:opacity-100 hover:bg-accent cursor-pointer"
                       style={{
                         height: `${height}%`,
                         minHeight: '4px',
@@ -172,12 +190,13 @@ export function ProductDashboard({
               delay={0.62}
               depth={0.75}
               accent
+              className="group cursor-crosshair"
             >
               <div
                 className="relative"
                 style={{
                   minHeight:
-                    'clamp(280px, 34vw, 440px)',
+                    'clamp(220px, 30vh, 400px)',
                   overflow: 'hidden',
                 }}
               >
@@ -192,6 +211,7 @@ export function ProductDashboard({
                     d="M60 200 H190"
                     stroke="var(--line-structural)"
                     strokeWidth="1"
+                    className="dashboard-path animate-flow"
                   />
 
                   <path
@@ -199,6 +219,8 @@ export function ProductDashboard({
                     stroke="var(--line-structural)"
                     strokeWidth="1"
                     fill="none"
+                    className="dashboard-path animate-flow"
+                    style={{ animationDelay: '0.2s' }}
                   />
 
                   <path
@@ -206,6 +228,8 @@ export function ProductDashboard({
                     stroke="var(--line-structural)"
                     strokeWidth="1"
                     fill="none"
+                    className="dashboard-path animate-flow"
+                    style={{ animationDelay: '0.4s' }}
                   />
 
                   <path
@@ -213,6 +237,8 @@ export function ProductDashboard({
                     stroke="var(--line-structural)"
                     strokeWidth="1"
                     fill="none"
+                    className="dashboard-path animate-flow"
+                    style={{ animationDelay: '0.6s' }}
                   />
 
                   <path
@@ -220,6 +246,8 @@ export function ProductDashboard({
                     stroke="var(--line-structural)"
                     strokeWidth="1"
                     fill="none"
+                    className="dashboard-path animate-flow"
+                    style={{ animationDelay: '0.8s' }}
                   />
 
                   <circle
@@ -227,6 +255,7 @@ export function ProductDashboard({
                     cy="200"
                     r="4"
                     fill="var(--accent)"
+                    className="transition-all duration-300 group-hover:r-[6px] group-hover:drop-shadow-[0_0_8px_var(--accent)]"
                   />
 
                   <circle
@@ -234,6 +263,7 @@ export function ProductDashboard({
                     cy="110"
                     r="4"
                     fill="var(--line-active)"
+                    className="transition-all duration-300 group-hover:fill-accent group-hover:r-[6px]"
                   />
 
                   <circle
@@ -241,6 +271,7 @@ export function ProductDashboard({
                     cy="290"
                     r="4"
                     fill="var(--line-active)"
+                    className="transition-all duration-300 group-hover:fill-accent group-hover:r-[6px]"
                   />
 
                   <circle
@@ -248,6 +279,7 @@ export function ProductDashboard({
                     cy="200"
                     r="4"
                     fill="var(--accent)"
+                    className="transition-all duration-300 group-hover:r-[6px] group-hover:drop-shadow-[0_0_8px_var(--accent)]"
                   />
                 </svg>
 
@@ -283,7 +315,7 @@ export function ProductDashboard({
 
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                   <div
-                    className="flex items-center justify-center"
+                    className="flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:border-accent group-hover:bg-black"
                     style={{
                       width: 82,
                       height: 82,

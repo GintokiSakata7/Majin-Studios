@@ -30,6 +30,10 @@ export function CoreScene({
   const ringRef = useRef<THREE.Group>(null);
 
   const { activeAccent } = useGlobalState();
+  
+  // Interactive pointer tracking
+  const isHovered = useRef(false);
+  const pointerTarget = useRef({ x: 0, y: 0 });
 
   const accent =
     CORE_COLORS[activeAccent] ?? CORE_COLORS.MONOCHROME;
@@ -74,6 +78,38 @@ export function CoreScene({
     }
 
     /*
+     * Interactive Parallax Rotation
+     */
+    if (isHovered.current) {
+      pointerTarget.current.x = state.pointer.x;
+      pointerTarget.current.y = state.pointer.y;
+    } else {
+      pointerTarget.current.x = THREE.MathUtils.lerp(
+        pointerTarget.current.x,
+        0,
+        0.05
+      );
+      pointerTarget.current.y = THREE.MathUtils.lerp(
+        pointerTarget.current.y,
+        0,
+        0.05
+      );
+    }
+
+    groupRef.current.rotation.x = THREE.MathUtils.damp(
+      groupRef.current.rotation.x,
+      pointerTarget.current.y * 0.8,
+      4,
+      delta
+    );
+    groupRef.current.rotation.y = THREE.MathUtils.damp(
+      groupRef.current.rotation.y,
+      pointerTarget.current.x * 0.8,
+      4,
+      delta
+    );
+
+    /*
      * Core rotation.
      */
     innerRef.current.rotation.y += delta * 0.16;
@@ -109,6 +145,20 @@ export function CoreScene({
       ref={groupRef}
       position={[2.6, 0, 0]}
     >
+      {/* Invisible Hit Area for Pointer Events */}
+      <mesh
+        onPointerOver={(e) => {
+          e.stopPropagation();
+          isHovered.current = true;
+        }}
+        onPointerOut={() => {
+          isHovered.current = false;
+        }}
+      >
+        <sphereGeometry args={[3.8, 16, 16]} />
+        <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+      </mesh>
+
       {/* Inner core */}
       <group ref={innerRef}>
         <mesh>
