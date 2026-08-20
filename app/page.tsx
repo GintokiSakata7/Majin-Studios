@@ -17,7 +17,6 @@ import {
   Process,
   Team,
   WhyMajin,
-  Contact,
   Footer,
 } from '../components/sections';
 
@@ -90,8 +89,6 @@ export default function Home() {
         <Team />
 
         <WhyMajin />
-
-        <Contact />
       </main>
 
       <Footer />

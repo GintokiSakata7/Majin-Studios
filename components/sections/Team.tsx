@@ -240,6 +240,7 @@ export function Team() {
             </TechnicalLabel>
 
             <h3 className="mt-8 text-5xl sm:text-6xl lg:text-7xl font-black leading-none tracking-tighter uppercase whitespace-nowrap">
+            <h3 className="mt-5 text-display">
               {activeMember?.name}
             </h3>
 
@@ -282,18 +283,7 @@ export function Team() {
                 </a>
               )}
 
-              {activeMember?.github && (
-                <a
-                  href={
-                    activeMember.github
-                  }
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-os-label hover:text-accent-current transition-colors"
-                >
-                  GITHUB →
-                </a>
-              )}
+
             </div>
           </div>
         </div>

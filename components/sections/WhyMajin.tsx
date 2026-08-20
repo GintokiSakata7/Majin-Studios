@@ -1,155 +1,409 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { useGlobalState, WhyStage } from '../../store/useGlobalState';
-import { TechnicalLabel } from '../ui';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
+
+import {
+  useGlobalState,
+  WhyStage,
+} from '../../store/useGlobalState';
+
+import {
+  SectionHeading,
+  TechnicalLabel,
+  OSLabel,
+  HUDMarker,
+} from '../ui';
+
 import styles from './WhyMajin.module.css';
 
-const REASONS = [
+interface Reason {
+  id: WhyStage;
+  number: string;
+  label: string;
+  title: string;
+  description: string;
+  system: string;
+  signal: string;
+}
+
+const REASONS: Reason[] = [
+  {
+    id: 'complexity',
+    number: '01',
+    label: 'COMPLEXITY',
+    title: 'WE START WITH THE REAL PROBLEM.',
+    description:
+      'We begin with the problem, the users, the workflow, and the constraints—not with a technology trend. Before choosing a model, framework, or architecture, we understand what the system actually needs to accomplish.',
+    system: 'PROBLEM ANALYSIS',
+    signal: 'INPUT / UNDERSTAND',
+  },
+
   {
     id: 'systems',
-    number: '01',
-    title: 'WE THINK IN SYSTEMS.',
-    description: 'Not isolated features. We consider the product, architecture, intelligence, and infrastructure as one continuous pipeline. Because a great interface fails if the data model doesn\'t support it, and a powerful AI fails if the UX doesn\'t guide it.',
-  },
-  {
-    id: 'production',
     number: '02',
-    title: 'WE BUILD FOR PRODUCTION.',
-    description: 'Not just proofs of concept. Our background is in shipping enterprise software and complex platforms. We engineer for reliability, latency, scale, and maintainability from day one.',
+    label: 'SYSTEMS',
+    title: 'WE THINK BEYOND THE INTERFACE.',
+    description:
+      'A product is more than a screen. We connect product experience, frontend, backend, APIs, data, AI, integrations, and infrastructure into one coherent system so each layer supports the others.',
+    system: 'SYSTEM ARCHITECTURE',
+    signal: 'STRUCTURE / CONNECT',
   },
+
   {
-    id: 'workflows',
+    id: 'build',
     number: '03',
-    title: 'WE DESIGN AGENTIC WORKFLOWS.',
-    description: 'Not basic wrappers. We go beyond simple chat interfaces. We design architectures where LLMs have memory, tools, planning capabilities, and autonomous execution loops to solve actual business problems.',
+    label: 'BUILD',
+    title: 'WE BUILD, NOT JUST ADVISE.',
+    description:
+      'Ideas become working software. We can take a product from architecture and interface design through full-stack implementation, integrations, AI capabilities, deployment, and iteration.',
+    system: 'PRODUCT ENGINEERING',
+    signal: 'BUILD / INTEGRATE',
   },
+
   {
-    id: 'studio',
+    id: 'ai',
     number: '04',
-    title: 'WE ARE AN ENGINEERING STUDIO.',
-    description: 'Not a generic agency. We don\'t farm out work or use off-the-shelf templates. You work directly with senior engineers who understand both the deep technical constraints and the product vision.',
+    label: 'AI',
+    title: 'AI IS A SYSTEM, NOT A FEATURE.',
+    description:
+      'We go beyond putting a chat box on a product. We design intelligent workflows around models, agents, tools, retrieval, memory, evaluation, orchestration, and the actual work the system needs to perform.',
+    system: 'INTELLIGENT SYSTEMS',
+    signal: 'REASON / ACT',
+  },
+
+  {
+    id: 'problem',
+    number: '05',
+    label: 'FIT',
+    title: 'THE ARCHITECTURE FOLLOWS THE PROBLEM.',
+    description:
+      'Every project has different constraints. We choose the technologies, architecture, interactions, and implementation approach around the requirement instead of forcing the product into a predefined template.',
+    system: 'PROBLEM-SPECIFIC BUILD',
+    signal: 'ADAPT / SOLVE',
+  },
+
+  {
+    id: 'resolve',
+    number: '06',
+    label: 'RESOLVE',
+    title: 'A SMALL TEAM. DIRECT ENGINEERING.',
+    description:
+      'Majin is intentionally focused. The people discussing the product can stay close to the people designing and building it, keeping communication direct and technical decisions close to implementation.',
+    system: 'DIRECT DELIVERY',
+    signal: 'RESOLVE / SHIP',
   },
 ];
 
 export function WhyMajin() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const statementsRef = useRef<HTMLDivElement>(null);
-  
-  const { setWhyStage } = useGlobalState();
-  const [activeId, setActiveId] = useState<string>('systems');
+  const {
+    setWhyStage,
+  } = useGlobalState();
+
+  const [
+    activeId,
+    setActiveId,
+  ] = useState<WhyStage>('complexity');
+
+  const activeReason =
+    REASONS.find(
+      (reason) =>
+        reason.id === activeId
+    ) ?? REASONS[0];
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const statements = gsap.utils.toArray<HTMLElement>('.why-statement');
-
-    const trigger = ScrollTrigger.create({
-      trigger: section,
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: true,
-      onUpdate: (self) => {
-        const p = self.progress;
-        
-        let nextStage: WhyStage = 'systems';
-        
-        if (p < 0.25) {
-          nextStage = 'systems';
-        } else if (p < 0.50) {
-          nextStage = 'production';
-        } else if (p < 0.75) {
-          nextStage = 'workflows';
-        } else {
-          nextStage = 'studio';
-        }
-
-        setWhyStage(nextStage);
-        setActiveId(nextStage);
-
-        statements.forEach((el, i) => {
-          const segmentSize = 0.25;
-          const peak = i * segmentSize + (segmentSize / 2);
-          const distance = Math.abs(p - peak);
-          
-          let opacity = 0;
-          let y = 30;
-
-          // Crossfade radius
-          const fadeRadius = segmentSize * 0.8;
-
-          if (distance < fadeRadius) {
-             const normalizedDist = distance / fadeRadius; // 0 (center) to 1 (edge)
-             
-             // Smooth easing for opacity (sine wave)
-             opacity = Math.cos(normalizedDist * Math.PI / 2);
-             
-             // Y transform
-             const direction = p < peak ? 1 : -1;
-             y = direction * (normalizedDist * 40);
-          }
-
-          gsap.set(el, { 
-            opacity, 
-            y,
-            visibility: opacity > 0.01 ? 'visible' : 'hidden',
-            pointerEvents: opacity > 0.8 ? 'auto' : 'none'
-          });
-        });
-      },
-    });
-
-    return () => {
-      trigger.kill();
-    };
-  }, [setWhyStage]);
+    setWhyStage(activeId);
+  }, [
+    activeId,
+    setWhyStage,
+  ]);
 
   return (
-    <section ref={sectionRef} id="why-majin" className={styles.section}>
-      <div ref={containerRef} className={styles.viewport}>
-        <div ref={statementsRef}>
-          {REASONS.map((reason) => (
-            <div 
-              key={reason.id} 
-              className={`why-statement ${styles.statement}`}
-              style={{ opacity: 0, visibility: 'hidden' }}
-            >
-              <h2 className={styles.statementText}>
-                {reason.title}
-              </h2>
-              {reason.description && (
-                <div className={styles.subline}>
-                  <div style={{ marginBottom: '12px' }}>
-                    <TechnicalLabel variant="default">
-                      {reason.number} — {reason.id.toUpperCase()}
-                    </TechnicalLabel>
-                  </div>
-                  <p>{reason.description}</p>
-                </div>
-              )}
-            </div>
-          ))}
+    <section
+      id="why-majin"
+      className={styles.section}
+    >
+      <div className="page-container min-h-screen flex flex-col justify-center relative z-10 py-32">
+        <div className={styles.header}>
+          <SectionHeading
+            title="THE MAJIN DIFFERENCE."
+            metadata="FIG. 08 — WHY MAJIN"
+          />
+
+          <p className={styles.intro}>
+            We combine product thinking,
+            full-stack engineering, and
+            intelligent systems to turn
+            complex problems into software
+            that can actually be used.
+          </p>
         </div>
 
-        <div className={styles.progress}>
-          {REASONS.map((reason) => (
-            <div 
-              key={`prog-${reason.id}`} 
-              className={
-                activeId === reason.id 
-                  ? `${styles.progressItem} ${styles.progressItemActive}` 
-                  : styles.progressItem
-              } 
+        <div className={styles.splitLayout}>
+          {/* ------------------------------------------------
+              INDEX / PRINCIPLES
+             ------------------------------------------------ */}
+          <aside className={styles.indexPanel}>
+            <div className={styles.indexHeader}>
+              <OSLabel
+                label="SYSTEM"
+                value="WHY MAJIN"
+              />
+
+              <TechnicalLabel variant="accent">
+                {String(
+                  REASONS.findIndex(
+                    (reason) =>
+                      reason.id ===
+                      activeId
+                  ) + 1
+                ).padStart(2, '0')}
+                /06
+              </TechnicalLabel>
+            </div>
+
+            <div className={styles.tabList}>
+              {REASONS.map(
+                (reason) => {
+                  const isActive =
+                    activeId ===
+                    reason.id;
+
+                  return (
+                    <button
+                      key={reason.id}
+                      type="button"
+                      className={[
+                        styles.tab,
+                        isActive
+                          ? styles.tabActive
+                          : '',
+                      ]
+                        .filter(Boolean)
+                        .join(' ')}
+                      onMouseEnter={() =>
+                        setActiveId(
+                          reason.id
+                        )
+                      }
+                      onFocus={() =>
+                        setActiveId(
+                          reason.id
+                        )
+                      }
+                      onClick={() =>
+                        setActiveId(
+                          reason.id
+                        )
+                      }
+                    >
+                      <span
+                        className={
+                          styles.tabNumber
+                        }
+                      >
+                        {reason.number}
+                      </span>
+
+                      <span
+                        className={
+                          styles.tabTitle
+                        }
+                      >
+                        {reason.label}
+                      </span>
+
+                      <span
+                        className={
+                          styles.tabSignal
+                        }
+                      >
+                        {reason.signal}
+                      </span>
+
+                      {isActive && (
+                        <span
+                          className={
+                            styles.tabIndicator
+                          }
+                        />
+                      )}
+                    </button>
+                  );
+                }
+              )}
+            </div>
+
+            <div className={styles.indexFooter}>
+              <TechnicalLabel>
+                MAJIN / ENGINEERING STUDIO
+              </TechnicalLabel>
+            </div>
+          </aside>
+
+          {/* ------------------------------------------------
+              ACTIVE PRINCIPLE VIEWER
+             ------------------------------------------------ */}
+          <div
+            className={
+              styles.viewerPanel
+            }
+          >
+            <HUDMarker
+              type="corner"
+              top="-1px"
+              left="-1px"
             />
-          ))}
+
+            <HUDMarker
+              type="corner"
+              top="-1px"
+              right="-1px"
+            />
+
+            <HUDMarker
+              type="corner"
+              bottom="-1px"
+              left="-1px"
+            />
+
+            <HUDMarker
+              type="corner"
+              bottom="-1px"
+              right="-1px"
+            />
+
+            {/* Background technical structure */}
+            <div
+              className={
+                styles.viewerGrid
+              }
+              aria-hidden="true"
+            />
+
+            <div
+              className={
+                styles.viewerOrb
+              }
+              aria-hidden="true"
+            />
+
+            <div
+              className={
+                styles.viewerHeader
+              }
+            >
+              <OSLabel
+                label="ACTIVE SYSTEM"
+                value={
+                  activeReason.system
+                }
+                status="active"
+              />
+
+              <TechnicalLabel variant="accent">
+                {activeReason.number}{' '}
+                / {activeReason.label}
+              </TechnicalLabel>
+            </div>
+
+            <div
+              className={
+                styles.viewerContent
+              }
+              key={activeReason.id}
+            >
+              <div
+                className={
+                  styles.viewerNumber
+                }
+              >
+                {activeReason.number}
+              </div>
+
+              <h2 className={styles.title}>
+                {activeReason.title}
+              </h2>
+
+              <p
+                className={
+                  styles.description
+                }
+              >
+                {activeReason.description}
+              </p>
+
+              <div
+                className={
+                  styles.viewerFooter
+                }
+              >
+                <div>
+                  <TechnicalLabel>
+                    PRINCIPLE
+                  </TechnicalLabel>
+
+                  <div
+                    className={
+                      styles.footerValue
+                    }
+                  >
+                    {activeReason.label}
+                  </div>
+                </div>
+
+                <div>
+                  <TechnicalLabel>
+                    SIGNAL
+                  </TechnicalLabel>
+
+                  <div
+                    className={
+                      styles.footerValue
+                    }
+                  >
+                    {activeReason.signal}
+                  </div>
+                </div>
+
+                <div>
+                  <TechnicalLabel>
+                    STATUS
+                  </TechnicalLabel>
+
+                  <div
+                    className={
+                      styles.footerValueAccent
+                    }
+                  >
+                    ACTIVE
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className={
+                styles.viewerIndex
+              }
+            >
+              {REASONS.map(
+                (reason) => (
+                  <span
+                    key={reason.id}
+                    className={
+                      reason.id ===
+                        activeId
+                        ? styles.progressActive
+                        : styles.progress
+                    }
+                  />
+                )
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </section>

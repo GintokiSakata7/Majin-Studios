@@ -15,7 +15,6 @@ export interface TeamMemberProps {
 
   linkedin?: string;
 
-  github?: string;
 
   focus?: string;
 
@@ -33,7 +32,6 @@ export function TeamCard({
 
   linkedin,
 
-  github,
 
   focus,
 
@@ -144,29 +142,16 @@ export function TeamCard({
         )}
       </div>
 
-      {(linkedin || github) && (
+      {linkedin && (
         <div className={styles.links}>
-          {linkedin && (
-            <a
-              href={linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.link}
-            >
-              LINKEDIN →
-            </a>
-          )}
-
-          {github && (
-            <a
-              href={github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.link}
-            >
-              GITHUB →
-            </a>
-          )}
+          <a
+            href={linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.link}
+          >
+            LINKEDIN →
+          </a>
         </div>
       )}
     </article>
