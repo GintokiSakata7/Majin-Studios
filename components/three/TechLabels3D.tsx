@@ -121,7 +121,7 @@ export function TechLabels3D() {
           3.15,
           -1.8,
         ]}
-        text="NODE / AI"
+        text="AI"
       />
 
       <Label
@@ -130,7 +130,7 @@ export function TechLabels3D() {
           2.65,
           -3.3,
         ]}
-        text="NODE / AGENTS"
+        text="AGENTS"
         accent={
           currentScene === 'AGENTS'
         }
@@ -142,7 +142,7 @@ export function TechLabels3D() {
           -3.55,
           -1.3,
         ]}
-        text="NODE / PRODUCTS"
+        text="PRODUCTS"
         accent={
           currentScene === 'PRODUCTS'
         }
