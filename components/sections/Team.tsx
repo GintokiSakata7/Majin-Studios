@@ -289,8 +289,16 @@ export function Team() {
           {/* MOBILE LIST */}
           <div className="col-span-12 flex flex-col gap-6 lg:hidden">
             {teamData.map((member) => (
-              <div key={member.id} className="border border-line-structural p-6 bg-surface backdrop-blur-sm">
-                <TechnicalLabel variant={member.accent === 'MONOCHROME' ? 'secondary' : 'accent'}>
+              <div 
+                key={member.id} 
+                className="border border-line-structural border-l-[3px] p-6 bg-surface backdrop-blur-sm"
+                style={{
+                  '--accent-current': `var(--accent-${member.accent.toLowerCase()})`,
+                  '--accent-text': `var(--accent-${member.accent.toLowerCase()})`,
+                  borderLeftColor: `color-mix(in srgb, var(--accent-mono) 30%, transparent)`,
+                } as React.CSSProperties}
+              >
+                <TechnicalLabel variant="accent">
                   {member.role}
                 </TechnicalLabel>
 

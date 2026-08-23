@@ -32,6 +32,12 @@ export function Systems() {
 
   return (
     <section className="section relative min-h-[120vh] py-32" id="systems">
+      <style>{`
+        @keyframes floatNode {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-6px); }
+        }
+      `}</style>
       <div ref={containerRef} className="page-container">
         <div className="mb-20">
           <SectionHeading
@@ -127,46 +133,51 @@ export function Systems() {
                   onMouseEnter={() => setActiveNode(node.id)}
                   onFocus={() => setActiveNode(node.id)}
                 >
-                  <span
-                    className={[
-                      'flex items-center justify-center relative',
-                      'w-12 h-12',
-                      'border bg-universe',
-                      node.accent ? 'border-accent-current' : 'border-line-active',
-                      'transition-all duration-500',
-                      isActive ? 'scale-110 shadow-[0_0_20px_rgba(var(--accent-current-rgb),0.2)]' : 'hover:scale-105',
-                    ].join(' ')}
+                  <div 
+                    className="flex flex-col items-center transition-all duration-300"
+                    style={{ animation: isActive ? 'floatNode 2.5s ease-in-out infinite' : 'none' }}
                   >
-                    {/* Inner spinning element for tech vibe */}
-                    <span 
-                      className="absolute inset-1 border border-dashed rounded-sm animate-[spin_12s_linear_infinite]"
-                      style={{ borderColor: node.accent ? 'var(--accent-current)' : 'var(--line-structural)' }}
-                    />
-                    {isActive && (
-                      <span 
-                        className="absolute inset-0 animate-ping opacity-25"
-                        style={{ background: node.accent ? 'var(--accent-current)' : 'var(--line-active)' }}
-                      />
-                    )}
                     <span
                       className={[
-                        'w-2 h-2 z-10 shadow-sm',
-                        node.accent ? 'bg-accent-current' : 'bg-text-primary',
+                        'flex items-center justify-center relative',
+                        'w-12 h-12',
+                        'border bg-universe',
+                        node.accent ? 'border-accent-current' : 'border-line-active',
+                        'transition-all duration-500',
+                        isActive ? 'scale-110 shadow-[0_0_20px_rgba(var(--accent-current-rgb),0.2)]' : 'hover:scale-105',
                       ].join(' ')}
-                    />
-                  </span>
-                  
-                  {/* Static Label Below Node */}
-                  <span className="absolute top-[120%] left-1/2 -translate-x-1/2 whitespace-nowrap text-os-label font-mono text-[10px] tracking-widest text-text-secondary pointer-events-none transition-opacity duration-300">
-                    {node.label}
-                  </span>
+                    >
+                      {/* Inner spinning element for tech vibe */}
+                      <span 
+                        className="absolute inset-1 border border-dashed rounded-sm animate-[spin_12s_linear_infinite]"
+                        style={{ borderColor: node.accent ? 'var(--accent-current)' : 'var(--line-structural)' }}
+                      />
+                      {isActive && (
+                        <span 
+                          className="absolute inset-0 animate-ping opacity-25"
+                          style={{ background: node.accent ? 'var(--accent-current)' : 'var(--line-active)' }}
+                        />
+                      )}
+                      <span
+                        className={[
+                          'w-2 h-2 z-10 shadow-sm',
+                          node.accent ? 'bg-accent-current' : 'bg-text-primary',
+                        ].join(' ')}
+                      />
+                    </span>
+                    
+                    {/* Static Label Below Node */}
+                    <span className="absolute top-[120%] whitespace-nowrap text-os-label font-mono text-[10px] tracking-widest text-text-secondary pointer-events-none transition-opacity duration-300">
+                      {node.label}
+                    </span>
+                  </div>
                 </button>
               );
             })}
 
-            {/* Small Anchored HUD */}
+            {/* Small Anchored HUD (Desktop) */}
             <div 
-              className="absolute z-20 pointer-events-none transition-all duration-400 ease-out flex items-center"
+              className="hidden md:flex absolute z-20 pointer-events-none transition-all duration-400 ease-out items-center"
               style={{
                 left: activeDetails && activeDetails.x > 70 
                   ? `calc(${activeDetails.x}% - 14rem - 3rem)` // HUD is ~14rem wide, placed to the left
@@ -183,6 +194,7 @@ export function Systems() {
               
               <div 
                 className="w-56 p-4 bg-universe/95 backdrop-blur-md border border-line-active shadow-2xl"
+                style={{ animation: activeDetails ? 'floatNode 4s ease-in-out infinite' : 'none' }}
               >
                 <div className="flex items-center gap-2 mb-3 pb-3 border-b border-line-structural">
                   <span className="w-1.5 h-1.5 bg-accent-current" />
@@ -204,6 +216,35 @@ export function Systems() {
               {activeDetails && activeDetails.x <= 70 && (
                 <div className="h-px bg-line-active w-8 ml-0 opacity-70" />
               )}
+            </div>
+
+            {/* Top Banner HUD (Mobile) */}
+            <div 
+              className="md:hidden absolute top-4 left-4 right-4 z-20 pointer-events-none transition-opacity duration-400 ease-out flex justify-center"
+              style={{
+                opacity: activeDetails ? 1 : 0,
+              }}
+            >
+              <div 
+                className="w-full max-w-md p-4 bg-universe/95 backdrop-blur-md border border-line-active shadow-2xl"
+                style={{ animation: activeDetails ? 'floatNode 4s ease-in-out infinite' : 'none' }}
+              >
+                <div className="flex items-center gap-2 mb-3 pb-3 border-b border-line-structural">
+                  <span className="w-1.5 h-1.5 bg-accent-current" />
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-text-primary">
+                    {activeDetails?.label ?? 'SYSTEM'}
+                  </span>
+                </div>
+                
+                <ul className="grid grid-cols-2 gap-y-2 gap-x-2">
+                  {activeDetails?.subsystems.map((sub) => (
+                    <li key={sub} className="font-mono text-[9.5px] tracking-wide text-text-secondary flex items-center gap-2 truncate">
+                      <span className="text-accent-current/50 opacity-60 flex-shrink-0">&gt;</span>
+                      <span className="truncate">{sub}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
           </div>
