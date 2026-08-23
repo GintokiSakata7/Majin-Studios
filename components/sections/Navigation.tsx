@@ -7,165 +7,118 @@ import styles from './Navigation.module.css';
 
 import { TechnicalLabel } from '../ui';
 
-const NAV_LINKS = [
-  { href: '#work',        label: 'Work' },
-  { href: '#capabilities', label: 'Capabilities' },
-  { href: '#systems',     label: 'Systems' },
-  { href: '#studio',      label: 'Studio' },
-  { href: '#why-majin',   label: 'Why Us' },
-  { href: '#contact',     label: 'Contact' },
-];
-
 export function Navigation() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  /* Close drawer on resize to desktop */
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 700) setMobileOpen(false);
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
     };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [isMobileMenuOpen]);
 
-  /* Prevent body scroll when drawer is open */
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [mobileOpen]);
-
-  const closeDrawer = () => setMobileOpen(false);
+  const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const closeMenu = () => setIsMobileMenuOpen(false);
 
   return (
-    <>
-      <nav
-        className={styles.nav}
-        aria-label="Primary navigation"
+    <nav
+      className={styles.nav}
+      aria-label="Primary navigation"
+    >
+      <div
+        className={`page-container ${styles.container}`}
       >
-        <div
-          className={`page-container ${styles.container}`}
+        <a
+          href="#home"
+          className={styles.brand}
+          data-cursor="interactive"
         >
+          <Image 
+            src="/logo.jpg" 
+            alt="Majin Studios" 
+            width={140} 
+            height={45} 
+            className={styles.brandLogo} 
+          />
+        </a>
+
+        <div className={styles.links}>
           <a
-            href="#home"
-            className={styles.brand}
-            data-cursor="interactive"
-            onClick={closeDrawer}
+            href="#work"
+            className={styles.link}
           >
-            <Image
-              src="/logo.jpg"
-              alt="Majin Studios"
-              width={140}
-              height={45}
-              className={styles.brandLogo}
-            />
+            Work
           </a>
 
-          {/* Desktop links */}
-          <div className={styles.links}>
-            {NAV_LINKS.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className={styles.link}
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-
-          <div className={styles.status}>
-            <span className={styles.dot} />
-            ACCEPTING SELECTED PROJECTS
-          </div>
-
-          {/* Hamburger — mobile only */}
-          <button
-            type="button"
-            className={styles.hamburger}
-            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={mobileOpen}
-            onClick={() => setMobileOpen((prev) => !prev)}
+          <a
+            href="#capabilities"
+            className={styles.link}
           >
-            <span
-              className={[
-                styles.hamburgerLine,
-                mobileOpen ? styles.hamburgerLineTopOpen : '',
-              ].join(' ')}
-            />
-            <span
-              className={[
-                styles.hamburgerLine,
-                mobileOpen ? styles.hamburgerLineMidOpen : '',
-              ].join(' ')}
-            />
-            <span
-              className={[
-                styles.hamburgerLine,
-                mobileOpen ? styles.hamburgerLineBottomOpen : '',
-              ].join(' ')}
-            />
-          </button>
-        </div>
-      </nav>
+            Capabilities
+          </a>
 
-      {/* Mobile drawer overlay */}
-      <div
-        className={[
-          styles.drawerOverlay,
-          mobileOpen ? styles.drawerOverlayOpen : '',
-        ].join(' ')}
-        aria-hidden={!mobileOpen}
-        onClick={closeDrawer}
-      />
-
-      {/* Mobile drawer panel */}
-      <div
-        className={[
-          styles.drawer,
-          mobileOpen ? styles.drawerOpen : '',
-        ].join(' ')}
-        aria-hidden={!mobileOpen}
-      >
-        {/* Drawer header */}
-        <div className={styles.drawerHeader}>
-          <span className={styles.drawerLabel}>NAVIGATION</span>
-          <button
-            type="button"
-            className={styles.drawerClose}
-            aria-label="Close menu"
-            onClick={closeDrawer}
+          <a
+            href="#systems"
+            className={styles.link}
           >
-            ✕
-          </button>
+            Systems
+          </a>
+
+          <a
+            href="#studio"
+            className={styles.link}
+          >
+            Studio
+          </a>
+
+          <a
+            href="#why-majin"
+            className={styles.link}
+          >
+            Why Us
+          </a>
+
+          <a
+            href="#contact"
+            className={styles.link}
+          >
+            Contact
+          </a>
         </div>
 
-        {/* Drawer links */}
-        <nav className={styles.drawerLinks}>
-          {NAV_LINKS.map((item, index) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className={styles.drawerLink}
-              onClick={closeDrawer}
-              style={{ transitionDelay: mobileOpen ? `${index * 55}ms` : '0ms' }}
-            >
-              <span className={styles.drawerLinkNum}>
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <span className={styles.drawerLinkLabel}>
-                {item.label}
-              </span>
-              <span className={styles.drawerLinkArrow}>→</span>
-            </a>
-          ))}
-        </nav>
+        <div className={styles.status}>
+          <span
+            className={styles.dot}
+          />
 
-        {/* Drawer footer */}
-        <div className={styles.drawerFooter}>
-          <span className={styles.dot} />
           ACCEPTING SELECTED PROJECTS
         </div>
+
+        <button 
+          className={`${styles.hamburger} ${isMobileMenuOpen ? styles.hamburgerOpen : ''}`}
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          <span className={styles.hamburgerLine} />
+          <span className={styles.hamburgerLine} />
+          <span className={styles.hamburgerLine} />
+        </button>
       </div>
-    </>
+
+      <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
+        <div className={styles.mobileLinks}>
+          <a href="#work" className={styles.mobileLink} onClick={closeMenu}>Work</a>
+          <a href="#capabilities" className={styles.mobileLink} onClick={closeMenu}>Capabilities</a>
+          <a href="#systems" className={styles.mobileLink} onClick={closeMenu}>Systems</a>
+          <a href="#studio" className={styles.mobileLink} onClick={closeMenu}>Studio</a>
+          <a href="#why-majin" className={styles.mobileLink} onClick={closeMenu}>Why Us</a>
+          <a href="#contact" className={styles.mobileLink} onClick={closeMenu}>Contact</a>
+        </div>
+      </div>
+    </nav>
   );
 }

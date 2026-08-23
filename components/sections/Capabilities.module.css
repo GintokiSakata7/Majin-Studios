@@ -258,54 +258,45 @@
     min-height: auto;
   }
 
-  /* Stack capabilities vertically */
   .visualField {
     min-height: auto;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: block;
+    padding: var(--space-12) 0;
   }
 
-  /* Hide decorative orbital elements — not meaningful on small screens */
   .network {
     display: none;
   }
 
   .capabilities {
-    position: relative;
-    width: 100%;
-    /* Override the 3-col layout — single stacked column */
-    grid-template-columns: 1fr !important;
-    grid-template-rows: none !important;
-    gap: var(--space-4);
-    padding: var(--space-6) 0;
-  }
-
-  /* Reset all absolute grid placements */
-  .ai,
-  .agents,
-  .products,
-  .custom,
-  .data,
-  .cloud {
-    grid-column: 1 !important;
-    grid-row: auto !important;
-    align-items: flex-start;
-    text-align: left;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: var(--space-6);
   }
 
   .capability {
     position: relative;
+
     inset: auto !important;
+    right: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    top: auto !important;
+
     max-width: none;
     margin-bottom: 0;
+    
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+  
+  .ai, .agents, .products, .custom, .data, .cloud {
+    align-items: flex-start;
+    text-align: left;
+  }
+  
+  .ai .status,
+  .products .status {
+    flex-direction: row;
   }
 }
-
-@media (max-width: 480px) {
-  .header {
-    margin-bottom: var(--space-10);
-  }
-}
-

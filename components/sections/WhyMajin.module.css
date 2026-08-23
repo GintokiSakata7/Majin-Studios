@@ -658,26 +658,15 @@
   }
 }
 
-/* Single column tabs on very small screens */
 @media (max-width: 480px) {
   .tabList {
     grid-template-columns: 1fr;
   }
-
-  .tab {
-    min-height: 56px;
-  }
-
+  
   .viewerPanel {
     min-height: auto;
-    padding: var(--space-5);
-  }
-
-  .title {
-    font-size: clamp(2rem, 9vw, 4rem);
   }
 }
-
 
 @media (prefers-reduced-motion: reduce) {
 

@@ -210,6 +210,10 @@
   .right {
     text-align: left;
   }
+  
+  .services {
+    gap: 6px;
+  }
 
   .links {
     flex-direction: column;

@@ -164,10 +164,12 @@ export function Work() {
                     }
                   />
 
-                  <div className="relative z-10 w-full h-full flex items-center justify-center p-8">
-                    <ProductDashboard
-                      className="w-full max-w-[1000px]"
-                    />
+                  <div className="relative z-10 w-full h-full flex items-center justify-center p-0 sm:p-8 overflow-hidden">
+                    <div className="w-[800px] h-full origin-center scale-[0.4] sm:scale-100 sm:w-full flex items-center justify-center">
+                      <ProductDashboard
+                        className="w-full max-w-[1000px]"
+                      />
+                    </div>
                   </div>
 
                   <div className="absolute top-6 right-6 z-20">
