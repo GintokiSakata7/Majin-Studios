@@ -258,42 +258,54 @@
     min-height: auto;
   }
 
+  /* Stack capabilities vertically */
   .visualField {
-    min-height: 1000px;
-
-    display: block;
+    min-height: auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
+  /* Hide decorative orbital elements — not meaningful on small screens */
   .network {
-    inset: 15% 0;
+    display: none;
   }
 
-  .orbitOne {
-    width: 500px;
-    height: 210px;
+  .capabilities {
+    position: relative;
+    width: 100%;
+    /* Override the 3-col layout — single stacked column */
+    grid-template-columns: 1fr !important;
+    grid-template-rows: none !important;
+    gap: var(--space-4);
+    padding: var(--space-6) 0;
   }
 
-  .orbitTwo {
-    width: 560px;
-    height: 260px;
-  }
-
-  .core {
-    width: 120px;
-    height: 120px;
+  /* Reset all absolute grid placements */
+  .ai,
+  .agents,
+  .products,
+  .custom,
+  .data,
+  .cloud {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .capability {
     position: relative;
-
     inset: auto !important;
-    right: auto !important;
-    left: auto !important;
-    bottom: auto !important;
-    top: auto !important;
-
     max-width: none;
-
-    margin-bottom: var(--space-12);
+    margin-bottom: 0;
   }
 }
+
+@media (max-width: 480px) {
+  .header {
+    margin-bottom: var(--space-10);
+  }
+}
+

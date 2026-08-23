@@ -152,4 +152,290 @@
   .links {
     display: none;
   }
+
+  .status {
+    display: none;
+  }
 }
+
+/* =========================================================
+   HAMBURGER BUTTON
+   ========================================================= */
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  width: 40px;
+  height: 40px;
+
+  background: transparent;
+  border: 1px solid var(--line-structural);
+
+  cursor: pointer;
+
+  padding: 0;
+
+  flex-shrink: 0;
+
+  transition: border-color 300ms var(--ease-out);
+}
+
+.hamburger:hover {
+  border-color: var(--line-active);
+}
+
+.hamburgerLine {
+  display: block;
+  width: 18px;
+  height: 1px;
+  background: var(--text-secondary);
+  transition:
+    transform 300ms var(--ease-out),
+    opacity 300ms var(--ease-out);
+  transform-origin: center;
+}
+
+.hamburgerLineTopOpen {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.hamburgerLineMidOpen {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburgerLineBottomOpen {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+@media (max-width: 700px) {
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* =========================================================
+   MOBILE DRAWER OVERLAY
+   ========================================================= */
+
+.drawerOverlay {
+  display: none;
+
+  position: fixed;
+  inset: 0;
+
+  z-index: calc(var(--z-nav) - 1);
+
+  background: rgba(5, 6, 7, 0.75);
+
+  backdrop-filter: blur(4px);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 400ms var(--ease-out);
+}
+
+.drawerOverlayOpen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 700px) {
+  .drawerOverlay {
+    display: block;
+  }
+}
+
+/* =========================================================
+   MOBILE DRAWER PANEL
+   ========================================================= */
+
+.drawer {
+  position: fixed;
+
+  top: 0;
+  right: 0;
+
+  width: min(320px, 88vw);
+  height: 100dvh;
+
+  z-index: var(--z-nav);
+
+  display: flex;
+  flex-direction: column;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(8, 10, 13, 0.98),
+      rgba(5, 6, 7, 0.99)
+    );
+
+  border-left: 1px solid var(--line-structural);
+
+  backdrop-filter: blur(24px);
+
+  transform: translateX(100%);
+
+  transition: transform 420ms var(--ease-out);
+
+  overflow: hidden;
+}
+
+.drawerOpen {
+  transform: translateX(0);
+}
+
+/* Only render drawer on mobile */
+@media (min-width: 701px) {
+  .drawer {
+    display: none;
+  }
+}
+
+/* --- Drawer Header --- */
+
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: var(--nav-height);
+
+  padding: 0 var(--space-6);
+
+  border-bottom: 1px solid var(--line-structural);
+
+  flex-shrink: 0;
+}
+
+.drawerLabel {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-metadata);
+}
+
+.drawerClose {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  background: transparent;
+  border: 1px solid var(--line-structural);
+
+  font-size: 12px;
+  color: var(--text-secondary);
+
+  cursor: pointer;
+
+  transition:
+    border-color 250ms var(--ease-out),
+    color 250ms var(--ease-out);
+}
+
+.drawerClose:hover {
+  border-color: var(--line-active);
+  color: var(--text-primary);
+}
+
+/* --- Drawer Links --- */
+
+.drawerLinks {
+  display: flex;
+  flex-direction: column;
+
+  padding: var(--space-6) 0;
+
+  flex: 1;
+
+  overflow-y: auto;
+}
+
+.drawerLink {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  align-items: center;
+
+  padding: var(--space-5) var(--space-6);
+
+  border-bottom: 1px solid var(--line-structural);
+
+  font-family: var(--font-mono);
+
+  color: var(--text-secondary);
+
+  text-decoration: none;
+
+  transition:
+    background 250ms var(--ease-out),
+    color 250ms var(--ease-out),
+    padding-left 250ms var(--ease-out);
+}
+
+.drawerLink:first-child {
+  border-top: 1px solid var(--line-structural);
+}
+
+.drawerLink:hover {
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--text-primary);
+  padding-left: calc(var(--space-6) + 6px);
+}
+
+.drawerLinkNum {
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: var(--text-metadata);
+}
+
+.drawerLinkLabel {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.drawerLinkArrow {
+  font-size: 12px;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition:
+    opacity 250ms var(--ease-out),
+    transform 250ms var(--ease-out);
+  color: var(--accent-current);
+}
+
+.drawerLink:hover .drawerLinkArrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* --- Drawer Footer --- */
+
+.drawerFooter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: var(--space-6);
+
+  border-top: 1px solid var(--line-structural);
+
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-metadata);
+
+  flex-shrink: 0;
+}
+

@@ -89,7 +89,11 @@ export function Team() {
           />
         </div>
 
-        <div className="grid grid-cols-12 gap-8 min-h-[760px]">
+        {/* =====================================================
+            DESKTOP LAYOUT — interactive node matrix
+            Hidden on mobile via CSS
+            ===================================================== */}
+        <div className="team-desktop-layout grid grid-cols-12 gap-8 min-h-[760px]">
           {/* MATRIX */}
           <div className="col-span-12 lg:col-span-8 relative min-h-[650px] border border-line-structural overflow-hidden">
             <div
@@ -284,6 +288,73 @@ export function Team() {
 
 
             </div>
+          </div>
+        </div>
+
+        {/* =====================================================
+            MOBILE LAYOUT — stacked member cards
+            Shown only on mobile via CSS
+            ===================================================== */}
+        <div className="team-mobile-layout">
+          <div className="team-mobile-grid">
+            {teamData.map((member, index) => (
+              <article
+                key={member.id}
+                className="team-mobile-card"
+                onClick={() => activateMember(member.id, index)}
+              >
+                {/* Card top bar */}
+                <div className="team-mobile-card-header">
+                  <TechnicalLabel variant="accent">
+                    {String(index + 1).padStart(2, '0')} / {teamData.length.toString().padStart(2, '0')}
+                  </TechnicalLabel>
+                  <span className="team-mobile-card-role">
+                    {member.role}
+                  </span>
+                </div>
+
+                {/* Name */}
+                <h3 className="team-mobile-card-name">
+                  {member.name}
+                </h3>
+
+                <p className="team-mobile-card-fullname">
+                  {member.fullName}
+                </p>
+
+                {/* Focus */}
+                {member.focus && (
+                  <p className="team-mobile-card-focus">
+                    {member.focus}
+                  </p>
+                )}
+
+                {/* Specialties */}
+                <div className="team-mobile-card-tags">
+                  {member.specialties.map((s) => (
+                    <span key={s} className="team-mobile-card-tag">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+
+                {/* LinkedIn */}
+                {member.linkedin && (
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="team-mobile-card-link"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    LINKEDIN →
+                  </a>
+                )}
+
+                {/* Bottom accent line */}
+                <div className="team-mobile-card-accent" />
+              </article>
+            ))}
           </div>
         </div>
       </div>

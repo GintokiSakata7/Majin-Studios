@@ -161,12 +161,20 @@
     min-height: 100svh;
   }
 
+  .content {
+    padding-top: var(--space-8);
+  }
+
   .headline {
     font-size: clamp(
-      3.8rem,
-      18vw,
-      7rem
+      3.2rem,
+      16vw,
+      6.5rem
     );
+
+    /* Prevent letters bleeding off-screen on very narrow phones */
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   .actions {
@@ -179,3 +187,14 @@
     display: none;
   }
 }
+
+@media (max-width: 400px) {
+  .headline {
+    font-size: clamp(
+      2.8rem,
+      14vw,
+      5.5rem
+    );
+  }
+}
+
