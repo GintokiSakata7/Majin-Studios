@@ -259,28 +259,19 @@
   }
 
   .visualField {
-    min-height: 1000px;
-
+    min-height: auto;
     display: block;
+    padding: var(--space-12) 0;
   }
 
   .network {
-    inset: 15% 0;
+    display: none;
   }
 
-  .orbitOne {
-    width: 500px;
-    height: 210px;
-  }
-
-  .orbitTwo {
-    width: 560px;
-    height: 260px;
-  }
-
-  .core {
-    width: 120px;
-    height: 120px;
+  .capabilities {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: var(--space-6);
   }
 
   .capability {
@@ -293,7 +284,19 @@
     top: auto !important;
 
     max-width: none;
-
-    margin-bottom: var(--space-12);
+    margin-bottom: 0;
+    
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+  
+  .ai, .agents, .products, .custom, .data, .cloud {
+    align-items: flex-start;
+    text-align: left;
+  }
+  
+  .ai .status,
+  .products .status {
+    flex-direction: row;
   }
 }

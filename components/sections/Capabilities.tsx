@@ -71,6 +71,34 @@ export function Capabilities() {
     }
   }, [capabilitiesStage, setCapabilitiesStage]);
 
+  // Mobile scroll observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('data-capability-id') as CapabilitiesStage;
+            if (id) {
+              setCapabilitiesStage(id);
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '-40% 0px -40% 0px',
+        threshold: 0,
+      }
+    );
+
+    const elements = document.querySelectorAll('[data-capability-id]');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [setCapabilitiesStage]);
+
   return (
     <section id="capabilities" className={styles.section}>
       <div ref={containerRef} className="page-container flex-1 flex flex-col w-full">
@@ -117,6 +145,7 @@ export function Capabilities() {
                 return (
                   <article
                     key={capability.id}
+                    data-capability-id={capability.id}
                     className={[
                       styles.capability,
                       styles[capability.className],

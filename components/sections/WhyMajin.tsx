@@ -172,65 +172,92 @@ export function WhyMajin() {
                     reason.id;
 
                   return (
-                    <button
-                      key={reason.id}
-                      type="button"
-                      className={[
-                        styles.tab,
-                        isActive
-                          ? styles.tabActive
-                          : '',
-                      ]
-                        .filter(Boolean)
-                        .join(' ')}
-                      onMouseEnter={() =>
-                        setActiveId(
-                          reason.id
-                        )
-                      }
-                      onFocus={() =>
-                        setActiveId(
-                          reason.id
-                        )
-                      }
-                      onClick={() =>
-                        setActiveId(
-                          reason.id
-                        )
-                      }
-                    >
-                      <span
-                        className={
-                          styles.tabNumber
+                    <div key={reason.id} className={styles.tabWrapper}>
+                      <button
+                        type="button"
+                        className={[
+                          styles.tab,
+                          isActive
+                            ? styles.tabActive
+                            : '',
+                        ]
+                          .filter(Boolean)
+                          .join(' ')}
+                        onMouseEnter={() =>
+                          setActiveId(
+                            reason.id
+                          )
+                        }
+                        onFocus={() =>
+                          setActiveId(
+                            reason.id
+                          )
+                        }
+                        onClick={() =>
+                          setActiveId(
+                            reason.id
+                          )
                         }
                       >
-                        {reason.number}
-                      </span>
-
-                      <span
-                        className={
-                          styles.tabTitle
-                        }
-                      >
-                        {reason.label}
-                      </span>
-
-                      <span
-                        className={
-                          styles.tabSignal
-                        }
-                      >
-                        {reason.signal}
-                      </span>
-
-                      {isActive && (
                         <span
                           className={
-                            styles.tabIndicator
+                            styles.tabNumber
                           }
-                        />
+                        >
+                          {reason.number}
+                        </span>
+
+                        <span
+                          className={
+                            styles.tabTitle
+                          }
+                        >
+                          {reason.label}
+                        </span>
+
+                        <span
+                          className={
+                            styles.tabSignal
+                          }
+                        >
+                          {reason.signal}
+                        </span>
+
+                        {isActive && (
+                          <span
+                            className={
+                              styles.tabIndicator
+                            }
+                          />
+                        )}
+                      </button>
+
+                      {/* MOBILE ACCORDION CONTENT */}
+                      {isActive && (
+                        <div className={styles.accordionContent}>
+                          <h2 className={styles.accordionTitle}>
+                            {reason.title}
+                          </h2>
+                          <p className={styles.accordionDescription}>
+                            {reason.description}
+                          </p>
+                          <div className={styles.accordionFooter}>
+                            <div>
+                              <TechnicalLabel>SYSTEM</TechnicalLabel>
+                              <div className={styles.accordionFooterValueAccent}>
+                                {reason.system}
+                              </div>
+                            </div>
+                            <div>
+                              <TechnicalLabel>SIGNAL</TechnicalLabel>
+                              <div className={styles.accordionFooterValue}>
+                                {reason.signal}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       )}
-                    </button>
+                    </div>
                   );
                 }
               )}
@@ -244,7 +271,7 @@ export function WhyMajin() {
           </aside>
 
           {/* ------------------------------------------------
-              ACTIVE PRINCIPLE VIEWER
+              ACTIVE PRINCIPLE VIEWER (DESKTOP)
              ------------------------------------------------ */}
           <div
             className={

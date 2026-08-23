@@ -163,10 +163,11 @@
 
   .headline {
     font-size: clamp(
-      3.8rem,
-      18vw,
-      7rem
+      3rem,
+      16vw,
+      6rem
     );
+    line-height: 0.95;
   }
 
   .actions {

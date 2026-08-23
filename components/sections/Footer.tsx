@@ -90,9 +90,9 @@ export function Footer() {
 
             <div className={styles.formContainer}>
               <HUDMarker type="corner" top="-1px" left="-1px" />
-              <HUDMarker type="corner" top="-1px" right="-1px" />
-              <HUDMarker type="corner" bottom="-1px" left="-1px" />
-              <HUDMarker type="corner" bottom="-1px" right="-1px" />
+              <HUDMarker type="corner" top="-1px" right="-1px" className="rotate-90" />
+              <HUDMarker type="corner" bottom="-1px" left="-1px" className="-rotate-90" />
+              <HUDMarker type="corner" bottom="-1px" right="-1px" className="rotate-180" />
 
               <div className="flex items-center justify-between border-b border-line-structural pb-2 mb-4">
                 <OSLabel label="SYSTEM" value="COMMUNICATIONS" />

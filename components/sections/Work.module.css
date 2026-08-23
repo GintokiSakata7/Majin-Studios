@@ -227,4 +227,9 @@
   .metrics {
     gap: var(--space-5);
   }
+
+  .visual {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+  }
 }

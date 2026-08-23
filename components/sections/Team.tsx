@@ -91,7 +91,7 @@ export function Team() {
 
         <div className="grid grid-cols-12 gap-8 min-h-[760px]">
           {/* MATRIX */}
-          <div className="col-span-12 lg:col-span-8 relative min-h-[650px] border border-line-structural overflow-hidden">
+          <div className="col-span-12 lg:col-span-8 relative min-h-[650px] border border-line-structural overflow-hidden hidden lg:block">
             <div
               className="absolute inset-0 opacity-25"
               style={{
@@ -234,7 +234,7 @@ export function Team() {
           </div>
 
           {/* ACTIVE MEMBER */}
-          <div className="col-span-12 lg:col-span-4 flex flex-col justify-center">
+          <div className="col-span-12 lg:col-span-4 hidden lg:flex flex-col justify-center">
             <TechnicalLabel variant="accent">
               ACTIVE TEAM
             </TechnicalLabel>
@@ -284,6 +284,61 @@ export function Team() {
 
 
             </div>
+          </div>
+
+          {/* MOBILE LIST */}
+          <div className="col-span-12 flex flex-col gap-6 lg:hidden">
+            {teamData.map((member) => (
+              <div 
+                key={member.id} 
+                className="border border-line-structural border-l-[3px] p-6 bg-surface backdrop-blur-sm"
+                style={{
+                  '--accent-current': `var(--accent-${member.accent.toLowerCase()})`,
+                  '--accent-text': `var(--accent-${member.accent.toLowerCase()})`,
+                  borderLeftColor: `color-mix(in srgb, var(--accent-mono) 30%, transparent)`,
+                } as React.CSSProperties}
+              >
+                <TechnicalLabel variant="accent">
+                  {member.role}
+                </TechnicalLabel>
+
+                <h3 className="mt-4 text-4xl font-black leading-none tracking-tighter uppercase">
+                  {member.name}
+                </h3>
+
+                <div className="mt-2 text-sm font-mono text-white tracking-widest uppercase opacity-90">
+                  {member.fullName}
+                </div>
+
+                <p className="mt-4 text-body text-secondary">
+                  {member.focus}
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {member.specialties.map((specialty) => (
+                    <span
+                      key={specialty}
+                      className="px-2 py-1 border border-line-structural font-mono text-[9px] tracking-[0.12em] uppercase text-secondary"
+                    >
+                      {specialty}
+                    </span>
+                  ))}
+                </div>
+
+                {member.linkedin && (
+                  <div className="mt-6">
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-os-label hover:text-accent-current transition-colors"
+                    >
+                      LINKEDIN →
+                    </a>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>

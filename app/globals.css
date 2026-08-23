@@ -683,9 +683,9 @@
     .text-display-giant {
       font-size:
         clamp(
-          3.6rem,
-          17vw,
-          7rem
+          2rem,
+          10vw,
+          4rem
         );
     }
 
