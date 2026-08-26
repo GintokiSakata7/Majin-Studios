@@ -109,7 +109,7 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: '/favicon.ico',
+    icon: '/logo.jpg',
   },
 };
 
@@ -142,6 +142,7 @@ export default function RootLayout({
       '@id': 'https://www.majinstudios.tech/#organization',
       name: 'Majin Studios',
       url: 'https://www.majinstudios.tech/',
+      logo: 'https://www.majinstudios.tech/logo.jpg',
     },
   ];
 
