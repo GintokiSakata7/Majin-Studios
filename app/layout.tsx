@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   creator: 'Majin Studios',
 
   metadataBase: new URL(
-    'https://majin.studio'
+    'https://www.majinstudios.tech'
   ),
 
   alternates: {
@@ -49,9 +49,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
 
-    locale: 'en_US',
+    locale: 'en_IN',
 
-    url: 'https://majin.studio',
+    url: 'https://www.majinstudios.tech',
 
     title:
       'Majin Studios — Intelligent Digital Products',
@@ -109,7 +109,9 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: '/favicon.ico',
+    icon: '/logo.jpg',
+    shortcut: '/logo.jpg',
+    apple: '/logo.jpg',
   },
 };
 
@@ -128,12 +130,41 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      '@id': 'https://www.majinstudios.tech/#website',
+      name: 'Majin Studios',
+      url: 'https://www.majinstudios.tech/',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      '@id': 'https://www.majinstudios.tech/#organization',
+      name: 'Majin Studios',
+      url: 'https://www.majinstudios.tech/',
+      logo: 'https://www.majinstudios.tech/logo.jpg',
+      sameAs: [
+        'https://in.linkedin.com/company/majin-studios',
+        'https://www.instagram.com/majin_studios/',
+        'https://x.com/Majin_Studios',
+      ],
+    },
+  ];
+
   return (
     <html
       lang="en"
       data-accent="monochrome"
       suppressHydrationWarning
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body suppressHydrationWarning>
         {children}
       </body>
