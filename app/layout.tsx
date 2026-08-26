@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
 
-    locale: 'en_US',
+    locale: 'en_IN',
 
     url: 'https://www.majinstudios.tech',
 
