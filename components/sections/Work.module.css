@@ -153,6 +153,17 @@
   color: var(--text-primary);
 }
 
+.highlightedButton {
+  box-shadow: 0 0 0 2px var(--accent-current);
+  animation: buttonPulse 2s infinite;
+}
+
+@keyframes buttonPulse {
+  0% { box-shadow: 0 0 0 0 var(--accent-glow); }
+  70% { box-shadow: 0 0 0 10px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
 .metricLabel {
   margin-top: 5px;
 

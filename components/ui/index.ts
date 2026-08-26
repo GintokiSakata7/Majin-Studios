@@ -23,6 +23,7 @@ export * from './OSLabel';
 export * from './HUDMarker';
 
 export * from './ProductPanel';
-
 export * from './ProductDashboard';
 export * from './BootLoader';
+export * from './GlobalAgent';
+export * from './AgentTarget';

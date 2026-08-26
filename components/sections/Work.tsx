@@ -9,6 +9,7 @@ import {
   TechnicalLabel,
   Button,
   ProductDashboard,
+  AgentTarget,
 } from '../ui';
 
 import {
@@ -41,7 +42,7 @@ export function Work() {
 
         <div className={styles.projectList}>
           {projectsData.map(
-            (project) => (
+            (project, index) => (
               <article
                 key={project.id}
                 className={styles.project}
@@ -137,15 +138,18 @@ export function Work() {
                     </div>
                   )}
 
-                  <div className="mt-8">
-                    <Button
-                      href={project.links?.caseStudy || `#project-${project.id}`}
-                      variant="outline"
-                      withArrow
-                      external={!!project.links?.caseStudy}
-                    >
-                      VIEW SYSTEM
-                    </Button>
+                  <div className="mt-8 relative w-max">
+                    <AgentTarget className="w-max" message={`Click here to preview <strong>${project.name}</strong>.`} offsetX={10}>
+                      <Button
+                        href={project.links?.caseStudy || `#project-${project.id}`}
+                        variant="outline"
+                        withArrow
+                        external={!!project.links?.caseStudy}
+                        className={styles.highlightedButton}
+                      >
+                        VIEW SYSTEM
+                      </Button>
+                    </AgentTarget>
                   </div>
                 </div>
 

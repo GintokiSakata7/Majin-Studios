@@ -62,6 +62,18 @@ interface GlobalState {
   // Boot sequence state
   hasBooted: boolean;
   setHasBooted: (status: boolean) => void;
+
+  // Tutorial state
+  hasSeenTutorial: boolean;
+  setHasSeenTutorial: (status: boolean) => void;
+
+  // Global AI Agent state
+  agentIsVisible: boolean;
+  setAgentIsVisible: (visible: boolean) => void;
+  agentTarget: { x: number, y: number } | null;
+  setAgentTarget: (target: { x: number, y: number } | null) => void;
+  agentMessage: string;
+  setAgentMessage: (message: string) => void;
 }
 
 export const useGlobalState = create<GlobalState>((set) => ({
@@ -92,6 +104,31 @@ export const useGlobalState = create<GlobalState>((set) => ({
   
   hasBooted: false,
   setHasBooted: (status) => set({ hasBooted: status }),
+
+  hasSeenTutorial: false,
+  setHasSeenTutorial: (status) => set({ hasSeenTutorial: status }),
+
+  agentIsVisible: true,
+  setAgentIsVisible: (visible) => set({ agentIsVisible: visible }),
+  agentTarget: null,
+  setAgentTarget: (target) => set({ agentTarget: target }),
+  agentMessage: null,
+  setAgentMessage: (message) => set({ agentMessage: message }),
+
+  activeTargetId: null,
+  setActiveTargetId: (id) => set({ activeTargetId: id }),
+  targetRegistry: {},
+  registerTarget: (id, ref, message, offsetX, offsetY, vanishAfterMs) => set((state) => ({
+    targetRegistry: {
+      ...state.targetRegistry,
+      [id]: { ref, message, offsetX, offsetY, vanishAfterMs }
+    }
+  })),
+  unregisterTarget: (id) => set((state) => {
+    const newRegistry = { ...state.targetRegistry };
+    delete newRegistry[id];
+    return { targetRegistry: newRegistry };
+  }),
 }));
 
 // Helper to get CSS variable for active accent

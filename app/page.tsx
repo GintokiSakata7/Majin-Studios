@@ -24,6 +24,7 @@ import {
   ScrollProgress,
   CustomCursor,
   BootLoader,
+  GlobalAgent,
 } from '../components/ui';
 
 import {
@@ -78,6 +79,7 @@ export default function Home() {
           --------------------------------------------------- */}
 
       <BootLoader />
+      <GlobalAgent />
 
       <CustomCursor />
 

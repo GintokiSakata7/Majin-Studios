@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { useGlobalState } from '../../store/useGlobalState';
 import Image from 'next/image';
 import emailjs from '@emailjs/browser';
 import styles from './Footer.module.css';
@@ -9,12 +10,50 @@ import {
   TechnicalLabel,
   HUDMarker,
   OSLabel,
-  Button
+  Button,
+  AgentTarget
 } from '../ui';
 
 export function Footer() {
   const formRef = useRef<HTMLFormElement>(null);
+  const footerRef = useRef<HTMLElement>(null);
+  const tourPlayed = useRef(false);
+  const { setActiveTargetId, setAgentMessage } = useGlobalState();
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !tourPlayed.current) {
+          tourPlayed.current = true;
+          
+          // Start the automated tour sequence
+          setActiveTargetId('footer-form');
+          
+          setTimeout(() => {
+            setActiveTargetId('footer-linkedin');
+            setTimeout(() => {
+              setActiveTargetId('footer-instagram');
+              setTimeout(() => {
+                setActiveTargetId('footer-mail');
+                setTimeout(() => {
+                  setActiveTargetId(null);
+                  setAgentMessage(null);
+                }, 3000);
+              }, 3000);
+            }, 3000);
+          }, 4000);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (footerRef.current) {
+      observer.observe(footerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [setActiveTargetId, setAgentMessage]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -41,6 +80,7 @@ export function Footer() {
     <footer
       id="contact"
       className={styles.footer}
+      ref={footerRef}
     >
       <div
         className={`page-container ${styles.container}`}
@@ -61,30 +101,36 @@ export function Footer() {
               />
 
               <div className={styles.brandContact}>
-                <a
-                  href="https://www.linkedin.com/company/majin-studios"
-                  className={styles.link}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  LINKEDIN
-                </a>
+                <AgentTarget id="footer-linkedin" autoTrigger={false} message="Follow us on LinkedIn for updates!" offsetX={15}>
+                  <a
+                    href="https://www.linkedin.com/company/majin-studios"
+                    className={styles.link}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    LINKEDIN
+                  </a>
+                </AgentTarget>
 
-                <a
-                  href="https://www.instagram.com/majin_studios/"
-                  className={styles.link}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  INSTAGRAM
-                </a>
+                <AgentTarget id="footer-instagram" autoTrigger={false} message="Follow us on Instagram!" offsetX={15}>
+                  <a
+                    href="https://www.instagram.com/majin_studios/"
+                    className={styles.link}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    INSTAGRAM
+                  </a>
+                </AgentTarget>
 
-                <a
-                  href="mailto:hello@majin.studio"
-                  className={styles.link}
-                >
-                  HELLO@MAJIN.STUDIO
-                </a>
+                <AgentTarget id="footer-mail" autoTrigger={false} message="Have a query? Mail us directly." offsetX={15}>
+                  <a
+                    href="mailto:hello@majin.studio"
+                    className={styles.link}
+                  >
+                    HELLO@MAJIN.STUDIO
+                  </a>
+                </AgentTarget>
               </div>
             </div>
 
@@ -99,18 +145,20 @@ export function Footer() {
               </div>
 
               {status === 'success' ? (
-                <div className="flex flex-col items-center justify-center text-center py-12">
-                  <div className="text-4xl text-accent-current mb-4">✓</div>
-                  <h3 className="text-display">MESSAGE SENT.</h3>
-                  <p className="mt-4 text-body text-secondary max-w-md">
-                    Thank you for reaching out. We have received your message and will get back to you shortly.
-                  </p>
-                  <div className="mt-8">
-                    <Button variant="outline" onClick={() => setStatus('idle')}>
-                      SEND ANOTHER MESSAGE
-                    </Button>
+                <AgentTarget message="Message sent!<br/>Be sure to follow us on Instagram & LinkedIn." offsetX={-450} offsetY={0}>
+                  <div className="flex flex-col items-center justify-center text-center py-12">
+                    <div className="text-4xl text-accent-current mb-4">✓</div>
+                    <h3 className="text-display">MESSAGE SENT.</h3>
+                    <p className="mt-4 text-body text-secondary max-w-md">
+                      Thank you for reaching out. We have received your message and will get back to you shortly.
+                    </p>
+                    <div className="mt-8">
+                      <Button variant="outline" onClick={() => setStatus('idle')}>
+                        SEND ANOTHER MESSAGE
+                      </Button>
+                    </div>
                   </div>
-                </div>
+                </AgentTarget>
               ) : (
                 <div className="flex flex-col gap-4">
                   <div>
@@ -118,37 +166,39 @@ export function Footer() {
                       Ready to build your next system? Send us an outline of your project, requirements, or general inquiry.
                     </p>
                     
-                    <form 
-                      ref={formRef}
-                      className="flex flex-col gap-6 w-full max-w-xl"
-                      onSubmit={handleSubmit}
-                    >
-                      <div className={styles.field}>
-                        <label className={styles.label}>NAME</label>
-                        <input required type="text" className={styles.input} placeholder="Your name" name="name" />
-                      </div>
-                      
-                      <div className={styles.field}>
-                        <label className={styles.label}>EMAIL</label>
-                        <input required type="email" className={styles.input} placeholder="you@company.com" name="email" />
-                      </div>
-                      
-                      <div className={styles.field}>
-                        <label className={styles.label}>COMPANY / INDIVIDUAL</label>
-                        <input type="text" className={styles.input} placeholder="Your company or just 'Individual'" name="company" />
-                      </div>
+                    <AgentTarget id="footer-form" autoTrigger={false} block={true} message="Ready to build your next system?<br/>Fill out this form and we'll be in touch." offsetX={-450} offsetY={0}>
+                      <form 
+                        ref={formRef}
+                        className="flex flex-col gap-6 w-full max-w-xl"
+                        onSubmit={handleSubmit}
+                      >
+                        <div className={styles.field}>
+                          <label className={styles.label}>NAME</label>
+                          <input required type="text" className={styles.input} placeholder="Your name" name="name" />
+                        </div>
+                        
+                        <div className={styles.field}>
+                          <label className={styles.label}>EMAIL</label>
+                          <input required type="email" className={styles.input} placeholder="you@company.com" name="email" />
+                        </div>
+                        
+                        <div className={styles.field}>
+                          <label className={styles.label}>COMPANY / INDIVIDUAL</label>
+                          <input type="text" className={styles.input} placeholder="Your company or just 'Individual'" name="company" />
+                        </div>
 
-                      <div className={styles.field}>
-                        <label className={styles.label}>MESSAGE</label>
-                        <textarea required className={styles.textarea} placeholder="Describe your project, requirements, or inquiry..." name="query" />
-                      </div>
+                        <div className={styles.field}>
+                          <label className={styles.label}>MESSAGE</label>
+                          <textarea required className={styles.textarea} placeholder="Describe your project, requirements, or inquiry..." name="query" />
+                        </div>
 
-                      <div className="mt-4">
-                        <Button type="submit" disabled={status === 'submitting'} withArrow>
-                          {status === 'submitting' ? 'SENDING...' : 'SEND MESSAGE'}
-                        </Button>
-                      </div>
-                    </form>
+                        <div className="mt-4">
+                          <Button type="submit" disabled={status === 'submitting'} withArrow>
+                            {status === 'submitting' ? 'SENDING...' : 'SEND MESSAGE'}
+                          </Button>
+                        </div>
+                      </form>
+                    </AgentTarget>
                   </div>
                 </div>
               )}

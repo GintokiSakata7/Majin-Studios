@@ -1,0 +1,74 @@
+.container {
+  position: fixed;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 50;
+  background: rgba(7, 8, 9, 0.6);
+  border: 1px solid var(--line-structural);
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+  padding: 8px 16px;
+  opacity: 0;
+  pointer-events: none; /* Never block user interaction */
+  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.container.closing {
+  animation: fadeOut 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  background-color: var(--accent-current);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-current);
+  animation: pulse 2s infinite;
+}
+
+.message {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+@media (max-width: 768px) {
+  .container {
+    bottom: var(--space-20); /* Above mobile nav if any */
+    width: max-content;
+    max-width: 90vw;
+  }
+}

@@ -1,0 +1,165 @@
+.container {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 40px); /* Position it to the right of the button */
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 50;
+  pointer-events: none; /* Let clicks pass through to the button if needed */
+  opacity: 0;
+  animation: flyIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s; /* Delay fly in */
+}
+
+/* The Bot Orb */
+.orb {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff, var(--accent-current) 60%, transparent);
+  box-shadow: 
+    0 0 20px var(--accent-glow),
+    inset 0 0 10px rgba(255,255,255,0.8);
+  animation: floatOrb 3s ease-in-out infinite, pulseGlow 2s infinite alternate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Inner core of the orb */
+.orbCore {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 10px #ffffff;
+  animation: blinkCore 4s infinite;
+}
+
+/* The Speech Bubble */
+.speechBubble {
+  position: relative;
+  background: rgba(10, 12, 16, 0.85);
+  border: 1px solid var(--accent-current);
+  border-radius: 8px 8px 8px 2px;
+  padding: 12px 16px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 10px var(--accent-glow);
+  max-width: 200px;
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: popBubble 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.2s; /* Pops in after the orb */
+}
+
+/* Little triangle pointing to the orb */
+.speechBubble::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  bottom: 4px;
+  width: 10px;
+  height: 10px;
+  background: rgba(10, 12, 16, 0.85);
+  border-left: 1px solid var(--accent-current);
+  border-bottom: 1px solid var(--accent-current);
+  transform: rotate(45deg);
+}
+
+.message {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.highlightText {
+  color: var(--accent-current);
+  font-weight: bold;
+}
+
+/* Animations */
+@keyframes flyIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) translateX(-20px) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0) scale(1);
+  }
+}
+
+@keyframes popBubble {
+  0% {
+    opacity: 0;
+    transform: translateX(-10px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes floatOrb {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 15px var(--accent-glow); }
+  100% { box-shadow: 0 0 30px var(--accent-glow), 0 0 50px var(--accent-current); }
+}
+
+@keyframes blinkCore {
+  0%, 96%, 100% { transform: scale(1); opacity: 1; }
+  98% { transform: scale(0.2); opacity: 0.5; } /* Quick blink */
+}
+
+@media (max-width: 768px) {
+  .container {
+    top: auto;
+    bottom: -60px; /* Below the button on mobile */
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+  
+  .speechBubble {
+    border-radius: 8px 8px 2px 8px;
+    transform: translateY(-10px);
+    animation: popBubbleMobile 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.2s;
+  }
+  
+  .speechBubble::before {
+    left: 50%;
+    bottom: -6px;
+    transform: translateX(-50%) rotate(-45deg);
+  }
+
+  @keyframes flyIn {
+    0% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(50px) scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+  }
+  
+  @keyframes popBubbleMobile {
+    0% {
+      opacity: 0;
+      transform: translateY(10px) scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
