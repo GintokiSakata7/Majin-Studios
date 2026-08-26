@@ -82,10 +82,11 @@ export function Team() {
         ref={containerRef}
         className="page-container"
       >
-        <div className="mb-20">
+        <div className="mb-10">
           <SectionHeading
             title="SIX PEOPLE. ONE BUILD SYSTEM."
             metadata="FIG. 06 — CORE TEAM"
+            as="h3"
           />
         </div>
 
