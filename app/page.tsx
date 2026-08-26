@@ -36,13 +36,23 @@ export default function Home() {
   useEffect(() => {
     /*
      * Start the experience at the top only after
-     * the initial browser paint.
+     * the initial browser paint, unless there is a hash fragment.
      */
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'auto',
-    });
+    if (!window.location.hash) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'auto',
+      });
+    } else {
+      setTimeout(() => {
+        const id = window.location.hash.slice(1);
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100); // slight delay to let DOM render
+    }
   }, []);
 
   return (
