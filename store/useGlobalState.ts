@@ -58,6 +58,10 @@ interface GlobalState {
   // Progress (0 to 1 across the whole universe)
   scrollProgress: number;
   setScrollProgress: (progress: number) => void;
+
+  // Boot sequence state
+  hasBooted: boolean;
+  setHasBooted: (status: boolean) => void;
 }
 
 export const useGlobalState = create<GlobalState>((set) => ({
@@ -85,6 +89,9 @@ export const useGlobalState = create<GlobalState>((set) => ({
   
   scrollProgress: 0,
   setScrollProgress: (progress) => set({ scrollProgress: progress }),
+  
+  hasBooted: false,
+  setHasBooted: (status) => set({ hasBooted: status }),
 }));
 
 // Helper to get CSS variable for active accent

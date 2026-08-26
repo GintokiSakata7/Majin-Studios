@@ -25,3 +25,4 @@ export * from './HUDMarker';
 export * from './ProductPanel';
 
 export * from './ProductDashboard';
+export * from './BootLoader';
