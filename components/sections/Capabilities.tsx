@@ -71,8 +71,35 @@ export function Capabilities() {
     }
   }, [capabilitiesStage, setCapabilitiesStage]);
 
-  // Mobile scroll observer
+  // Auto-scroll on mobile (physically scrolls the container)
   useEffect(() => {
+    let interval: NodeJS.Timeout;
+    
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) {
+      interval = setInterval(() => {
+        const elements = document.querySelectorAll('[data-capability-id]');
+        const currentIndex = capabilities.findIndex(c => c.id === capabilitiesStage);
+        const nextIndex = (currentIndex + 1) % capabilities.length;
+        
+        if (elements[nextIndex]) {
+          const el = elements[nextIndex] as HTMLElement;
+          const container = el.parentElement;
+          if (container) {
+            // Scroll only the local container horizontally to center the element
+            const scrollLeft = el.offsetLeft - (container.clientWidth / 2) + (el.clientWidth / 2);
+            container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+          }
+        }
+      }, 2000);
+    }
+
+    return () => clearInterval(interval);
+  }, [capabilitiesStage]);
+
+  // Observer to track which card is currently visible
+  useEffect(() => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -86,7 +113,7 @@ export function Capabilities() {
       },
       {
         root: null,
-        rootMargin: '-40% 0px -40% 0px',
+        rootMargin: isMobile ? '0px -30% 0px -30%' : '-40% 0px -40% 0px',
         threshold: 0,
       }
     );
@@ -94,9 +121,7 @@ export function Capabilities() {
     const elements = document.querySelectorAll('[data-capability-id]');
     elements.forEach((el) => observer.observe(el));
 
-    return () => {
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, [setCapabilitiesStage]);
 
   return (
@@ -146,6 +171,7 @@ export function Capabilities() {
                   <article
                     key={capability.id}
                     data-capability-id={capability.id}
+                    data-active={isActive.toString()}
                     className={[
                       styles.capability,
                       styles[capability.className],
