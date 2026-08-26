@@ -217,24 +217,6 @@ export function QuantumArena() {
             dotsContainer.appendChild(dot);
         });
         
-        const prevBtn = document.createElement('button');
-        prevBtn.className = 'slider-nav prev';
-        prevBtn.innerHTML = '←';
-        prevBtn.onclick = () => { 
-            gallery.scrollBy({ left: -(gallery.clientWidth * 0.7), behavior: 'smooth' });
-            resetTimer(); 
-        };
-        
-        const nextBtn = document.createElement('button');
-        nextBtn.className = 'slider-nav next';
-        nextBtn.innerHTML = '→';
-        nextBtn.onclick = () => { 
-            gallery.scrollBy({ left: gallery.clientWidth * 0.7, behavior: 'smooth' });
-            resetTimer(); 
-        };
-        
-        wrapper.appendChild(prevBtn);
-        wrapper.appendChild(nextBtn);
         wrapper.appendChild(dotsContainer);
         
         // Auto slide logic
