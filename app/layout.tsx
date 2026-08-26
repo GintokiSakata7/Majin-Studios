@@ -145,6 +145,11 @@ export default function RootLayout({
       name: 'Majin Studios',
       url: 'https://www.majinstudios.tech/',
       logo: 'https://www.majinstudios.tech/logo.jpg',
+      sameAs: [
+        'https://in.linkedin.com/company/majin-studios',
+        'https://www.instagram.com/majin_studios/',
+        'https://x.com/Majin_Studios',
+      ],
     },
   ];
 
