@@ -83,8 +83,8 @@ export function GlobalAgent() {
         const isMobile = window.innerWidth < 768;
         const avatarWidth = 48;
         
-        let targetX = rect.right + target.offsetX;
-        let targetY = rect.top + (rect.height / 2) + target.offsetY - (avatarWidth / 2); // Center vertically
+        let targetX = rect.right + (target.offsetX || 0);
+        let targetY = rect.top + (rect.height / 2) + (target.offsetY || 0) - (avatarWidth / 2); // Center vertically
         let flipped = false;
 
         if (isMobile) {
@@ -109,7 +109,7 @@ export function GlobalAgent() {
           flipped = targetX > window.innerWidth - 250; 
           
           if (flipped) {
-            targetX = rect.left - 60 - Math.abs(target.offsetX); // Place on left
+            targetX = rect.left - 60 - Math.abs(target.offsetX || 0); // Place on left
           }
         }
 

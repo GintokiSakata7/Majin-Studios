@@ -72,8 +72,21 @@ interface GlobalState {
   setAgentIsVisible: (visible: boolean) => void;
   agentTarget: { x: number, y: number } | null;
   setAgentTarget: (target: { x: number, y: number } | null) => void;
-  agentMessage: string;
-  setAgentMessage: (message: string) => void;
+  agentMessage: string | null;
+  setAgentMessage: (message: string | null) => void;
+
+  // Agent Target Registry
+  activeTargetId: string | null;
+  setActiveTargetId: (id: string | null) => void;
+  targetRegistry: Record<string, { 
+    ref: any; 
+    message: string; 
+    offsetX?: number; 
+    offsetY?: number; 
+    vanishAfterMs?: number;
+  }>;
+  registerTarget: (id: string, ref: any, message: string, offsetX?: number, offsetY?: number, vanishAfterMs?: number) => void;
+  unregisterTarget: (id: string) => void;
 }
 
 export const useGlobalState = create<GlobalState>((set) => ({
