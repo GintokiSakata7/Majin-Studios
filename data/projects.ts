@@ -333,68 +333,68 @@ export const projectsData: Project[] = [
   },
 
   {
-    id: 'enterprise-rag',
+    id: 'quantum-arena',
 
     number: '02',
 
-    category: 'DATA INFRASTRUCTURE',
+    category: 'SYSTEM / OPERATIONAL',
 
-    name: 'Semantic Knowledge Engine',
+    name: 'Quantum Arena',
 
     tagline:
-      'High-precision retrieval system for technical documentation.',
+      'End-to-end digital infrastructure behind a 36-hour event.',
 
-    status: 'CONCEPT',
-    isConcept: true,
+    status: 'PRODUCTION',
+    isConcept: false,
 
     accent: 'LIME',
 
-    visualType: 'knowledge-graph',
+    visualType: 'dashboard-system',
 
     problem:
-      'Standard retrieval can return irrelevant or weakly related technical information when working with dense architectural documentation.',
+      'Managing registration, verification, check-in, and judging for large-scale events often involves fragmented systems and manual work.',
 
     solution:
-      'A hybrid retrieval architecture combining semantic embeddings, graph relationships, and precise keyword matching.',
+      'An end-to-end operations platform combining participant workflows, event-day controls, judge tooling, and post-event automation.',
 
     outcome:
-      'Conceptual retrieval architecture demonstrating a layered approach to technical knowledge discovery.',
+      'Engineered the digital infrastructure behind a 36-hour event handling 1,500+ participants.',
 
     technologies: [
-      'TypeScript',
-      'Pinecone',
-      'FastAPI',
-      'React',
-      'AWS',
+      'React 19',
+      'Vite',
+      'Node.js',
+      'Express',
+      'MongoDB',
     ],
 
     capabilities: [
       {
-        label: 'Semantic search',
+        label: 'Participant Module',
         description:
-          'Retrieve information based on meaning rather than exact wording.',
+          'Registration, team information, live status and published scorecards.',
       },
       {
-        label: 'Knowledge relationships',
+        label: 'Verification & Check-in',
         description:
-          'Represent relationships between technical entities and documentation.',
+          'Payment and ID uploads, secure review, QR scanning, and attendance operations.',
       },
       {
-        label: 'Hybrid retrieval',
+        label: 'Judging & Scoring',
         description:
-          'Combine semantic and lexical retrieval strategies.',
+          'Dedicated judge portals, master evaluation sheet, and top-ranking reports.',
       },
       {
-        label: 'Fast querying',
+        label: 'Automation',
         description:
-          'Designed around responsive technical knowledge exploration.',
+          'Image-based certificates and controlled transactional email distribution.',
       },
     ],
 
     architecture: [
       {
         id: 'client',
-        label: 'Web Client',
+        label: 'Participant UI',
         type: 'client',
         position: {
           x: -0.85,
@@ -402,99 +402,114 @@ export const projectsData: Project[] = [
           z: 0,
         },
         connections: ['gateway'],
-        metadata: 'USER QUERY',
+        metadata: 'REACT / VITE',
+      },
+
+      {
+        id: 'admin',
+        label: 'Admin + Judge UI',
+        type: 'frontend',
+        position: {
+          x: -0.4,
+          y: 0.3,
+          z: 0,
+        },
+        connections: ['gateway'],
+        metadata: 'SECURE PORTALS',
       },
 
       {
         id: 'gateway',
-        label: 'API Gateway',
+        label: 'Node + Express API',
         type: 'api',
         position: {
-          x: -0.4,
+          x: 0,
           y: 0,
           z: 0,
         },
-        connections: ['embed', 'vector'],
-        metadata: 'QUERY ROUTING',
+        connections: ['db', 'services'],
+        metadata: 'EVENT LOGIC',
       },
 
       {
-        id: 'embed',
-        label: 'Embedding Engine',
-        type: 'ai',
-        position: {
-          x: 0,
-          y: 0.3,
-          z: 0,
-        },
-        connections: ['vector'],
-        metadata: 'SEMANTIC REPRESENTATION',
-      },
-
-      {
-        id: 'vector',
-        label: 'Vector DB',
+        id: 'db',
+        label: 'MongoDB',
         type: 'database',
         position: {
           x: 0.45,
-          y: -0.1,
+          y: -0.2,
           z: 0,
         },
         connections: [],
-        metadata: 'KNOWLEDGE STORE',
+        metadata: 'STATE & SCORES',
+      },
+      {
+        id: 'services',
+        label: 'Cloudinary + Email',
+        type: 'external',
+        position: {
+          x: 0.45,
+          y: 0.2,
+          z: 0,
+        },
+        connections: [],
+        metadata: 'UPLOADS & NOTIFS',
       },
     ],
 
     assembly: [
       {
-        id: 'knowledge-shell',
-        label: 'Knowledge Shell',
+        id: 'qa-shell',
+        label: 'Platform Shell',
         order: 1,
         type: 'shell',
         description:
-          'Base interface for technical knowledge exploration.',
+          'Base interface for event operations.',
       },
 
       {
-        id: 'search-panel',
-        label: 'Search Panel',
+        id: 'registration-panel',
+        label: 'Registration & Verification',
         order: 2,
         type: 'form',
         description:
-          'Query interface for technical documentation.',
+          'Participant intake and approval workflows.',
       },
 
       {
-        id: 'retrieval-panel',
-        label: 'Retrieval Panel',
+        id: 'judging-panel',
+        label: 'Judge Portal',
         order: 3,
         type: 'panel',
         description:
-          'Ranked retrieval results and semantic relationships.',
+          'Structured team evaluation and scoring.',
       },
 
       {
-        id: 'knowledge-map',
-        label: 'Knowledge Map',
+        id: 'automation-engine',
+        label: 'Certificate Engine',
         order: 4,
-        type: 'map',
+        type: 'workflow',
         description:
-          'Visual representation of relationships between retrieved entities.',
+          'Automated generation and distribution of certificates.',
       },
     ],
 
     metrics: [
       {
-        label: 'Retrieval Accuracy',
-        value: '99.2%',
-        context: 'Concept / simulated metric',
+        label: 'Participants',
+        value: '1500+',
+        context: 'Event scale',
       },
       {
-        label: 'Query Latency',
-        value: '<200ms',
-        context: 'Concept / simulated target',
+        label: 'Event Duration',
+        value: '36H',
+        context: 'Continuous operations',
       },
     ],
+    links: {
+      caseStudy: '/quantumarena'
+    }
   },
 ];
 

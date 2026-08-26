@@ -139,9 +139,10 @@ export function Work() {
 
                   <div className="mt-8">
                     <Button
-                      href={`#project-${project.id}`}
+                      href={project.links?.caseStudy || `#project-${project.id}`}
                       variant="outline"
                       withArrow
+                      external={!!project.links?.caseStudy}
                     >
                       VIEW SYSTEM
                     </Button>
