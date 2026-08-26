@@ -680,6 +680,12 @@
       padding-inline: 6vw;
     }
 
+    .text-display-giant, .text-display, .text-heading-1, .text-heading-2, .text-heading-3 {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+
     .text-display-giant {
       font-size:
         clamp(

@@ -147,7 +147,7 @@ export function Process() {
 
   return (
     <section
-      className={`section ${styles.section} py-32`}
+      className={`section ${styles.section} py-16 md:py-32`}
       id="process"
     >
       <div

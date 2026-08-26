@@ -31,7 +31,7 @@ export function Systems() {
   const activeDetails = useMemo(() => nodes.find((n) => n.id === activeNode), [activeNode]);
 
   return (
-    <section className="section relative min-h-[120vh] py-32" id="systems">
+    <section className="section relative min-h-[auto] md:min-h-[120vh] py-16 md:py-32" id="systems">
       <style>{`
         @keyframes floatNode {
           0%, 100% { transform: translateY(0px); }

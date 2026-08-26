@@ -25,14 +25,14 @@ export function Work() {
 
   return (
     <section
-      className={`section relative pt-32 ${styles.section}`}
+      className={`section relative pt-16 md:pt-32 ${styles.section}`}
       id="work"
     >
       <div
         ref={containerRef}
         className="page-container"
       >
-        <div className="mb-24">
+        <div className="mb-12 md:mb-24">
           <SectionHeading
             title="SELECTED SYSTEMS."
             metadata="FIG. 04 — PRODUCTS / CASE STUDIES"

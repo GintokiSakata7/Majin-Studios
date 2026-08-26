@@ -125,7 +125,7 @@ export function WhyMajin() {
       id="why-majin"
       className={styles.section}
     >
-      <div className="page-container min-h-screen flex flex-col justify-center relative z-10 py-32">
+      <div className="page-container min-h-[auto] md:min-h-screen flex flex-col justify-center relative z-10 py-16 md:py-32">
         <div className={styles.header}>
           <SectionHeading
             title="THE MAJIN DIFFERENCE."

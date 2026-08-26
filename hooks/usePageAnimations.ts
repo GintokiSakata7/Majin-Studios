@@ -135,7 +135,7 @@ export function usePageAnimations() {
 
       const heroTimeline = gsap.timeline({
         defaults: {
-          ease: 'power3.out',
+          ease: 'power2.out',
         },
       });
 
@@ -143,20 +143,16 @@ export function usePageAnimations() {
         heroTimeline.fromTo(
           heroText,
           {
-            y: 48,
+            y: 30,
             opacity: 0,
-            clipPath:
-              'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)',
           },
           {
             y: 0,
             opacity: 1,
-            clipPath:
-              'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-            duration: 1.05,
-            stagger: 0.12,
+            duration: 0.8,
+            stagger: 0.08,
           },
-          0.35
+          0.1
         );
       }
 
@@ -164,15 +160,15 @@ export function usePageAnimations() {
         heroTimeline.fromTo(
           heroBody,
           {
-            y: 22,
+            y: 15,
             opacity: 0,
           },
           {
             y: 0,
             opacity: 1,
-            duration: 0.75,
+            duration: 0.6,
           },
-          '-=0.55'
+          '-=0.4'
         );
       }
 
@@ -180,15 +176,15 @@ export function usePageAnimations() {
         heroTimeline.fromTo(
           heroActions,
           {
-            y: 16,
+            y: 10,
             opacity: 0,
           },
           {
             y: 0,
             opacity: 1,
-            duration: 0.65,
+            duration: 0.5,
           },
-          '-=0.45'
+          '-=0.3'
         );
       }
 
@@ -208,22 +204,18 @@ export function usePageAnimations() {
         gsap.fromTo(
           heading,
           {
-            y: 44,
+            y: 20,
             opacity: 0,
-            clipPath:
-              'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)',
           },
           {
             y: 0,
             opacity: 1,
-            clipPath:
-              'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-            duration: 0.95,
-            ease: 'power3.out',
+            duration: 0.4,
+            ease: 'power2.out',
 
             scrollTrigger: {
               trigger: heading,
-              start: 'top 84%',
+              start: 'top 95%',
               toggleActions: 'play none none reverse',
             },
           }
@@ -270,18 +262,18 @@ export function usePageAnimations() {
         gsap.fromTo(
           statement,
           {
-            y: index % 2 === 0 ? 34 : 20,
+            y: index % 2 === 0 ? 20 : 10,
             opacity: 0,
           },
           {
             y: 0,
             opacity: 1,
-            duration: 0.9,
-            ease: 'power3.out',
+            duration: 0.7,
+            ease: 'power2.out',
 
             scrollTrigger: {
               trigger: statement,
-              start: 'top 82%',
+              start: 'top 88%',
               toggleActions: 'play none none reverse',
             },
           }

@@ -15,9 +15,9 @@ export function QuantumArena() {
 
     
         const images = [
-            '/quantumarena/images/Screenshot 2026-08-25 204631.png', '/quantumarena/images/Screenshot 2026-08-25 204657.png', '/quantumarena/images/Screenshot 2026-08-25 204713.png', '/quantumarena/images/Screenshot 2026-08-25 204731 - Copy.png', '/quantumarena/images/Screenshot 2026-08-25 204731.png', '/quantumarena/images/Screenshot 2026-08-25 204746.png', '/quantumarena/images/Screenshot 2026-08-25 204800.png', '/quantumarena/images/Screenshot 2026-08-25 204814.png', '/quantumarena/images/Screenshot 2026-08-25 204825.png', '/quantumarena/images/Screenshot 2026-08-25 204842.png', '/quantumarena/images/Screenshot 2026-08-25 204859.png', '/quantumarena/images/Screenshot 2026-08-25 204916.png'
+            '/quantumarena/images/Screenshot 2026-08-25 204631.png', '/quantumarena/images/Screenshot 2026-08-25 204657.png', '/quantumarena/images/Screenshot 2026-08-25 204713.png', '/quantumarena/images/Screenshot 2026-08-25 204731.png', '/quantumarena/images/Screenshot 2026-08-25 204746.png', '/quantumarena/images/Screenshot 2026-08-25 204800.png', '/quantumarena/images/Screenshot 2026-08-25 204814.png', '/quantumarena/images/Screenshot 2026-08-25 204825.png', '/quantumarena/images/Screenshot 2026-08-25 204842.png', '/quantumarena/images/Screenshot 2026-08-25 204859.png', '/quantumarena/images/Screenshot 2026-08-25 204916.png'
         ];
-        const labels = ['System Overview', 'Event About', 'Participant Experience', 'Tracks / Discover', 'Track Browser', 'Timeline / Operations', 'Timeline / Execution', 'Prizes / Outcomes', 'Rules / Governance', 'Registration / Conversion', 'Event Location / Context', 'Additional Interface'];
+        const labels = ['System Overview', 'Event About', 'Participant Experience', 'Tracks / Discover', 'Timeline / Operations', 'Timeline / Execution', 'Prizes / Outcomes', 'Rules / Governance', 'Registration / Conversion', 'Event Location / Context', 'Additional Interface'];
         const workflow = [
             ['SYSTEM / REGISTRATION', 'Participant intake', 'Teams register with 1–5 members, submit payment and identity material, and move through a trackable approval process.', 'registered → submitted → verified → approved'],
             ['SYSTEM / CHECK-IN', 'Live event operations', 'QR-based check-in and multi-day attendance tracking turned event-day entry into a controlled digital workflow.', 'scan → identify → verify → check-in → attendance'],
@@ -191,8 +191,89 @@ export function QuantumArena() {
             storyList.appendChild(row); 
         });
 
-        // gallery
-        const gallery = getEl("gallery"); gallery.innerHTML = ''; images.forEach((src, i) => { const card = document.createElement('article'); card.className = 'shot reveal'; card.innerHTML = `<img src="${src}" alt="${labels[i]}" loading="lazy"><div class="shot-meta"><div><strong>${labels[i]}</strong><div style="margin-top:5px"><span>${String(i + 1).padStart(2, '0')} // INTERFACE</span></div></div><div class="shot-open">OPEN ↗</div></div>`; card.onclick = () => openModal(src, labels[i]); gallery.appendChild(card); revealObs.observe(card) });
+        // gallery slideshow (Native Scroll + Auto Slide)
+        const gallery = getEl("gallery"); 
+        const wrapper = getEl("galleryWrapper");
+        gallery.innerHTML = '';
+        
+        const dotsContainer = document.createElement('div');
+        dotsContainer.className = 'slider-dots';
+        
+        images.forEach((src, i) => { 
+            const card = document.createElement('article'); 
+            card.className = 'shot'; 
+            card.innerHTML = `<img src="${src}" alt="${labels[i]}" loading="lazy"><div class="shot-meta"><div><strong>${labels[i]}</strong><div style="margin-top:5px"><span>${String(i + 1).padStart(2, '0')} // INTERFACE</span></div></div><div class="shot-open">OPEN ↗</div></div>`; 
+            card.onclick = () => openModal(src, labels[i]); 
+            gallery.appendChild(card); 
+            
+            const dot = document.createElement('button');
+            dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+            dot.onclick = () => {
+                // Calculate scroll position to center the card
+                const scrollLeft = card.offsetLeft - (gallery.clientWidth - card.clientWidth) / 2;
+                gallery.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+                resetTimer();
+            };
+            dotsContainer.appendChild(dot);
+        });
+        
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'slider-nav prev';
+        prevBtn.innerHTML = '←';
+        prevBtn.onclick = () => { 
+            gallery.scrollBy({ left: -(gallery.clientWidth * 0.7), behavior: 'smooth' });
+            resetTimer(); 
+        };
+        
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'slider-nav next';
+        nextBtn.innerHTML = '→';
+        nextBtn.onclick = () => { 
+            gallery.scrollBy({ left: gallery.clientWidth * 0.7, behavior: 'smooth' });
+            resetTimer(); 
+        };
+        
+        wrapper.appendChild(prevBtn);
+        wrapper.appendChild(nextBtn);
+        wrapper.appendChild(dotsContainer);
+        
+        // Auto slide logic
+        let slideTimer: any;
+        const autoSlide = () => {
+            const maxScroll = gallery.scrollWidth - gallery.clientWidth;
+            if (gallery.scrollLeft >= maxScroll - 10) {
+                gallery.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                gallery.scrollBy({ left: gallery.clientWidth * 0.7, behavior: 'smooth' });
+            }
+        };
+        
+        const resetTimer = () => {
+            clearInterval(slideTimer);
+            slideTimer = setInterval(autoSlide, 2000); // 2 seconds
+        };
+        
+        gallery.addEventListener('scroll', () => {
+            const cards = gallery.querySelectorAll('.shot');
+            let activeIdx = 0;
+            let minDiff = Infinity;
+            cards.forEach((card, idx) => {
+                const diff = Math.abs((card as HTMLElement).offsetLeft - gallery.scrollLeft - (gallery.clientWidth - card.clientWidth) / 2);
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    activeIdx = idx;
+                }
+            });
+            const dots = dotsContainer.querySelectorAll('.slider-dot');
+            dots.forEach((dot, idx) => dot.classList.toggle('active', idx === activeIdx));
+        }, { passive: true });
+        
+        wrapper.addEventListener('mouseenter', () => clearInterval(slideTimer));
+        wrapper.addEventListener('mouseleave', () => resetTimer());
+        wrapper.addEventListener('touchstart', () => clearInterval(slideTimer), {passive: true});
+        wrapper.addEventListener('touchend', () => resetTimer(), {passive: true});
+        
+        resetTimer();
 
         // modal
         const modal = getEl("modal"), modalImg = getEl("modalImg") as HTMLImageElement, modalTitle = getEl("modalTitle"); function openModal(src: string, title: string) { modalImg.src = src; modalTitle.textContent = 'QUANTUM ARENA // ' + title.toUpperCase(); modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); container.classList.add('lock') } function closeModal() { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); modalImg.removeAttribute('src'); if (!getEl("loader").classList.contains('hide')) return; container.classList.remove('lock') } getEl("modalClose").onclick = closeModal; modal.addEventListener("click", (e: any) => { if (e.target === modal) closeModal() }); document.addEventListener("keydown", (e: any) => { if (e.key === 'Escape') closeModal() });
@@ -445,7 +526,9 @@ export function QuantumArena() {
                         actual system screens and open them full-size.</p>
                 </div>
             </div>
-            <div className="gallery" id="gallery" style={{marginTop:"42px"}}></div>
+            <div className="gallery-wrapper" id="galleryWrapper" style={{marginTop:"42px", position: "relative"}}>
+                <div className="gallery" id="gallery"></div>
+            </div>
         </section>
 
         <section id="architecture" className="wrap">
@@ -576,7 +659,7 @@ export function QuantumArena() {
                     <p className="final-sub">Quantum Arena is one example of the work Majin Studios can take from
                         requirement to deployed product — interfaces, backend workflows, integrations, automation and
                         operational tooling working as one system.</p>
-                    <div className="final-links"><a className="btn primary magnetic" href="mailto:majinstudios03@gmail.com">Talk
+                    <div className="final-links"><a className="btn primary magnetic" href="/#contact">Talk
                             to Majin Studios →</a><a className="btn magnetic" href="#top">Back to top ↑</a></div>
                     <div className="final-tags">
                         <span>WEB</span><span>SOFTWARE</span><span>APIs</span><span>AI</span><span>AUTOMATION</span>

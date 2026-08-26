@@ -245,10 +245,14 @@ function UniverseController() {
 
 export function UniverseScene() {
   const [mounted, setMounted] = useState(false);
+  const { currentScene } = useGlobalState();
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Determine when to vanish the 3D scene to prevent visual clutter and reduce complexity
+  const isVanishScene = currentScene === 'SYSTEMS' || currentScene === 'PRODUCTS' || currentScene === 'TEAM';
 
   return (
     <div
@@ -261,6 +265,8 @@ export function UniverseScene() {
         height: '100%',
         zIndex: 0,
         pointerEvents: 'none',
+        opacity: isVanishScene ? 0 : 1,
+        transition: 'opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1)',
       }}
       aria-hidden="true"
     >

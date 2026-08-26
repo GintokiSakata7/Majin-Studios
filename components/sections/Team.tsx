@@ -75,7 +75,7 @@ export function Team() {
 
   return (
     <section
-      className="section relative min-h-screen py-32"
+      className="section relative min-h-[auto] md:min-h-screen py-16 md:py-32"
       id="studio"
     >
       <div
@@ -89,7 +89,7 @@ export function Team() {
           />
         </div>
 
-        <div className="grid grid-cols-12 gap-8 min-h-[760px]">
+        <div className="grid grid-cols-12 gap-8 min-h-[auto] md:min-h-[760px]">
           {/* MATRIX */}
           <div className="col-span-12 lg:col-span-8 relative min-h-[650px] border border-line-structural overflow-hidden hidden lg:block">
             <div
