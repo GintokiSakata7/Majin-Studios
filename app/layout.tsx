@@ -179,6 +179,10 @@ export default function RootLayout({
         height: 1024,
       },
       image: 'https://www.majinstudios.tech/logo.jpg',
+      sameAs: [
+        'https://in.linkedin.com/company/majin-studios',
+        'https://www.instagram.com/majin_studios/',
+      ],
     },
   ];
 
