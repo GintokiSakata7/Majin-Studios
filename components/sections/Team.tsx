@@ -90,9 +90,9 @@ export function Team() {
           />
         </div>
 
-        <div className="grid grid-cols-12 gap-8 min-h-[auto] md:min-h-[760px]">
+        <div className="grid grid-cols-12 gap-8 min-h-[auto] md:min-h-[550px]">
           {/* MATRIX */}
-          <div className="col-span-12 lg:col-span-8 relative min-h-[650px] border border-line-structural overflow-hidden hidden lg:block">
+          <div className="col-span-12 lg:col-span-8 relative min-h-[500px] border border-line-structural overflow-hidden hidden lg:block">
             <div
               className="absolute inset-0 opacity-25"
               style={{
