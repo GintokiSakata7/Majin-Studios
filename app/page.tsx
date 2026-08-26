@@ -18,6 +18,7 @@ import {
   Team,
   WhyMajin,
   Footer,
+  Tools,
 } from '../components/sections';
 
 import {
@@ -113,6 +114,8 @@ export default function Home() {
          */}
 
         <Work />
+        
+        <Tools />
 
         <Process />
 

@@ -80,16 +80,38 @@ export function GlobalAgent() {
       if (target.ref) {
         const rect = target.ref.getBoundingClientRect();
         
+        const isMobile = window.innerWidth < 768;
+        const avatarWidth = 48;
+        
         let targetX = rect.right + target.offsetX;
-        
-        // If the element is too far to the right, we flip it and put the bot on the left side of the element
-        const flipped = targetX > window.innerWidth - 250; 
-        
-        if (flipped) {
-          targetX = rect.left - 60 - Math.abs(target.offsetX); // Place on left
-        }
+        let targetY = rect.top + (rect.height / 2) + target.offsetY - (avatarWidth / 2); // Center vertically
+        let flipped = false;
 
-        const targetY = rect.top + (rect.height / 2) + target.offsetY - 24; // Center vertically
+        if (isMobile) {
+          // On mobile, to avoid covering the button/element with the speech bubble,
+          // we place the bot fully ABOVE or BELOW the element.
+          targetX = window.innerWidth - avatarWidth - 16; // 16px padding from right edge
+          
+          // If there is enough space above the element in the viewport, place it above
+          if (rect.top > 100) {
+             targetY = rect.top - avatarWidth - 30; // 30px clearance above the element
+          } else {
+             // Otherwise place it below
+             targetY = rect.bottom + 30; // 30px clearance below the element
+          }
+          
+          // Ensure it stays vertically within the viewport
+          targetY = Math.max(16, Math.min(targetY, window.innerHeight - avatarWidth - 16));
+          
+          flipped = true; // Always flip on mobile right-edge so bubble goes left
+        } else {
+          // Desktop logic
+          flipped = targetX > window.innerWidth - 250; 
+          
+          if (flipped) {
+            targetX = rect.left - 60 - Math.abs(target.offsetX); // Place on left
+          }
+        }
 
         // Lerp coordinates
         currentPos.current.x += (targetX - currentPos.current.x) * 0.08;

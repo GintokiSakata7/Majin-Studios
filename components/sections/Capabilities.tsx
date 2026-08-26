@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Capabilities.module.css';
 import { SectionHeading, TechnicalLabel } from '../ui';
+import { AgentTarget } from '../ui/AgentTarget';
 import { useMotionEngine } from '../../hooks/useMotionEngine';
 import { useGlobalState } from '../../store/useGlobalState';
 import type { CapabilitiesStage } from '../../store/useGlobalState';
@@ -64,18 +65,29 @@ export function Capabilities() {
   const containerRef = useMotionEngine();
   const { capabilitiesStage, setCapabilitiesStage } = useGlobalState();
 
-  // Set default stage on mount
+  const [isMobile, setIsMobile] = useState(false);
+  const [agentMsg, setAgentMsg] = useState('');
+
+  // Set default stage on mount and detect mobile for agent
   useEffect(() => {
     if (!capabilitiesStage) {
       setCapabilitiesStage('ai');
     }
+    const checkMobile = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      setAgentMsg(mobile ? 'Slide to see' : '');
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, [capabilitiesStage, setCapabilitiesStage]);
 
   // Auto-scroll on mobile (physically scrolls the container)
   useEffect(() => {
     let interval: NodeJS.Timeout;
     
-    if (typeof window !== 'undefined' && window.innerWidth <= 768) {
+    if (isMobile) {
       interval = setInterval(() => {
         const elements = document.querySelectorAll('[data-capability-id]');
         const currentIndex = capabilities.findIndex(c => c.id === capabilitiesStage);
@@ -94,12 +106,10 @@ export function Capabilities() {
     }
 
     return () => clearInterval(interval);
-  }, [capabilitiesStage]);
+  }, [capabilitiesStage, isMobile]);
 
   // Observer to track which card is currently visible
   useEffect(() => {
-    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
-    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -122,18 +132,25 @@ export function Capabilities() {
     elements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, [setCapabilitiesStage]);
+  }, [setCapabilitiesStage, isMobile]);
 
   return (
     <section id="capabilities" className={styles.section}>
       <div ref={containerRef} className="page-container flex-1 flex flex-col w-full">
         <div className={styles.inner}>
           <div className={styles.header}>
-            <SectionHeading
-              title={<>WE BUILD THE SYSTEM<br/>AROUND THE PRODUCT.</>}
-              metadata="FIG. 02 — CAPABILITIES"
-              as="h2"
-            />
+            <AgentTarget 
+              id="capabilities-heading"
+              message={agentMsg}
+              vanishAfterMs={2000}
+              block
+            >
+              <SectionHeading
+                title={<>WE BUILD THE SYSTEM<br/>AROUND THE PRODUCT.</>}
+                metadata="FIG. 02 — CAPABILITIES"
+                as="h2"
+              />
+            </AgentTarget>
           </div>
 
           <div className={styles.visualField}>

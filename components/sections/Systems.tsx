@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { SectionHeading } from '../ui';
+import { AgentTarget } from '../ui/AgentTarget';
 import { useMotionEngine } from '../../hooks/useMotionEngine';
 
 interface SystemNode {
@@ -46,7 +47,15 @@ export function Systems() {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [draggingNode, setDraggingNode] = useState<string | null>(null);
   const [activeStep, setActiveStep] = useState<number>(-1);
+  const [isMobile, setIsMobile] = useState(false);
   const dragStartRef = useRef<{x: number, y: number} | null>(null);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const canvasRef = useRef<HTMLDivElement>(null);
 
@@ -172,10 +181,17 @@ export function Systems() {
       `}</style>
       <div ref={containerRef} className="page-container">
         <div className="mb-20">
-          <SectionHeading
-            title="SYSTEM ARCHITECTURE"
-            metadata="FIG. 03 — PRECISION PIPELINE"
-          />
+          <AgentTarget 
+            id="systems-heading"
+            message={isMobile ? "Tap to explore" : ""}
+            vanishAfterMs={2000}
+            block
+          >
+            <SectionHeading
+              title="SYSTEM ARCHITECTURE"
+              metadata="FIG. 03 — PRECISION PIPELINE"
+            />
+          </AgentTarget>
         </div>
 
         <div className="relative min-h-[500px] lg:min-h-[550px] flex flex-col justify-between">

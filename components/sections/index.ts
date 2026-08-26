@@ -15,3 +15,5 @@ export * from './Team';
 export * from './WhyMajin';
 
 export * from './Footer';
+
+export * from './Tools';

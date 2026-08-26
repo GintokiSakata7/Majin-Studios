@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { label: 'Work', href: '#work' },
   { label: 'Capabilities', href: '#capabilities' },
   { label: 'Systems', href: '#systems' },
+  { label: 'Builder', href: '/tools/builder' },
   { label: 'Studio', href: '#studio' },
   { label: 'Why Us', href: '#why-majin' },
   { label: 'Contact', href: '#contact' }
@@ -75,6 +76,15 @@ export function Navigation() {
             className={styles.link}
           >
             Systems
+          </a>
+
+          <a
+            href="/tools/builder"
+            className={styles.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Builder
           </a>
 
           <a
