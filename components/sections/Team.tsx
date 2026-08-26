@@ -86,13 +86,12 @@ export function Team() {
           <SectionHeading
             title="SIX PEOPLE. ONE BUILD SYSTEM."
             metadata="FIG. 06 — CORE TEAM"
-            as="h3"
           />
         </div>
 
-        <div className="grid grid-cols-12 gap-8 min-h-[auto] md:min-h-[550px]">
+        <div className="grid grid-cols-12 gap-8 min-h-[auto] md:min-h-[450px]">
           {/* MATRIX */}
-          <div className="col-span-12 lg:col-span-8 relative min-h-[500px] border border-line-structural overflow-hidden hidden lg:block">
+          <div className="col-span-12 lg:col-span-7 relative min-h-[450px] border border-line-structural overflow-hidden hidden lg:block">
             <div
               className="absolute inset-0 opacity-25"
               style={{
@@ -235,7 +234,7 @@ export function Team() {
           </div>
 
           {/* ACTIVE MEMBER */}
-          <div className="col-span-12 lg:col-span-4 hidden lg:flex flex-col justify-center">
+          <div className="col-span-12 lg:col-span-5 hidden lg:flex flex-col justify-center">
             <TechnicalLabel variant="accent">
               ACTIVE TEAM
             </TechnicalLabel>
