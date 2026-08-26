@@ -128,12 +128,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': ['WebSite', 'Organization'],
+    name: 'Majin Studios',
+    url: 'https://www.majinstudios.tech',
+  };
+
   return (
     <html
       lang="en"
       data-accent="monochrome"
       suppressHydrationWarning
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body suppressHydrationWarning>
         {children}
       </body>
