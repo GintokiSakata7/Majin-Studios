@@ -46,6 +46,35 @@ export const metadata: Metadata = {
     canonical: '/',
   },
 
+  icons: {
+    icon: [
+      {
+        url: '/favicon-32x32.png',
+        sizes: '32x32',
+        type: 'image/png',
+      },
+      {
+        url: '/favicon-16x16.png',
+        sizes: '16x16',
+        type: 'image/png',
+      },
+      {
+        url: '/favicon-48x48.png',
+        sizes: '48x48',
+        type: 'image/png',
+      },
+    ],
+    apple: [
+      {
+        url: '/apple-touch-icon.png',
+        sizes: '180x180',
+        type: 'image/png',
+      },
+    ],
+  },
+
+  manifest: '/manifest.webmanifest',
+
   openGraph: {
     type: 'website',
 
@@ -108,11 +137,7 @@ export const metadata: Metadata = {
     },
   },
 
-  icons: {
-    icon: '/logo.jpg',
-    shortcut: '/logo.jpg',
-    apple: '/logo.jpg',
-  },
+  applicationName: 'Majin Studios',
 };
 
 export const viewport: Viewport = {
@@ -137,6 +162,9 @@ export default function RootLayout({
       '@id': 'https://www.majinstudios.tech/#website',
       name: 'Majin Studios',
       url: 'https://www.majinstudios.tech/',
+      publisher: {
+        '@id': 'https://www.majinstudios.tech/#organization',
+      },
     },
     {
       '@context': 'https://schema.org',
@@ -144,12 +172,13 @@ export default function RootLayout({
       '@id': 'https://www.majinstudios.tech/#organization',
       name: 'Majin Studios',
       url: 'https://www.majinstudios.tech/',
-      logo: 'https://www.majinstudios.tech/logo.jpg',
-      sameAs: [
-        'https://in.linkedin.com/company/majin-studios',
-        'https://www.instagram.com/majin_studios/',
-        'https://x.com/Majin_Studios',
-      ],
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.majinstudios.tech/logo.jpg',
+        width: 1024,
+        height: 1024,
+      },
+      image: 'https://www.majinstudios.tech/logo.jpg',
     },
   ];
 
