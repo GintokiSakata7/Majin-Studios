@@ -95,19 +95,19 @@ export function Footer() {
               <HUDMarker type="corner" bottom="-1px" right="-1px" className="rotate-180" />
 
               <div className="flex items-center justify-between border-b border-line-structural pb-2 mb-4">
-                <OSLabel label="SYSTEM" value="COMMUNICATIONS" />
+                <OSLabel label="SYSTEM" value="CONTACT" />
               </div>
 
               {status === 'success' ? (
                 <div className="flex flex-col items-center justify-center text-center py-12">
                   <div className="text-4xl text-accent-current mb-4">✓</div>
-                  <h3 className="text-display">SYSTEM INITIALIZED.</h3>
+                  <h3 className="text-display">MESSAGE SENT.</h3>
                   <p className="mt-4 text-body text-secondary max-w-md">
-                    Your project parameters have been captured. The Majin team can now review the system.
+                    Thank you for reaching out. We have received your message and will get back to you shortly.
                   </p>
                   <div className="mt-8">
                     <Button variant="outline" onClick={() => setStatus('idle')}>
-                      NEW SEQUENCE
+                      SEND ANOTHER MESSAGE
                     </Button>
                   </div>
                 </div>
@@ -124,12 +124,12 @@ export function Footer() {
                       onSubmit={handleSubmit}
                     >
                       <div className={styles.field}>
-                        <label className={styles.label}>USER.NAME</label>
+                        <label className={styles.label}>NAME</label>
                         <input required type="text" className={styles.input} placeholder="Your name" name="name" />
                       </div>
                       
                       <div className={styles.field}>
-                        <label className={styles.label}>USER.EMAIL</label>
+                        <label className={styles.label}>EMAIL</label>
                         <input required type="email" className={styles.input} placeholder="you@company.com" name="email" />
                       </div>
                       
@@ -139,13 +139,13 @@ export function Footer() {
                       </div>
 
                       <div className={styles.field}>
-                        <label className={styles.label}>QUERY</label>
+                        <label className={styles.label}>MESSAGE</label>
                         <textarea required className={styles.textarea} placeholder="Describe your project, requirements, or inquiry..." name="query" />
                       </div>
 
                       <div className="mt-4">
                         <Button type="submit" disabled={status === 'submitting'} withArrow>
-                          {status === 'submitting' ? 'INITIALIZING...' : 'INITIALIZE COMMS'}
+                          {status === 'submitting' ? 'SENDING...' : 'SEND MESSAGE'}
                         </Button>
                       </div>
                     </form>

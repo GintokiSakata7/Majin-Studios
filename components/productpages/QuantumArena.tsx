@@ -19,15 +19,15 @@ export function QuantumArena() {
         ];
         const labels = ['System Overview', 'Event About', 'Participant Experience', 'Tracks / Discover', 'Timeline / Operations', 'Timeline / Execution', 'Prizes / Outcomes', 'Rules / Governance', 'Registration / Conversion', 'Event Location / Context', 'Additional Interface'];
         const workflow = [
-            ['SYSTEM / REGISTRATION', 'Participant intake', 'Teams register with 1–5 members, submit payment and identity material, and move through a trackable approval process.', 'registered → submitted → verified → approved'],
-            ['SYSTEM / CHECK-IN', 'Live event operations', 'QR-based check-in and multi-day attendance tracking turned event-day entry into a controlled digital workflow.', 'scan → identify → verify → check-in → attendance'],
-            ['SYSTEM / EVALUATION', 'Judge workflow', 'Judges and super-admins access structured team information and evaluate projects through dedicated portals.', 'login → roster → abstract → stack → evaluation → score'],
-            ['SYSTEM / RANKING', 'Results processing', 'Evaluation inputs can be consolidated into master sheets and top-ranking reports for the final event workflow.', 'evaluations → scores → ranking → top-3 report'],
-            ['SYSTEM / CERTIFICATION', 'Post-event automation', 'Approved, checked-in participants flow into image generation and email distribution.', 'eligible → render → queue → email → delivered']
+            ['REGISTRATION', 'Participant intake', 'Teams register with 1–5 members, submit payment and identity material, and move through a trackable approval process.', 'registered → submitted → verified → approved'],
+            ['CHECK-IN', 'Live event operations', 'QR-based check-in and multi-day attendance tracking turned event-day entry into a controlled digital workflow.', 'scan → identify → verify → check-in → attendance'],
+            ['EVALUATION', 'Judge workflow', 'Judges and super-admins access structured team information and evaluate projects through dedicated portals.', 'login → roster → abstract → stack → evaluation → score'],
+            ['RANKING', 'Results processing', 'Evaluation inputs can be consolidated into master sheets and top-ranking reports for the final event workflow.', 'evaluations → scores → ranking → top-3 report'],
+            ['CERTIFICATION', 'Post-event automation', 'Approved, checked-in participants flow into image generation and email distribution.', 'eligible → render → queue → email → delivered']
         ];
 
         // loader
-        const startLoader = () => { const bar = getEl("loadBar"), pct = getEl("loadPct"), status = getEl("loadStatus"); let n = 0; const timer = setInterval(() => { n += Math.floor(Math.random() * 14) + 8; if (n > 100) n = 100; bar.style.width = n + '%'; pct.textContent = String(n).padStart(2, '0') + '%'; status.textContent = n < 45 ? 'LOADING ASSETS' : n < 78 ? 'MAPPING INTERFACES' : n < 100 ? 'STARTING EXPERIENCE' : 'SYSTEM READY'; if (n === 100) { clearInterval(timer); setTimeout(() => { getEl("loader").classList.add('hide'); container.classList.remove('lock') }, 350) } }, 80) };
+        const startLoader = () => { const bar = getEl("loadBar"), pct = getEl("loadPct"), status = getEl("loadStatus"); let n = 0; const timer = setInterval(() => { n += Math.floor(Math.random() * 14) + 8; if (n > 100) n = 100; bar.style.width = n + '%'; pct.textContent = String(n).padStart(2, '0') + '%'; status.textContent = n < 45 ? 'LOADING ASSETS' : n < 78 ? 'PREPARING' : n < 100 ? 'STARTING' : 'READY'; if (n === 100) { clearInterval(timer); setTimeout(() => { getEl("loader").classList.add('hide'); container.classList.remove('lock') }, 350) } }, 80) };
         if (document.readyState === 'complete') startLoader(); else window.addEventListener('load', startLoader);
 
         // cursor
@@ -577,7 +577,7 @@ export function QuantumArena() {
                     <div className="arch-line l3"></div>
                     <div className="arch-line l4"></div>
                 </div>
-                <div className="arch-console"><b>[SYSTEM MAP]</b> React 19 → Node/Express → MongoDB / Cloudinary / Mail →
+                <div className="arch-console"><b>ARCHITECTURE</b> React 19 → Node/Express → MongoDB / Cloudinary / Mail →
                     live event operations<br /><span style={{color:"#5f6b75"}}>STACK //</span> React 19 · Vite · Node.js ·
                     Express 5 · MongoDB · Mongoose · Cloudinary · Multer · Jimp · Nodemailer · Resend · JWT · bcryptjs
                 </div>

@@ -193,6 +193,13 @@
     display: block;
   }
 
+  .meta {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-bottom: var(--space-8);
+  }
+
   .content {
     width: 100%;
     max-width: 700px;
