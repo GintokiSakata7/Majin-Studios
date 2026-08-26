@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   creator: 'Majin Studios',
 
   metadataBase: new URL(
-    'https://majin.studio'
+    'https://www.majinstudios.tech'
   ),
 
   alternates: {
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
 
     locale: 'en_US',
 
-    url: 'https://majin.studio',
+    url: 'https://www.majinstudios.tech',
 
     title:
       'Majin Studios — Intelligent Digital Products',
