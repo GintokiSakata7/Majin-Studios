@@ -128,12 +128,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': ['WebSite', 'Organization'],
-    name: 'Majin Studios',
-    url: 'https://www.majinstudios.tech',
-  };
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      '@id': 'https://www.majinstudios.tech/#website',
+      name: 'Majin Studios',
+      url: 'https://www.majinstudios.tech/',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      '@id': 'https://www.majinstudios.tech/#organization',
+      name: 'Majin Studios',
+      url: 'https://www.majinstudios.tech/',
+    },
+  ];
 
   return (
     <html
