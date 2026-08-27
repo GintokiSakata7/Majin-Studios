@@ -15,7 +15,18 @@ export function QuantumArena() {
 
     
         const images = [
-            '/quantumarena/images/Screenshot 2026-08-25 204631.png', '/quantumarena/images/Screenshot 2026-08-25 204657.png', '/quantumarena/images/Screenshot 2026-08-25 204713.png', '/quantumarena/images/Screenshot 2026-08-25 204731 - Copy.png', '/quantumarena/images/Screenshot 2026-08-25 204731.png', '/quantumarena/images/Screenshot 2026-08-25 204746.png', '/quantumarena/images/Screenshot 2026-08-25 204800.png', '/quantumarena/images/Screenshot 2026-08-25 204814.png', '/quantumarena/images/Screenshot 2026-08-25 204825.png', '/quantumarena/images/Screenshot 2026-08-25 204842.png', '/quantumarena/images/Screenshot 2026-08-25 204859.png', '/quantumarena/images/Screenshot 2026-08-25 204916.png'
+            '/quantumarena/images/REPLACE_WITH_SYSTEM_OVERVIEW_SCREENSHOT.png', 
+            '/quantumarena/images/REPLACE_WITH_EVENT_ABOUT_SCREENSHOT.png', 
+            '/quantumarena/images/REPLACE_WITH_PARTICIPANT_EXPERIENCE_SCREENSHOT.png', 
+            '/quantumarena/images/REPLACE_WITH_TRACKS_DISCOVER_SCREENSHOT.png', 
+            '/quantumarena/images/REPLACE_WITH_TRACK_BROWSER_SCREENSHOT.png', 
+            '/quantumarena/images/REPLACE_WITH_TIMELINE_OPERATIONS_SCREENSHOT.png', 
+            '/quantumarena/images/REPLACE_WITH_TIMELINE_EXECUTION_SCREENSHOT.png', 
+            '/quantumarena/images/REPLACE_WITH_PRIZES_OUTCOMES_SCREENSHOT.png', 
+            '/quantumarena/images/REPLACE_WITH_RULES_GOVERNANCE_SCREENSHOT.png', 
+            '/quantumarena/images/REPLACE_WITH_REGISTRATION_CONVERSION_SCREENSHOT.png', 
+            '/quantumarena/images/REPLACE_WITH_EVENT_LOCATION_CONTEXT_SCREENSHOT.png', 
+            '/quantumarena/images/REPLACE_WITH_ADDITIONAL_INTERFACE_SCREENSHOT.png'
         ];
         const labels = ['System Overview', 'Event About', 'Participant Experience', 'Tracks / Discover', 'Track Browser', 'Timeline / Operations', 'Timeline / Execution', 'Prizes / Outcomes', 'Rules / Governance', 'Registration / Conversion', 'Event Location / Context', 'Additional Interface'];
         const workflow = [
@@ -315,7 +326,7 @@ export function QuantumArena() {
                             className="dot"
                             style={{background:"#20d998",width:"7px",height:"7px",borderRadius:"50%"}}></span><b>quantum_arena
                             // system overview</b></div><img className="hero-shot"
-                        src="/quantumarena/images/Screenshot 2026-08-25 204631.png" alt="Quantum Arena interface" />
+                        src="/quantumarena/images/REPLACE_WITH_SYSTEM_OVERVIEW_SCREENSHOT.png" alt="Quantum Arena interface" />
                     </div>
                     <div className="hero-tag">
                         <div className="t1">SYSTEM / OPERATIONAL</div>
@@ -583,7 +594,7 @@ export function QuantumArena() {
                     </div>
                 </div>
                 <div className="final-art">
-                    <div className="screen"><img src="/quantumarena/images/Screenshot 2026-08-25 204916.png"
+                    <div className="screen"><img src="/quantumarena/images/REPLACE_WITH_ADDITIONAL_INTERFACE_SCREENSHOT.png"
                             alt="Quantum Arena interface preview" /></div>
                 </div>
             </div>
