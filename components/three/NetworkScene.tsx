@@ -2,7 +2,6 @@
 
 import React, { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Line } from '@react-three/drei';
 import * as THREE from 'three';
 import { useGlobalState } from '../../store/useGlobalState';
 
@@ -59,8 +58,8 @@ export function NetworkScene({ active }: NetworkSceneProps) {
     return list;
   }, [numNodes]);
 
-  const lineMatRefs = useRef<any[]>([]);
-  const lineGeomRefs = useRef<any[]>([]);
+  const lineMatRefs = useRef<(THREE.LineBasicMaterial | null)[]>([]);
+  const lineGeomRefs = useRef<(THREE.BufferGeometry | null)[]>([]);
 
   // State data that useFrame will smoothly interpolate toward
   const targets = useRef({
@@ -225,7 +224,7 @@ export function NetworkScene({ active }: NetworkSceneProps) {
         });
         break;
     }
-  }, [whyStage, currentScene, initialNodes, edges]);
+  }, [whyStage, currentScene, initialNodes, edges, capabilitiesStage]);
 
   useFrame((state, delta) => {
     if (!groupRef.current) return;
@@ -295,9 +294,9 @@ export function NetworkScene({ active }: NetworkSceneProps) {
 
   return (
     <group ref={groupRef}>
-      {edges.map(([a, b], i) => (
+      {edges.map((_, i) => (
         <line key={`edge-${i}`}>
-          <bufferGeometry ref={(r) => { if(r) lineGeomRefs.current[i] = r; }}>
+          <bufferGeometry ref={(r) => { if(r) lineGeomRefs.current[i] = r as THREE.BufferGeometry; }}>
             <float32BufferAttribute attach="attributes-position" args={[new Float32Array(6), 3]} />
           </bufferGeometry>
           <lineBasicMaterial 

@@ -1,0 +1,4353 @@
+=======================================================
+File: c:\Users\rishi\MAJIN\Website\components\scanfeast\scanfeast-case-study.css
+=======================================================
+
+.sf-case-study {
+  --sf-bg: #07090c;
+  --sf-panel: #0d1117;
+  --sf-panel-2: #11161e;
+  --sf-ink: #f4f6f8;
+  --sf-muted: #808996;
+  --sf-line: rgba(255, 255, 255, 0.095);
+  --sf-orange: #ff6a00;
+
+  background: var(--sf-bg);
+  color: var(--sf-ink);
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+
+  overflow: clip;
+}
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+.sf-case-study img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.sf-case-study__intro > span,
+.sf-section__intro > span,
+.sf-problem > div > span,
+.sf-outcome > span {
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--sf-orange);
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.sf-case-study__intro {
+  min-height: 100svh;
+
+  display: grid;
+  align-items: center;
+
+  padding: 10vw;
+
+  position: relative;
+
+  background:
+    radial-gradient(
+      circle at 72% 45%,
+      rgba(255, 106, 0, 0.13),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 88% 15%,
+      rgba(255, 255, 255, 0.04),
+      transparent 22%
+    ),
+    var(--sf-bg);
+}
+
+.sf-case-study__intro::after {
+  content: "";
+
+  position: absolute;
+
+  right: 7vw;
+  bottom: 8vw;
+
+  width: 110px;
+  height: 110px;
+
+  border:
+    1px solid
+    rgba(255, 106, 0, 0.25);
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 80px
+      rgba(255, 106, 0, 0.12);
+
+  animation:
+    sf-pulse 4s ease-in-out infinite;
+}
+
+.sf-case-study__intro > div {
+  width: min(100%, 1000px);
+}
+
+.sf-case-study__intro h1 {
+  margin: 24px 0 0;
+
+  font-size:
+    clamp(78px, 14vw, 190px);
+
+  line-height: 0.76;
+
+  letter-spacing: -0.09em;
+
+  font-weight: 780;
+}
+
+.sf-case-study__intro p {
+  max-width: 590px;
+
+  margin: 32px 0 0;
+
+  color: var(--sf-muted);
+
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.sf-case-study__meta {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 12px 24px;
+
+  margin-top: 34px;
+
+  color:
+    rgba(255, 255, 255, 0.42);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  font-size: 8px;
+
+  letter-spacing: 0.1em;
+}
+
+/* =========================================================
+   PROBLEM
+   ========================================================= */
+
+.sf-problem {
+  display: grid;
+
+  grid-template-columns:
+    1.1fr 0.9fr;
+
+  gap: 8vw;
+
+  padding: 18vw 10vw;
+
+  border-top:
+    1px solid var(--sf-line);
+}
+
+.sf-problem h2 {
+  margin: 22px 0 0;
+
+  font-size:
+    clamp(44px, 7vw, 100px);
+
+  line-height: 0.86;
+
+  letter-spacing: -0.075em;
+}
+
+.sf-problem p {
+  align-self: end;
+
+  max-width: 470px;
+
+  color: var(--sf-muted);
+
+  font-size: 16px;
+
+  line-height: 1.8;
+}
+
+/* =========================================================
+   SECTION
+   ========================================================= */
+
+.sf-section {
+  padding:
+    14vw 8vw;
+
+  border-top:
+    1px solid var(--sf-line);
+}
+
+.sf-section__intro {
+  display: grid;
+
+  grid-template-columns:
+    0.8fr 1.2fr;
+
+  gap: 4vw;
+}
+
+.sf-section__intro h2 {
+  margin: 0;
+
+  font-size:
+    clamp(44px, 7vw, 100px);
+
+  line-height: 0.84;
+
+  letter-spacing:
+    -0.075em;
+}
+
+.sf-section__intro p {
+  max-width: 520px;
+
+  color: var(--sf-muted);
+
+  font-size: 14px;
+
+  line-height: 1.8;
+}
+
+/* =========================================================
+   CINEMATIC SCENES
+   ========================================================= */
+
+.sf-cinematic {
+  position: relative;
+
+  width: 100%;
+
+  margin-top: 8vw;
+}
+
+.sf-cinematic__sticky {
+  position: sticky;
+
+  top: 0;
+
+  height: 100svh;
+
+  overflow: hidden;
+}
+
+.sf-cinematic__canvas {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  min-height: 650px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(--sf-line);
+
+  isolation: isolate;
+
+  background:
+    radial-gradient(
+      circle at 50% 52%,
+      rgba(255, 106, 0, 0.075),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #0d1117,
+      #07090c
+    );
+}
+
+.sf-cinematic__canvas::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: -2;
+
+  background:
+    linear-gradient(
+      rgba(255,255,255,0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 72px 72px;
+
+  mask-image:
+    radial-gradient(
+      circle at center,
+      black 10%,
+      transparent 76%
+    );
+}
+
+.sf-cinematic__glow {
+  position: absolute;
+
+  left: 50%;
+  top: 54%;
+
+  width: 430px;
+  height: 430px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 106, 0, 0.08);
+
+  filter: blur(80px);
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   CINEMATIC COPY
+   ========================================================= */
+
+.sf-cinematic-copy {
+  position: absolute;
+
+  z-index: 50;
+
+  top: 15%;
+
+  width: min(370px, 31vw);
+
+  transition:
+    opacity 120ms linear,
+    transform 120ms linear;
+}
+
+.sf-cinematic-copy--left {
+  left: 6%;
+}
+
+.sf-cinematic-copy--right {
+  right: 6%;
+
+  text-align: right;
+}
+
+.sf-cinematic-copy > span {
+  color: var(--sf-orange);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  font-size: 8px;
+
+  letter-spacing: 0.15em;
+}
+
+.sf-cinematic-copy h3 {
+  margin: 18px 0 0;
+
+  font-size:
+    clamp(34px, 4vw, 64px);
+
+  line-height: 0.86;
+
+  letter-spacing: -0.07em;
+}
+
+.sf-cinematic-copy p {
+  max-width: 330px;
+
+  margin-top: 22px;
+
+  color: var(--sf-muted);
+
+  font-size: 12px;
+
+  line-height: 1.8;
+}
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.sf-table-3d {
+  position: absolute;
+
+  left: 50%;
+  top: 63%;
+
+  width:
+    min(530px, 46vw);
+
+  aspect-ratio: 1.7;
+
+  transform-origin: center;
+
+  transition:
+    opacity 100ms linear;
+}
+
+.sf-table-3d__surface {
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 28px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.16);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255,106,0,0.10),
+      transparent 44%
+    ),
+    linear-gradient(
+      145deg,
+      #1c232c,
+      #0b0e12
+    );
+
+  box-shadow:
+    inset 0 0 60px
+      rgba(255,255,255,0.025),
+
+    0 90px 130px
+      rgba(0,0,0,0.6);
+}
+
+.sf-table-3d__rim {
+  position: absolute;
+
+  inset: 7%;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.055);
+
+  border-radius: 20px;
+}
+
+.sf-table-3d__qr {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform:
+    translate(-50%, -50%)
+    rotateX(-58deg)
+    rotateZ(7deg);
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 19px);
+
+  gap: 5px;
+
+  padding: 13px;
+
+  border-radius: 5px;
+
+  background: #f4f6f8;
+
+  box-shadow:
+    0 14px 35px
+      rgba(0,0,0,0.25);
+}
+
+.sf-table-3d__qr span {
+  width: 19px;
+  height: 19px;
+
+  background: #080a0d;
+}
+
+.sf-table-3d__qr span:nth-child(2),
+.sf-table-3d__qr span:nth-child(5),
+.sf-table-3d__qr span:nth-child(8) {
+  opacity: 0.4;
+}
+
+.sf-table-3d__surface > small {
+  position: absolute;
+
+  left: 50%;
+  bottom: 7%;
+
+  transform:
+    translateX(-50%)
+    rotateX(-58deg);
+
+  color:
+    rgba(255,255,255,0.32);
+
+  font:
+    7px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  letter-spacing: 0.15em;
+
+  white-space: nowrap;
+}
+
+.sf-table-3d__leg {
+  position: absolute;
+
+  top: 73%;
+
+  width: 42px;
+  height: 160px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #080b0e,
+      #20262e,
+      #080b0e
+    );
+
+  transform-origin: top;
+}
+
+.sf-table-3d__leg--left {
+  left: 17%;
+
+  transform:
+    rotate(4deg);
+}
+
+.sf-table-3d__leg--right {
+  right: 17%;
+
+  transform:
+    rotate(-4deg);
+}
+
+/* =========================================================
+   DEVICE / PHONE
+   ========================================================= */
+
+.sf-device {
+  position: absolute;
+
+  left: 50%;
+  top: 53%;
+
+  z-index: 30;
+}
+
+.sf-phone-device {
+  width:
+    min(292px, 25vw);
+}
+
+.sf-phone-device__frame {
+  position: relative;
+
+  padding: 9px;
+
+  border-radius: 38px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.18);
+
+  background:
+    linear-gradient(
+      145deg,
+      #373e47,
+      #0b0f13
+    );
+
+  box-shadow:
+    0 80px 120px
+      rgba(0,0,0,0.68),
+
+    inset 0 0 0 1px
+      rgba(255,255,255,0.045);
+}
+
+.sf-phone-device__speaker {
+  position: absolute;
+
+  z-index: 20;
+
+  top: 11px;
+  left: 50%;
+
+  width: 86px;
+  height: 19px;
+
+  transform:
+    translateX(-50%);
+
+  border-radius: 20px;
+
+  background: #050607;
+}
+
+.sf-phone-device__screen {
+  position: relative;
+
+  height: 570px;
+
+  overflow: hidden;
+
+  border-radius: 28px;
+
+  background: white;
+}
+
+.sf-screen-image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  transition:
+    opacity 90ms linear;
+}
+
+/* =========================================================
+   DINER ROUTE
+   ========================================================= */
+
+.sf-diner-route {
+  position: absolute;
+
+  z-index: 60;
+
+  left: 50%;
+  bottom: 9%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  transform:
+    translateX(-50%);
+}
+
+.sf-diner-route span {
+  color:
+    rgba(255,255,255,0.4);
+
+  font:
+    7px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  letter-spacing: 0.15em;
+
+  transition:
+    color 200ms ease;
+}
+
+.sf-diner-route span.is-active {
+  color: var(--sf-orange);
+}
+
+.sf-diner-route i {
+  width: 28px;
+  height: 1px;
+
+  background:
+    rgba(255,255,255,0.16);
+}
+
+/* =========================================================
+   FLOATING SCREEN
+   ========================================================= */
+
+.sf-floating-screen {
+  position: absolute;
+
+  z-index: 45;
+
+  width:
+    min(320px, 25vw);
+
+  border:
+    1px solid
+    rgba(255,255,255,0.12);
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  background:
+    #10141a;
+
+  box-shadow:
+    0 50px 90px
+      rgba(0,0,0,0.55);
+
+  transition:
+    opacity 100ms linear,
+    transform 100ms linear;
+}
+
+.sf-floating-screen--faq {
+  right: 7%;
+  bottom: 15%;
+}
+
+.sf-floating-screen--tracking {
+  left: 7%;
+  bottom: 14%;
+}
+
+.sf-floating-screen__chrome {
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 13px;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,0.08);
+
+  color:
+    rgba(255,255,255,0.4);
+
+  font:
+    7px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  letter-spacing: 0.13em;
+}
+
+.sf-floating-screen__image {
+  background: white;
+}
+
+.sf-floating-screen__image img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+}
+
+/* =========================================================
+   KDS
+   ========================================================= */
+
+.sf-kds-device {
+  position: absolute;
+
+  z-index: 35;
+
+  left: 42%;
+  top: 54%;
+
+  width:
+    min(800px, 59vw);
+
+  transform-origin: center;
+}
+
+.sf-kds-device__bezel {
+  padding: 13px;
+
+  border-radius: 20px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.16);
+
+  background:
+    linear-gradient(
+      145deg,
+      #343b44,
+      #0b0f13
+    );
+
+  box-shadow:
+    0 90px 130px
+      rgba(0,0,0,0.68);
+}
+
+.sf-kds-device__screen {
+  position: relative;
+
+  height:
+    min(480px, 36vw);
+
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  background: white;
+}
+
+.sf-kds-ready {
+  position: absolute;
+
+  inset: 0;
+
+  padding: 30px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #0d1712,
+      #09100d
+    );
+
+  color: #f4f6f8;
+}
+
+.sf-kds-ready__top {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding-bottom: 20px;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,0.08);
+
+  font:
+    10px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+}
+
+.sf-kds-ready__top b {
+  color:
+    #6ee7a0;
+}
+
+.sf-kds-ready__main {
+  max-width: 520px;
+
+  margin: 50px auto 0;
+
+  padding: 30px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.08);
+
+  border-radius: 16px;
+
+  background:
+    rgba(255,255,255,0.025);
+}
+
+.sf-kds-ready__main strong {
+  display: block;
+
+  font-size: 32px;
+
+  letter-spacing: -0.05em;
+}
+
+.sf-kds-ready__main p {
+  color:
+    rgba(255,255,255,0.6);
+
+  font-size: 12px;
+
+  line-height: 1.8;
+}
+
+.sf-kds-ready__button {
+  margin-top: 22px;
+
+  padding: 14px;
+
+  border-radius: 10px;
+
+  text-align: center;
+
+  background:
+    rgba(255,106,0,0.11);
+
+  border:
+    1px solid
+    rgba(255,106,0,0.24);
+
+  color: var(--sf-orange);
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.sf-kds-device__stand {
+  width: 135px;
+  height: 36px;
+
+  margin:
+    0 auto;
+
+  border-radius:
+    0 0 16px 16px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #282e35,
+      #0e1115
+    );
+}
+
+.sf-kitchen-flow {
+  position: absolute;
+
+  left: 42%;
+  bottom: 9%;
+
+  transform:
+    translateX(-50%);
+
+  z-index: 50;
+
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+}
+
+.sf-kitchen-flow span {
+  color:
+    rgba(255,255,255,0.35);
+
+  font:
+    7px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  letter-spacing: 0.13em;
+}
+
+.sf-kitchen-flow span.is-active {
+  color:
+    var(--sf-orange);
+}
+
+.sf-kitchen-flow i {
+  width: 30px;
+  height: 1px;
+
+  background:
+    rgba(255,255,255,0.16);
+}
+
+/* =========================================================
+   MANAGER
+   ========================================================= */
+
+.sf-manager-device {
+  position: absolute;
+
+  z-index: 30;
+
+  left: 55%;
+  top: 55%;
+
+  width:
+    min(960px, 68vw);
+}
+
+.sf-manager-device__bezel {
+  padding: 13px;
+
+  border-radius: 18px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.15);
+
+  background:
+    linear-gradient(
+      145deg,
+      #363d46,
+      #0b0e12
+    );
+
+  box-shadow:
+    0 90px 140px
+      rgba(0,0,0,0.7);
+}
+
+.sf-manager-device__screen {
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 8px;
+
+  background: white;
+}
+
+.sf-manager-device__screen
+.sf-screen-image {
+  position: absolute;
+}
+
+.sf-manager-metrics {
+  position: absolute;
+
+  z-index: 50;
+
+  left: 6%;
+  bottom: 10%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, auto);
+
+  gap: 8px;
+}
+
+.sf-manager-metrics article {
+  min-width: 110px;
+
+  padding: 15px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.1);
+
+  border-radius: 10px;
+
+  background:
+    rgba(13,17,23,0.82);
+
+  backdrop-filter:
+    blur(16px);
+}
+
+.sf-manager-metrics span {
+  display: block;
+
+  color:
+    var(--sf-orange);
+
+  font:
+    7px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  letter-spacing: 0.1em;
+}
+
+.sf-manager-metrics strong {
+  display: block;
+
+  margin-top: 6px;
+
+  font-size: 12px;
+}
+
+/* =========================================================
+   SUPPORTING SURFACES
+   ========================================================= */
+
+.sf-supporting-surfaces {
+  margin-top: 13vw;
+}
+
+.sf-supporting-surfaces > div:first-child {
+  display: grid;
+
+  grid-template-columns:
+    0.8fr 1.2fr;
+
+  gap: 4vw;
+}
+
+.sf-supporting-surfaces > div:first-child > span {
+  color: var(--sf-orange);
+
+  font:
+    8px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  letter-spacing: 0.14em;
+}
+
+.sf-supporting-surfaces h3 {
+  margin: 0;
+
+  font-size:
+    clamp(40px, 6vw, 88px);
+
+  line-height: 0.86;
+
+  letter-spacing: -0.065em;
+}
+
+.sf-supporting-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+
+  margin-top: 6vw;
+}
+
+.sf-surface-card {
+  padding: 14px;
+
+  border:
+    1px solid
+    var(--sf-line);
+
+  background:
+    var(--sf-panel);
+
+  transition:
+    transform 350ms ease,
+    border-color 350ms ease;
+}
+
+.sf-surface-card:hover {
+  transform:
+    translateY(-8px);
+
+  border-color:
+    rgba(255,106,0,0.32);
+}
+
+.sf-surface-card__image {
+  overflow: hidden;
+
+  background: white;
+
+  border-radius: 6px;
+}
+
+.sf-surface-card__image img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+}
+
+.sf-surface-card > span {
+  display: block;
+
+  margin-top: 18px;
+
+  color: var(--sf-orange);
+
+  font:
+    7px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  letter-spacing: 0.13em;
+}
+
+.sf-surface-card h4 {
+  margin: 10px 0 5px;
+
+  max-width: 310px;
+
+  font-size: 18px;
+
+  line-height: 1.05;
+
+  letter-spacing: -0.04em;
+}
+
+/* =========================================================
+   ARCHITECTURE
+   ========================================================= */
+
+.sf-architecture__visual {
+  margin-top: 8vw;
+
+  padding:
+    clamp(15px, 3vw, 35px);
+
+  border:
+    1px solid
+    var(--sf-line);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255,106,0,0.055),
+      transparent 50%
+    ),
+    #090c10;
+}
+
+.sf-architecture__svg {
+  display: block;
+
+  width: 100%;
+  height: auto;
+}
+
+.sf-arch-zone {
+  fill:
+    rgba(255,255,255,0.012);
+
+  stroke:
+    rgba(255,255,255,0.08);
+
+  stroke-width: 1;
+}
+
+.sf-arch-zone-label {
+  fill:
+    rgba(255,255,255,0.33);
+
+  font:
+    10px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  letter-spacing: 0.12em;
+}
+
+.sf-arch-line {
+  fill: none;
+
+  stroke:
+    rgba(255,255,255,0.14);
+
+  stroke-width: 2;
+}
+
+.sf-arch-line--socket {
+  stroke:
+    rgba(255,106,0,0.28);
+
+  stroke-dasharray:
+    8 8;
+
+  animation:
+    sf-dash 2s linear infinite;
+}
+
+.sf-arch-node {
+  fill:
+    #10151b;
+
+  stroke:
+    rgba(255,255,255,0.1);
+
+  stroke-width: 1;
+}
+
+.sf-arch-node--accent {
+  stroke:
+    rgba(255,106,0,0.3);
+
+  fill:
+    rgba(255,106,0,0.045);
+}
+
+.sf-arch-node-title {
+  fill: #f4f6f8;
+
+  font:
+    700 14px
+    Inter,
+    Arial,
+    sans-serif;
+
+  letter-spacing: -0.02em;
+}
+
+.sf-arch-node-subtitle {
+  fill:
+    rgba(255,255,255,0.4);
+
+  font:
+    9px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  letter-spacing: 0.08em;
+}
+
+.sf-arch-db {
+  fill:
+    rgba(255,106,0,0.08);
+
+  stroke:
+    rgba(255,106,0,0.28);
+
+  stroke-width: 1;
+}
+
+.sf-arch-packet {
+  fill:
+    var(--sf-orange);
+
+  filter:
+    url(#sfGlow);
+}
+
+.sf-arch-packet--socket {
+  fill:
+    #ffb078;
+}
+
+/* =========================================================
+   ENGINEERING
+   ========================================================= */
+
+.sf-engineering__grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+
+  margin-top: 9vw;
+}
+
+.sf-engineering-card {
+  min-height: 610px;
+
+  padding: 28px;
+
+  border:
+    1px solid
+    var(--sf-line);
+
+  background:
+    linear-gradient(
+      145deg,
+      #10151b,
+      #0b0e12
+    );
+
+  overflow: hidden;
+}
+
+.sf-engineering-card__top {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 14px;
+
+  color:
+    rgba(255,255,255,0.32);
+
+  font:
+    8px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  letter-spacing: 0.08em;
+}
+
+.sf-engineering-card__top span {
+  color: var(--sf-orange);
+}
+
+.sf-engineering-card h3 {
+  margin-top: 60px;
+
+  font-size:
+    clamp(27px, 3vw, 42px);
+
+  line-height: 0.92;
+
+  letter-spacing: -0.055em;
+}
+
+.sf-engineering-card > p {
+  margin-top: 21px;
+
+  color: var(--sf-muted);
+
+  font-size: 12px;
+
+  line-height: 1.75;
+}
+
+.sf-engineering-visual {
+  margin-top: 55px;
+
+  opacity: 0;
+
+  transform:
+    translateY(20px);
+
+  transition:
+    opacity 700ms ease,
+    transform 700ms ease;
+}
+
+.sf-engineering-card.is-visible
+.sf-engineering-visual {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+/* timer */
+
+.sf-timer-diagram {
+  display: grid;
+
+  grid-template-columns:
+    1fr auto 1fr;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.sf-timer-device {
+  padding: 18px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.08);
+
+  background:
+    rgba(255,255,255,0.025);
+}
+
+.sf-timer-device span,
+.sf-timer-device small {
+  display: block;
+
+  color:
+    rgba(255,255,255,0.34);
+
+  font:
+    7px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  letter-spacing: 0.1em;
+}
+
+.sf-timer-device strong {
+  display: block;
+
+  margin: 15px 0;
+
+  color:
+    var(--sf-orange);
+
+  font-size: 32px;
+
+  letter-spacing: -0.06em;
+
+  animation:
+    sf-number-pulse 1.8s
+    ease-in-out infinite;
+}
+
+.sf-timer-arrow {
+  color:
+    rgba(255,255,255,0.3);
+
+  font-size: 22px;
+}
+
+/* smart prep */
+
+.sf-prep-diagram {
+  display: grid;
+
+  grid-template-columns:
+    1fr auto 1fr auto 1fr;
+
+  align-items: center;
+
+  gap: 9px;
+}
+
+.sf-prep-step {
+  min-height: 120px;
+
+  padding: 15px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.08);
+
+  background:
+    rgba(255,255,255,0.025);
+}
+
+.sf-prep-step--active {
+  border-color:
+    rgba(255,106,0,0.3);
+
+  background:
+    rgba(255,106,0,0.055);
+}
+
+.sf-prep-step span {
+  display: block;
+
+  color:
+    rgba(255,255,255,0.3);
+
+  font:
+    7px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  letter-spacing: 0.1em;
+}
+
+.sf-prep-step strong {
+  display: block;
+
+  margin-top: 15px;
+
+  color:
+    rgba(255,255,255,0.82);
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+.sf-prep-step--active strong {
+  color:
+    var(--sf-orange);
+}
+
+.sf-prep-arrow {
+  color:
+    rgba(255,255,255,0.3);
+
+  font-size: 18px;
+}
+
+/* resilience */
+
+.sf-resilience-diagram {
+  display: grid;
+
+  gap: 20px;
+}
+
+.sf-resilience-line {
+  display: grid;
+
+  grid-template-columns:
+    110px 1fr auto;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 16px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.08);
+
+  background:
+    rgba(255,255,255,0.025);
+}
+
+.sf-resilience-line span {
+  color:
+    rgba(255,255,255,0.35);
+
+  font:
+    7px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  letter-spacing: 0.08em;
+}
+
+.sf-resilience-line i {
+  height: 1px;
+
+  background:
+    var(--sf-orange);
+
+  animation:
+    sf-flow-line 1.5s
+    ease-in-out infinite;
+}
+
+.sf-resilience-line b {
+  color:
+    rgba(255,255,255,0.7);
+
+  font-size: 9px;
+}
+
+.sf-resilience-break {
+  margin:
+    -10px 0;
+
+  text-align: center;
+
+  color:
+    #ff7f72;
+
+  font-size: 24px;
+
+  animation:
+    sf-break-pulse 1.4s
+    ease-in-out infinite;
+}
+
+.sf-resilience-line--fallback {
+  border-color:
+    rgba(255,106,0,0.24);
+}
+
+/* =========================================================
+   OUTCOME
+   ========================================================= */
+
+.sf-outcome {
+  min-height: 100svh;
+
+  padding:
+    14vw 8vw;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  border-top:
+    1px solid
+    var(--sf-line);
+}
+
+.sf-outcome__top {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.sf-outcome__top span {
+  color:
+    var(--sf-orange);
+
+  font:
+    8px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  letter-spacing: 0.14em;
+}
+
+.sf-outcome__top small {
+  color:
+    rgba(255,255,255,0.3);
+
+  font:
+    8px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+}
+
+.sf-outcome__headline {
+  margin-top: 8vw;
+}
+
+.sf-outcome h2 {
+  max-width: 1000px;
+
+  font-size:
+    clamp(55px, 9vw, 140px);
+
+  line-height: 0.8;
+
+  letter-spacing: -0.085em;
+}
+
+.sf-outcome h2 em {
+  color:
+    var(--sf-orange);
+
+  font-style: normal;
+}
+
+.sf-outcome__headline p {
+  max-width: 550px;
+
+  margin-top: 35px;
+
+  color: var(--sf-muted);
+
+  font-size: 13px;
+
+  line-height: 1.8;
+}
+
+.sf-outcome__metrics {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 1px;
+
+  margin-top: 8vw;
+
+  background:
+    var(--sf-line);
+}
+
+.sf-outcome__metrics article {
+  padding: 30px;
+
+  background:
+    var(--sf-bg);
+
+  opacity: 0;
+
+  transform:
+    translateY(25px);
+
+  transition:
+    opacity 700ms ease,
+    transform 700ms ease;
+}
+
+.sf-outcome.is-visible
+.sf-outcome__metrics article {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+.sf-outcome__metrics strong {
+  display: block;
+
+  font-size:
+    clamp(35px, 5vw, 75px);
+
+  letter-spacing: -0.07em;
+}
+
+.sf-outcome__metrics span {
+  display: block;
+
+  margin-top: 10px;
+
+  color:
+    var(--sf-muted);
+
+  font:
+    8px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  letter-spacing: 0.1em;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.sf-footer {
+  display: grid;
+
+  gap: 8px;
+
+  padding: 120px 8vw;
+
+  border-top:
+    1px solid
+    var(--sf-line);
+}
+
+.sf-footer span,
+.sf-footer small {
+  font:
+    8px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+
+  color: var(--sf-muted);
+
+  letter-spacing: 0.14em;
+}
+
+.sf-footer strong {
+  font-size:
+    clamp(50px, 8vw, 120px);
+
+  line-height: 0.8;
+
+  letter-spacing: -0.075em;
+}
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes sf-pulse {
+  0%,
+  100% {
+    transform:
+      scale(0.92);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform:
+      scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes sf-dash {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+
+@keyframes sf-number-pulse {
+  0%,
+  100% {
+    opacity: 0.65;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes sf-flow-line {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes sf-break-pulse {
+  0%,
+  100% {
+    transform:
+      scale(0.9);
+    opacity: 0.45;
+  }
+
+  50% {
+    transform:
+      scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+  .sf-cinematic-copy {
+    width: 290px;
+  }
+
+  .sf-table-3d {
+    width: 410px;
+  }
+
+  .sf-phone-device {
+    width: 245px;
+  }
+
+  .sf-phone-device__screen {
+    height: 490px;
+  }
+
+  .sf-kds-device {
+    width: 72vw;
+    left: 50%;
+  }
+
+  .sf-manager-device {
+    width: 76vw;
+  }
+
+  .sf-floating-screen {
+    width: 280px;
+  }
+
+  .sf-engineering__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sf-engineering-card {
+    min-height: 520px;
+  }
+}
+
+@media (max-width: 760px) {
+  .sf-case-study__intro {
+    padding:
+      120px 20px;
+  }
+
+  .sf-problem,
+  .sf-section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .sf-section__intro,
+  .sf-supporting-surfaces > div:first-child {
+    grid-template-columns: 1fr;
+  }
+
+  .sf-problem {
+    grid-template-columns: 1fr;
+  }
+
+  .sf-cinematic {
+    margin-top: 40px;
+  }
+
+  .sf-cinematic__canvas {
+    min-height: 620px;
+  }
+
+  .sf-cinematic-copy,
+  .sf-cinematic-copy--right {
+    left: 20px;
+    right: 20px;
+
+    width: auto;
+
+    top: 7%;
+
+    text-align: left;
+  }
+
+  .sf-cinematic-copy h3 {
+    font-size: 35px;
+  }
+
+  .sf-cinematic-copy p {
+    max-width: 285px;
+  }
+
+  .sf-table-3d {
+    top: 62%;
+
+    width: 315px;
+  }
+
+  .sf-phone-device {
+    top: 53%;
+
+    width: 205px;
+  }
+
+  .sf-phone-device__screen {
+    height: 420px;
+  }
+
+  .sf-diner-route {
+    bottom: 7%;
+
+    gap: 9px;
+  }
+
+  .sf-floating-screen--faq {
+    display: none;
+  }
+
+  .sf-floating-screen--tracking {
+    left: 20px;
+    bottom: 13%;
+
+    width: 230px;
+  }
+
+  .sf-kds-device {
+    left: 50%;
+    top: 59%;
+
+    width: 92vw;
+  }
+
+  .sf-kds-device__screen {
+    height: 54vw;
+  }
+
+  .sf-kds-ready {
+    padding: 15px;
+  }
+
+  .sf-kds-ready__main {
+    margin-top: 20px;
+    padding: 18px;
+  }
+
+  .sf-kds-ready__main strong {
+    font-size: 22px;
+  }
+
+  .sf-kitchen-flow {
+    left: 50%;
+    bottom: 7%;
+
+    gap: 8px;
+  }
+
+  .sf-kitchen-flow i {
+    width: 14px;
+  }
+
+  .sf-floating-screen--tracking {
+    display: none;
+  }
+
+  .sf-manager-device {
+    left: 50%;
+    top: 58%;
+
+    width: 95vw;
+  }
+
+  .sf-manager-metrics {
+    left: 20px;
+    bottom: 7%;
+
+    gap: 5px;
+  }
+
+  .sf-manager-metrics article {
+    min-width: 84px;
+    padding: 10px;
+  }
+
+  .sf-manager-metrics strong {
+    font-size: 9px;
+  }
+
+  .sf-supporting-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sf-architecture__visual {
+    padding: 8px;
+
+    overflow-x: auto;
+  }
+
+  .sf-architecture__svg {
+    min-width: 850px;
+  }
+
+  .sf-engineering-card {
+    min-height: auto;
+  }
+
+  .sf-timer-diagram {
+    grid-template-columns: 1fr;
+  }
+
+  .sf-timer-arrow {
+    text-align: center;
+  }
+
+  .sf-prep-diagram {
+    grid-template-columns: 1fr;
+  }
+
+  .sf-prep-arrow {
+    text-align: center;
+
+    transform:
+      rotate(90deg);
+  }
+
+  .sf-outcome {
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
+
+  .sf-outcome__top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .sf-outcome__metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .sf-footer {
+    padding:
+      100px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sf-case-study *,
+  .sf-case-study *::before,
+  .sf-case-study *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+=======================================================
+File: c:\Users\rishi\MAJIN\Website\components\scanfeast\scanfeast-data.ts
+=======================================================
+
+export const SCANFEAST_CASE_STUDY = {
+  eyebrow: "CASE STUDY / RESTAURANT OPERATING SYSTEM",
+
+  title: "SCANFEAST",
+
+  subtitle:
+    "A smart contactless ordering system connecting diners, chefs and management through real-time web technology.",
+
+  category:
+    "WEB SAAS / BUSINESS APPLICATION",
+
+  role:
+    "DESIGN / FULL-STACK DEVELOPMENT / DEPLOYMENT",
+
+  stack: [
+    "REACT",
+    "NODE.JS",
+    "SOCKET.IO",
+    "MONGODB",
+  ],
+
+  productSurfaces: [
+    {
+      id: "diner",
+      number: "01",
+      label: "DINER EXPERIENCE",
+      title:
+        "Ordering starts at the table.",
+      description:
+        "QR-based mobile ordering with live order status.",
+    },
+
+    {
+      id: "kds",
+      number: "02",
+      label: "KITCHEN DISPLAY SYSTEM",
+      title:
+        "The kitchen knows what's next.",
+      description:
+        "FIFO order handling, timers and live preparation status.",
+    },
+
+    {
+      id: "manager",
+      number: "03",
+      label: "MANAGER OPERATIONS",
+      title:
+        "Everything, in one view.",
+      description:
+        "Revenue, menu control, help desk and rush-hour visibility.",
+    },
+  ],
+
+  engineering: [
+    {
+      number: "01",
+      label: "TIME SYNCHRONIZATION",
+      title:
+        "Never trust the client clock.",
+    },
+
+    {
+      number: "02",
+      label: "SMART PREP",
+      title:
+        "Preparation time from the order itself.",
+    },
+
+    {
+      number: "03",
+      label: "NETWORK RESILIENCE",
+      title:
+        "Realtime first. Canonical fallback always.",
+    },
+  ],
+
+  outcomes: [
+    {
+      value: "100%",
+      label: "DIGITAL ORDERING WORKFLOW",
+    },
+
+    {
+      value: "<60s",
+      label: "TESTED ORDER PLACEMENT",
+    },
+
+    {
+      value: "RESILIENT",
+      label: "ORDER DELIVERY",
+    },
+  ],
+} as const;
+
+
+=======================================================
+File: c:\Users\rishi\MAJIN\Website\components\scanfeast\ScanfeastArchitecture.tsx
+=======================================================
+
+"use client";
+
+export default function ScanfeastArchitecture() {
+  return (
+    <section className="sf-section sf-architecture">
+      <div className="sf-section__intro">
+        <span>
+          03 / ARCHITECTURE
+        </span>
+
+        <h2>
+          ONE SYSTEM.
+          <br />
+          MANY SURFACES.
+        </h2>
+      </div>
+
+      <div className="sf-architecture__visual">
+        <svg
+          viewBox="0 0 1200 680"
+          role="img"
+          aria-label="Scanfeast architecture"
+          className="sf-architecture__svg"
+        >
+          <defs>
+            <filter
+              id="sfGlow"
+              x="-100%"
+              y="-100%"
+              width="300%"
+              height="300%"
+            >
+              <feGaussianBlur
+                stdDeviation="4"
+                result="blur"
+              />
+
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          {/* background zones */}
+
+          <rect
+            x="70"
+            y="45"
+            width="1060"
+            height="165"
+            rx="24"
+            className="sf-arch-zone"
+          />
+
+          <rect
+            x="190"
+            y="275"
+            width="820"
+            height="145"
+            rx="24"
+            className="sf-arch-zone"
+          />
+
+          <rect
+            x="370"
+            y="500"
+            width="460"
+            height="110"
+            rx="24"
+            className="sf-arch-zone"
+          />
+
+          {/* labels */}
+
+          <text
+            x="100"
+            y="82"
+            className="sf-arch-zone-label"
+          >
+            CLIENT LAYER
+          </text>
+
+          <text
+            x="220"
+            y="312"
+            className="sf-arch-zone-label"
+          >
+            BACKEND / REAL-TIME
+          </text>
+
+          <text
+            x="400"
+            y="537"
+            className="sf-arch-zone-label"
+          >
+            PERSISTENCE
+          </text>
+
+          {/* connections */}
+
+          <path
+            id="dinerApi"
+            d="M220 155 C220 230 420 245 455 330"
+            className="sf-arch-line"
+          />
+
+          <path
+            id="kdsApi"
+            d="M600 155 L600 330"
+            className="sf-arch-line"
+          />
+
+          <path
+            id="managerApi"
+            d="M980 155 C980 230 780 245 745 330"
+            className="sf-arch-line"
+          />
+
+          <path
+            id="dinerSocket"
+            d="M300 180 C430 215 450 215 510 330"
+            className="sf-arch-line sf-arch-line--socket"
+          />
+
+          <path
+            id="kdsSocket"
+            d="M650 180 L650 330"
+            className="sf-arch-line sf-arch-line--socket"
+          />
+
+          <path
+            id="managerSocket"
+            d="M900 180 C770 215 750 215 690 330"
+            className="sf-arch-line sf-arch-line--socket"
+          />
+
+          <path
+            id="databaseLine"
+            d="M600 420 L600 545"
+            className="sf-arch-line"
+          />
+
+          {/* client nodes */}
+
+          <Node
+            x={220}
+            y={145}
+            title="DINER"
+            subtitle="CUSTOMER BROWSER"
+          />
+
+          <Node
+            x={600}
+            y={145}
+            title="KDS"
+            subtitle="KITCHEN TABLET"
+          />
+
+          <Node
+            x={980}
+            y={145}
+            title="MANAGER"
+            subtitle="DASHBOARD"
+          />
+
+          {/* backend */}
+
+          <Node
+            x={455}
+            y={350}
+            title="EXPRESS"
+            subtitle="REST API"
+            accent
+          />
+
+          <Node
+            x={745}
+            y={350}
+            title="SOCKET.IO"
+            subtitle="REAL-TIME SERVER"
+            accent
+          />
+
+          {/* database */}
+
+          <g>
+            <ellipse
+              cx="600"
+              cy="555"
+              rx="105"
+              ry="28"
+              className="sf-arch-db"
+            />
+
+            <rect
+              x="495"
+              y="555"
+              width="210"
+              height="28"
+              className="sf-arch-db"
+            />
+
+            <ellipse
+              cx="600"
+              cy="583"
+              rx="105"
+              ry="28"
+              className="sf-arch-db"
+            />
+
+            <text
+              x="600"
+              y="570"
+              textAnchor="middle"
+              className="sf-arch-node-title"
+            >
+              MONGODB ATLAS
+            </text>
+          </g>
+
+          {/* packets */}
+
+          <Packet href="#dinerApi" delay="0s" />
+          <Packet href="#kdsApi" delay="0.8s" />
+          <Packet href="#managerApi" delay="1.6s" />
+
+          <Packet
+            href="#dinerSocket"
+            delay="0.4s"
+            socket
+          />
+
+          <Packet
+            href="#kdsSocket"
+            delay="1.2s"
+            socket
+          />
+
+          <Packet
+            href="#managerSocket"
+            delay="2s"
+            socket
+          />
+        </svg>
+      </div>
+
+      <p className="sf-section__note">
+        REST provides canonical API access,
+        Socket.IO carries realtime events,
+        and MongoDB remains the persistence
+        layer.
+      </p>
+    </section>
+  );
+}
+
+function Node({
+  x,
+  y,
+  title,
+  subtitle,
+  accent = false,
+}: {
+  x: number;
+  y: number;
+  title: string;
+  subtitle: string;
+  accent?: boolean;
+}) {
+  return (
+    <g>
+      <rect
+        x={x - 110}
+        y={y - 42}
+        width="220"
+        height="84"
+        rx="14"
+        className={
+          accent
+            ? "sf-arch-node sf-arch-node--accent"
+            : "sf-arch-node"
+        }
+      />
+
+      <text
+        x={x}
+        y={y - 2}
+        textAnchor="middle"
+        className="sf-arch-node-title"
+      >
+        {title}
+      </text>
+
+      <text
+        x={x}
+        y={y + 20}
+        textAnchor="middle"
+        className="sf-arch-node-subtitle"
+      >
+        {subtitle}
+      </text>
+    </g>
+  );
+}
+
+function Packet({
+  href,
+  delay,
+  socket = false,
+}: {
+  href: string;
+  delay: string;
+  socket?: boolean;
+}) {
+  return (
+    <circle
+      r="7"
+      className={
+        socket
+          ? "sf-arch-packet sf-arch-packet--socket"
+          : "sf-arch-packet"
+      }
+    >
+      <animateMotion
+        dur="2.8s"
+        begin={delay}
+        repeatCount="indefinite"
+      >
+        <mpath href={href} />
+      </animateMotion>
+    </circle>
+  );
+}
+
+
+=======================================================
+File: c:\Users\rishi\MAJIN\Website\components\scanfeast\ScanfeastCaseStudy.tsx
+=======================================================
+
+"use client";
+
+import ScanfeastProduct from "./ScanfeastProduct";
+import ScanfeastArchitecture from "./ScanfeastArchitecture";
+import ScanfeastEngineering from "./ScanfeastEngineering";
+import ScanfeastOutcome from "./ScanfeastOutcome";
+
+import "./scanfeast-case-study.css";
+
+export default function ScanfeastCaseStudy() {
+  return (
+    <main className="sf-case-study">
+      <section className="sf-case-study__intro">
+        <div>
+          <span>
+            MAJIN STUDIOS / CASE STUDY
+          </span>
+
+          <h1>
+            SCANFEAST
+          </h1>
+
+          <p>
+            A smart contactless ordering
+            system connecting diners, chefs
+            and management through real-time
+            web technology.
+          </p>
+
+          <div className="sf-case-study__meta">
+            <span>
+              WEB SAAS
+            </span>
+
+            <span>
+              DESIGN / FULL-STACK / DEPLOYMENT
+            </span>
+
+            <span>
+              REACT · NODE · SOCKET.IO · MONGODB
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section className="sf-problem">
+        <div>
+          <span>
+            01 / THE PROBLEM
+          </span>
+
+          <h2>
+            RESTAURANTS
+            <br />
+            SHOULDN&apos;T RUN
+            <br />
+            ON FRAGMENTED
+            <br />
+            COMMUNICATION.
+          </h2>
+        </div>
+
+        <p>
+          Traditional dine-in workflows
+          separate guests, waitstaff,
+          kitchen tickets and management
+          visibility. Scanfeast was designed
+          to connect those surfaces into one
+          live operating layer.
+        </p>
+      </section>
+
+      <ScanfeastProduct />
+
+      <ScanfeastArchitecture />
+
+      <ScanfeastEngineering />
+
+      <ScanfeastOutcome />
+
+      <footer className="sf-footer">
+        <span>
+          BUILT BY
+        </span>
+
+        <strong>
+          MAJIN STUDIOS
+        </strong>
+
+        <small>
+          DESIGN / ENGINEERING / DEPLOYMENT
+        </small>
+      </footer>
+    </main>
+  );
+}
+
+
+=======================================================
+File: c:\Users\rishi\MAJIN\Website\components\scanfeast\ScanfeastEngineering.tsx
+=======================================================
+
+"use client";
+
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+const MODULES = [
+  {
+    number: "01",
+    eyebrow:
+      "SERVER-AUTHORITATIVE TIMERS",
+    title:
+      "TIME SYNCHRONIZATION",
+    body:
+      "Countdowns use server-authoritative time so different devices do not visibly drift.",
+  },
+  {
+    number: "02",
+    eyebrow:
+      "RULE-BASED AUTOMATION",
+    title:
+      "SMART PREP",
+    body:
+      "Cart contents are evaluated against preparation rules to create useful ETAs automatically.",
+  },
+  {
+    number: "03",
+    eyebrow:
+      "REALTIME + FALLBACK",
+    title:
+      "NETWORK RESILIENCE",
+    body:
+      "Realtime delivery is backed by periodic HTTP synchronization so canonical state can recover.",
+  },
+];
+
+export default function ScanfeastEngineering() {
+  return (
+    <section className="sf-section sf-engineering">
+      <div className="sf-section__intro">
+        <span>
+          04 / ENGINEERING
+        </span>
+
+        <div>
+          <h2>
+            THE HARD PART
+            <br />
+            WASN'T THE UI.
+          </h2>
+
+          <p>
+            Accuracy, automation and
+            resilience are what make
+            a restaurant workflow feel
+            instant.
+          </p>
+        </div>
+      </div>
+
+      <div className="sf-engineering__grid">
+        {MODULES.map((module) => (
+          <EngineeringCard
+            key={module.number}
+            {...module}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function EngineeringCard({
+  number,
+  eyebrow,
+  title,
+  body,
+}: {
+  number: string;
+  eyebrow: string;
+  title: string;
+  body: string;
+}) {
+  const ref =
+    useRef<HTMLDivElement | null>(
+      null,
+    );
+
+  const [visible, setVisible] =
+    useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+
+    if (!element) return;
+
+    const observer =
+      new IntersectionObserver(
+        ([entry]) => {
+          setVisible(
+            entry.isIntersecting,
+          );
+        },
+        {
+          threshold: 0.28,
+        },
+      );
+
+    observer.observe(element);
+
+    return () =>
+      observer.disconnect();
+  }, []);
+
+  return (
+    <article
+      ref={ref}
+      className={`sf-engineering-card ${
+        visible
+          ? "is-visible"
+          : ""
+      }`}
+    >
+      <div className="sf-engineering-card__top">
+        <span>{number}</span>
+
+        <small>
+          {eyebrow}
+        </small>
+      </div>
+
+      <h3>
+        {title}
+      </h3>
+
+      <p>
+        {body}
+      </p>
+
+      {number === "01" && (
+        <TimerDiagram
+          visible={visible}
+        />
+      )}
+
+      {number === "02" && (
+        <PrepDiagram
+          visible={visible}
+        />
+      )}
+
+      {number === "03" && (
+        <ResilienceDiagram
+          visible={visible}
+        />
+      )}
+    </article>
+  );
+}
+
+function TimerDiagram({
+  visible,
+}: {
+  visible: boolean;
+}) {
+  return (
+    <div
+      className={`sf-engineering-visual sf-timer-diagram ${
+        visible ? "is-active" : ""
+      }`}
+    >
+      <div className="sf-timer-device">
+        <span>
+          SERVER
+        </span>
+
+        <strong>
+          09:57
+        </strong>
+
+        <small>
+          AUTHORITATIVE
+        </small>
+      </div>
+
+      <div className="sf-timer-arrow">
+        ↓
+      </div>
+
+      <div className="sf-timer-device">
+        <span>
+          CLIENT
+        </span>
+
+        <strong>
+          09:57
+        </strong>
+
+        <small>
+          OFFSET ADJUSTED
+        </small>
+      </div>
+    </div>
+  );
+}
+
+function PrepDiagram({
+  visible,
+}: {
+  visible: boolean;
+}) {
+  return (
+    <div
+      className={`sf-engineering-visual sf-prep-diagram ${
+        visible ? "is-active" : ""
+      }`}
+    >
+      <div className="sf-prep-step">
+        <span>
+          CART
+        </span>
+
+        <strong>
+          BIRYANI
+          <br />
+          TEA
+          <br />
+          SAMOSA
+        </strong>
+      </div>
+
+      <div className="sf-prep-arrow">
+        →
+      </div>
+
+      <div className="sf-prep-step sf-prep-step--active">
+        <span>
+          RULES
+        </span>
+
+        <strong>
+          PREP TIME
+        </strong>
+      </div>
+
+      <div className="sf-prep-arrow">
+        →
+      </div>
+
+      <div className="sf-prep-step">
+        <span>
+          ETA
+        </span>
+
+        <strong>
+          15 MIN
+        </strong>
+      </div>
+    </div>
+  );
+}
+
+function ResilienceDiagram({
+  visible,
+}: {
+  visible: boolean;
+}) {
+  return (
+    <div
+      className={`sf-engineering-visual sf-resilience-diagram ${
+        visible ? "is-active" : ""
+      }`}
+    >
+      <div className="sf-resilience-line">
+        <span>
+          WEBSOCKET
+        </span>
+
+        <i />
+
+        <b>
+          LIVE EVENT
+        </b>
+      </div>
+
+      <div className="sf-resilience-break">
+        ×
+      </div>
+
+      <div className="sf-resilience-line sf-resilience-line--fallback">
+        <span>
+          HTTP FALLBACK
+        </span>
+
+        <i />
+
+        <b>
+          CANONICAL STATE
+        </b>
+      </div>
+    </div>
+  );
+}
+
+
+=======================================================
+File: c:\Users\rishi\MAJIN\Website\components\scanfeast\ScanfeastHero.tsx
+=======================================================
+
+"use client";
+
+export default function ScanfeastHero() {
+  return (
+    <section className="sf-hero">
+      <div className="sf-hero__content">
+        <div className="sf-hero__eyebrow">
+          MAJIN STUDIOS / CASE STUDY
+        </div>
+
+        <h1>
+          SCAN
+          <span>FEAST</span>
+        </h1>
+
+        <p>
+          A restaurant operating system
+          connecting the table, kitchen and
+          management layer through one live
+          digital workflow.
+        </p>
+
+        <div className="sf-hero__meta">
+          <span>WEB SAAS</span>
+          <span>PRODUCT / ENGINEERING</span>
+          <span>REACT · NODE · SOCKET.IO</span>
+        </div>
+      </div>
+
+      <div className="sf-hero__device">
+        <div className="sf-laptop">
+          <div className="sf-laptop__screen-shell">
+            <div className="sf-browser">
+              <div className="sf-browser__bar">
+                <div className="sf-browser__dots">
+                  <i />
+                  <i />
+                  <i />
+                </div>
+
+                <div className="sf-browser__url">
+                  scanfeast.app
+                </div>
+
+                <span />
+              </div>
+
+              <div className="sf-browser__content">
+                <div className="sf-hero-appbar">
+                  <strong>
+                    SCANFEAST
+                  </strong>
+
+                  <span>
+                    TABLE 12
+                  </span>
+                </div>
+
+                <div className="sf-hero-workspace">
+                  <div className="sf-hero-copy-panel">
+                    <small>
+                      DINER EXPERIENCE
+                    </small>
+
+                    <strong>
+                      ORDER.
+                      <br />
+                      WITHOUT
+                      <br />
+                      WAITING.
+                    </strong>
+
+                    <p>
+                      Scan the table.
+                      Browse the menu.
+                      Follow the order live.
+                    </p>
+                  </div>
+
+                  <div className="sf-hero-mobile">
+                    <div className="sf-hero-mobile__top">
+                      <span>
+                        GOOD EVENING
+                      </span>
+
+                      <b>
+                        T12
+                      </b>
+                    </div>
+
+                    <div className="sf-hero-mobile__headline">
+                      Today's
+                      <br />
+                      picks
+                    </div>
+
+                    <div className="sf-hero-food">
+                      <div>
+                        BIRYANI
+                        <small>
+                          ₹280
+                        </small>
+                      </div>
+
+                      <div>
+                        SAMOSA
+                        <small>
+                          ₹50
+                        </small>
+                      </div>
+
+                      <div>
+                        MASALA TEA
+                        <small>
+                          ₹60
+                        </small>
+                      </div>
+                    </div>
+
+                    <div className="sf-hero-cart">
+                      VIEW CART
+                      <strong>
+                        3 ITEMS
+                      </strong>
+                    </div>
+                  </div>
+
+                  <div className="sf-hero-kds-mini">
+                    <div className="sf-hero-kds-mini__head">
+                      <span>
+                        KITCHEN LIVE
+                      </span>
+
+                      <b>
+                        ●
+                      </b>
+                    </div>
+
+                    <article>
+                      <div>
+                        <small>
+                          #104 / TABLE 1
+                        </small>
+
+                        <strong>
+                          BIRYANI
+                        </strong>
+                      </div>
+
+                      <span>
+                        04:32
+                      </span>
+                    </article>
+
+                    <article>
+                      <div>
+                        <small>
+                          #105 / TABLE 4
+                        </small>
+
+                        <strong>
+                          SAMOSA
+                        </strong>
+                      </div>
+
+                      <span>
+                        READY
+                      </span>
+                    </article>
+                  </div>
+                </div>
+
+                <div className="sf-hero-statusbar">
+                  <span>
+                    REAL-TIME SYSTEM
+                  </span>
+
+                  <i />
+
+                  <span>
+                    SOCKET.IO
+                  </span>
+
+                  <i />
+
+                  <span>
+                    MONGODB
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="sf-laptop__base">
+            <div className="sf-laptop__hinge" />
+
+            <div className="sf-laptop__keyboard">
+              {Array.from(
+                { length: 60 },
+                (_, index) => (
+                  <i key={index} />
+                ),
+              )}
+            </div>
+
+            <div className="sf-laptop__trackpad" />
+          </div>
+        </div>
+      </div>
+
+      <div className="sf-hero__scroll">
+        <span>
+          SCROLL TO ENTER THE SYSTEM
+        </span>
+
+        <i />
+      </div>
+    </section>
+  );
+}
+
+=======================================================
+File: c:\Users\rishi\MAJIN\Website\components\scanfeast\ScanfeastOutcome.tsx
+=======================================================
+
+"use client";
+
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+const METRICS = [
+  {
+    value: "100%",
+    label:
+      "DIGITAL ORDERING WORKFLOW",
+  },
+  {
+    value: "<60s",
+    label:
+      "TESTED ORDER PLACEMENT FLOW",
+  },
+  {
+    value: "LIVE",
+    label:
+      "WEBSOCKET + POLLING DELIVERY",
+  },
+];
+
+export default function ScanfeastOutcome() {
+  const ref =
+    useRef<HTMLElement | null>(
+      null,
+    );
+
+  const [visible, setVisible] =
+    useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+
+    if (!element) return;
+
+    const observer =
+      new IntersectionObserver(
+        ([entry]) => {
+          setVisible(
+            entry.isIntersecting,
+          );
+        },
+        {
+          threshold: 0.2,
+        },
+      );
+
+    observer.observe(element);
+
+    return () =>
+      observer.disconnect();
+  }, []);
+
+  return (
+    <section
+      ref={ref}
+      className={`sf-outcome ${
+        visible ? "is-visible" : ""
+      }`}
+    >
+      <div className="sf-outcome__top">
+        <span>
+          05 / OUTCOME
+        </span>
+
+        <small>
+          SCANFEAST / SYSTEM COMPLETE
+        </small>
+      </div>
+
+      <div className="sf-outcome__headline">
+        <h2>
+          THE RESTAURANT
+          <br />
+          <em>
+            MOVES AS ONE.
+          </em>
+        </h2>
+
+        <p>
+          A contactless ordering workflow
+          connecting the guest experience,
+          kitchen execution and management
+          visibility through one live system.
+        </p>
+      </div>
+
+      <div className="sf-outcome__metrics">
+        {METRICS.map((metric, index) => (
+          <article
+            key={metric.label}
+            style={{
+              transitionDelay: `${
+                index * 120
+              }ms`,
+            }}
+          >
+            <strong>
+              {metric.value}
+            </strong>
+
+            <span>
+              {metric.label}
+            </span>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+=======================================================
+File: c:\Users\rishi\MAJIN\Website\components\scanfeast\ScanfeastProduct.tsx
+=======================================================
+
+"use client";
+
+import {
+  useRef,
+  type CSSProperties,
+} from "react";
+
+import tableSelect from "../../data/scanfeast/images/Screenshot 2026-08-27 000822.png";
+import dinerMenu from "../../data/scanfeast/images/Screenshot 2026-08-27 001009.png";
+import cartScreen from "../../data/scanfeast/images/Screenshot 2026-08-27 001041.png";
+import faqScreen from "../../data/scanfeast/images/Screenshot 2026-08-27 001102.png";
+import readyScreen from "../../data/scanfeast/images/Screenshot 2026-08-27 001123.png";
+import ordersScreen from "../../data/scanfeast/images/Screenshot 2026-08-27 001343.png";
+import incomingScreen from "../../data/scanfeast/images/Screenshot 2026-08-27 001359.png";
+import cookingScreen from "../../data/scanfeast/images/Screenshot 2026-08-27 001421.png";
+import serverScreen from "../../data/scanfeast/images/Screenshot 2026-08-27 001503.png";
+import managerScreen from "../../data/scanfeast/images/Screenshot 2026-08-27 001600.png";
+
+import {
+  segment,
+  smooth,
+  useSceneProgress,
+} from "./ScanfeastScene";
+
+type ImageLayerProps = {
+  src: string;
+  alt: string;
+  opacity: number;
+};
+
+function ImageLayer({
+  src,
+  alt,
+  opacity,
+}: ImageLayerProps) {
+  return (
+    <img
+      src={src}
+      alt={alt}
+      draggable={false}
+      className="sf-screen-image"
+      style={{
+        opacity,
+      }}
+    />
+  );
+}
+
+function CinematicCopy({
+  index,
+  eyebrow,
+  title,
+  body,
+  align = "left",
+  opacity = 1,
+}: {
+  index: string;
+  eyebrow: string;
+  title: React.ReactNode;
+  body: string;
+  align?: "left" | "right";
+  opacity?: number;
+}) {
+  return (
+    <div
+      className={`sf-cinematic-copy sf-cinematic-copy--${align}`}
+      style={{
+        opacity,
+        transform: `
+          translateY(
+            ${opacity === 0 ? 30 : 0}px
+          )
+        `,
+      }}
+    >
+      <span>
+        {index} / {eyebrow}
+      </span>
+
+      <h3>{title}</h3>
+
+      <p>{body}</p>
+    </div>
+  );
+}
+
+/* =========================================================
+   PRODUCT
+   ========================================================= */
+
+export default function ScanfeastProduct() {
+  return (
+    <section className="sf-section sf-product">
+      <div className="sf-section__intro">
+        <span>02 / PRODUCT</span>
+
+        <h2>
+          THE SYSTEM
+          <br />
+          BECOMES A SCREEN.
+        </h2>
+      </div>
+
+      <DinerScene />
+
+      <KitchenScene />
+
+      <ManagerScene />
+
+      <SupportingSurfaces />
+    </section>
+  );
+}
+
+/* =========================================================
+   DINER SCENE
+   ========================================================= */
+
+function DinerScene() {
+  const ref = useRef<HTMLElement | null>(null);
+
+  const progress =
+    useSceneProgress(ref);
+
+  const table =
+    smooth(segment(progress, 0, 0.15));
+
+  const phone =
+    smooth(segment(progress, 0.08, 0.25));
+
+  const menu =
+    smooth(segment(progress, 0.18, 0.37));
+
+  const cart =
+    smooth(segment(progress, 0.34, 0.54));
+
+  const ready =
+    smooth(segment(progress, 0.51, 0.7));
+
+  const faq =
+    smooth(segment(progress, 0.62, 0.79));
+
+  const exit =
+    smooth(segment(progress, 0.76, 1));
+
+  return (
+    <section
+      ref={ref}
+      className="sf-cinematic"
+      style={{
+        height: "280vh",
+      }}
+    >
+      <div className="sf-cinematic__sticky">
+        <div className="sf-cinematic__canvas">
+          <div className="sf-cinematic__glow" />
+
+          <CinematicCopy
+            index="01"
+            eyebrow="DINER EXPERIENCE"
+            title={
+              <>
+                ORDERING
+                <br />
+                STARTS AT
+                <br />
+                THE TABLE.
+              </>
+            }
+            body="The guest scans the table, selects food, builds a cart and follows the order without needing a traditional ordering loop."
+            opacity={
+              Math.max(
+                0,
+                1 - faq * 1.4,
+              )
+            }
+          />
+
+          <div
+            className="sf-table-3d"
+            style={{
+              opacity: 1 - exit,
+              transform: `
+                translate(-50%, -50%)
+                perspective(1400px)
+                rotateX(58deg)
+                rotateZ(-7deg)
+                scale(${0.78 + table * 0.22})
+                translateY(${50 - table * 50}px)
+              `,
+            }}
+          >
+            <div className="sf-table-3d__surface">
+              <div className="sf-table-3d__rim" />
+
+              <div className="sf-table-3d__qr">
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+              </div>
+
+              <small>
+                TABLE 12 / SCAN TO ORDER
+              </small>
+            </div>
+
+            <div className="sf-table-3d__leg sf-table-3d__leg--left" />
+            <div className="sf-table-3d__leg sf-table-3d__leg--right" />
+          </div>
+
+          <div
+            className="sf-device sf-phone-device"
+            style={{
+              opacity:
+                phone *
+                (1 - exit),
+
+              transform: `
+                translate(-50%, -50%)
+                translateY(
+                  ${150 - phone * 150}px
+                )
+                rotate(
+                  ${-8 + phone * 8}deg
+                )
+                scale(
+                  ${0.82 + phone * 0.18}
+                )
+              `,
+            }}
+          >
+            <div className="sf-phone-device__frame">
+              <div className="sf-phone-device__speaker" />
+
+              <div className="sf-phone-device__screen">
+                <ImageLayer
+                  src={tableSelect.src}
+                  alt="Scanfeast table selection"
+                  opacity={
+                    Math.max(
+                      0,
+                      1 -
+                        segment(
+                          progress,
+                          0.15,
+                          0.23,
+                        ) -
+                        menu * 0.95,
+                    )
+                  }
+                />
+
+                <ImageLayer
+                  src={dinerMenu.src}
+                  alt="Scanfeast diner menu"
+                  opacity={
+                    menu *
+                    (1 - cart)
+                  }
+                />
+
+                <ImageLayer
+                  src={cartScreen.src}
+                  alt="Scanfeast shopping cart"
+                  opacity={
+                    cart *
+                    (1 - ready)
+                  }
+                />
+
+                <ImageLayer
+                  src={readyScreen.src}
+                  alt="Scanfeast ready order"
+                  opacity={ready}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="sf-diner-route"
+            style={{
+              opacity:
+                Math.max(
+                  0,
+                  1 - faq,
+                ),
+            }}
+          >
+            <span className="is-active">
+              SCAN
+            </span>
+
+            <i />
+
+            <span
+              className={
+                menu > 0.4
+                  ? "is-active"
+                  : ""
+              }
+            >
+              ORDER
+            </span>
+
+            <i />
+
+            <span
+              className={
+                cart > 0.4
+                  ? "is-active"
+                  : ""
+              }
+            >
+              TRACK
+            </span>
+          </div>
+
+          <div
+            className="sf-floating-screen sf-floating-screen--faq"
+            style={{
+              opacity: faq,
+              transform: `
+                translateY(
+                  ${30 - faq * 30}px
+                )
+                rotate(
+                  ${-4 + faq * 4}deg
+                )
+              `,
+            }}
+          >
+            <div className="sf-floating-screen__chrome">
+              <span>
+                SUPPORT SURFACE
+              </span>
+            </div>
+
+            <div className="sf-floating-screen__image">
+              <img
+                src={faqScreen.src}
+                alt="Scanfeast FAQ"
+              />
+            </div>
+          </div>
+
+          <div
+            className="sf-scene-index"
+            style={{
+              opacity: exit,
+            }}
+          >
+            <span>NEXT</span>
+            <strong>KITCHEN</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* =========================================================
+   KITCHEN SCENE
+   ========================================================= */
+
+function KitchenScene() {
+  const ref = useRef<HTMLElement | null>(null);
+
+  const progress =
+    useSceneProgress(ref);
+
+  const board =
+    smooth(segment(progress, 0, 0.2));
+
+  const incoming =
+    smooth(segment(progress, 0.08, 0.34));
+
+  const cooking =
+    smooth(segment(progress, 0.28, 0.56));
+
+  const ready =
+    smooth(segment(progress, 0.52, 0.74));
+
+  const orderTracking =
+    smooth(segment(progress, 0.66, 0.84));
+
+  const exit =
+    smooth(segment(progress, 0.84, 1));
+
+  return (
+    <section
+      ref={ref}
+      className="sf-cinematic sf-cinematic--kitchen"
+      style={{
+        height: "250vh",
+      }}
+    >
+      <div className="sf-cinematic__sticky">
+        <div className="sf-cinematic__canvas">
+          <CinematicCopy
+            index="02"
+            eyebrow="KITCHEN DISPLAY SYSTEM"
+            title={
+              <>
+                THE KITCHEN
+                <br />
+                KNOWS
+                <br />
+                WHAT'S NEXT.
+              </>
+            }
+            body="Orders arrive in realtime, move through preparation and leave the active queue when complete."
+            align="right"
+            opacity={
+              Math.max(
+                0,
+                1 - orderTracking,
+              )
+            }
+          />
+
+          <div
+            className="sf-kds-device"
+            style={{
+              opacity:
+                board *
+                (1 - exit),
+
+              transform: `
+                translate(-50%, -50%)
+                perspective(1600px)
+                rotateX(7deg)
+                rotateY(-12deg)
+                translateX(
+                  ${120 - board * 120}px
+                )
+                scale(
+                  ${0.84 + board * 0.16}
+                )
+              `,
+            }}
+          >
+            <div className="sf-kds-device__bezel">
+              <div className="sf-kds-device__screen">
+                <ImageLayer
+                  src={incomingScreen.src}
+                  alt="Scanfeast incoming orders"
+                  opacity={
+                    Math.max(
+                      incoming,
+                      1 -
+                        cooking -
+                        ready,
+                    )
+                  }
+                />
+
+                <ImageLayer
+                  src={cookingScreen.src}
+                  alt="Scanfeast kitchen cooking queue"
+                  opacity={
+                    cooking *
+                    (1 - ready)
+                  }
+                />
+
+                <div
+                  className="sf-kds-ready"
+                  style={{
+                    opacity: ready,
+                  }}
+                >
+                  <div className="sf-kds-ready__top">
+                    <span>
+                      ORDER #104
+                    </span>
+
+                    <b>
+                      READY
+                    </b>
+                  </div>
+
+                  <div className="sf-kds-ready__main">
+                    <strong>
+                      TABLE 1
+                    </strong>
+
+                    <p>
+                      Veg Spring Rolls
+                      <br />
+                      bonda
+                      <br />
+                      Aloo Bonda
+                      <br />
+                      Samosa
+                      <br />
+                      Fruit Bowl
+                    </p>
+
+                    <div className="sf-kds-ready__button">
+                      ✓ READY TO SERVE
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="sf-kds-device__stand" />
+          </div>
+
+          <div
+            className="sf-kitchen-flow"
+            style={{
+              opacity:
+                0.25 +
+                cooking * 0.75,
+            }}
+          >
+            <span
+              className={
+                incoming >
+                0.5
+                  ? "is-active"
+                  : ""
+              }
+            >
+              NEW
+            </span>
+
+            <i />
+
+            <span
+              className={
+                cooking >
+                0.3
+                  ? "is-active"
+                  : ""
+              }
+            >
+              COOKING
+            </span>
+
+            <i />
+
+            <span
+              className={
+                ready >
+                0.4
+                  ? "is-active"
+                  : ""
+              }
+            >
+              READY
+            </span>
+          </div>
+
+          <div
+            className="sf-floating-screen sf-floating-screen--tracking"
+            style={{
+              opacity:
+                orderTracking *
+                (1 - exit),
+
+              transform: `
+                translate(
+                  ${40 - orderTracking * 40}px,
+                  ${-50 + orderTracking * 50}px
+                )
+                rotate(${
+                  4 - orderTracking * 4
+                }deg)
+              `,
+            }}
+          >
+            <div className="sf-floating-screen__chrome">
+              <span>
+                DINER STATUS
+              </span>
+            </div>
+
+            <div className="sf-floating-screen__image">
+              <img
+                src={ordersScreen.src}
+                alt="Scanfeast order tracking"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* =========================================================
+   MANAGER SCENE
+   ========================================================= */
+
+function ManagerScene() {
+  const ref = useRef<HTMLElement | null>(null);
+
+  const progress =
+    useSceneProgress(ref);
+
+  const server =
+    smooth(segment(progress, 0, 0.24));
+
+  const manager =
+    smooth(segment(progress, 0.22, 0.52));
+
+  const zoom =
+    smooth(segment(progress, 0.45, 0.78));
+
+  const metrics =
+    smooth(segment(progress, 0.62, 0.86));
+
+  const exit =
+    smooth(segment(progress, 0.82, 1));
+
+  return (
+    <section
+      ref={ref}
+      className="sf-cinematic sf-cinematic--manager"
+      style={{
+        height: "235vh",
+      }}
+    >
+      <div className="sf-cinematic__sticky">
+        <div className="sf-cinematic__canvas">
+          <CinematicCopy
+            index="03"
+            eyebrow="MANAGER OPERATIONS"
+            title={
+              <>
+                EVERYTHING.
+                <br />
+                IN ONE
+                <br />
+                VIEW.
+              </>
+            }
+            body="Operational visibility brings revenue, table status and kitchen control into the manager's hands."
+            opacity={
+              Math.max(
+                0,
+                1 - metrics,
+              )
+            }
+          />
+
+          <div
+            className="sf-manager-device"
+            style={{
+              opacity:
+                server *
+                (1 - exit),
+
+              transform: `
+                translate(-50%, -50%)
+                perspective(1600px)
+                rotateX(7deg)
+                rotateY(-10deg)
+                translateY(
+                  ${75 - server * 75}px
+                )
+                scale(
+                  ${0.8 + zoom * 0.2}
+                )
+              `,
+            }}
+          >
+            <div className="sf-manager-device__bezel">
+              <div className="sf-manager-device__screen">
+                <ImageLayer
+                  src={serverScreen.src}
+                  alt="Scanfeast server dashboard"
+                  opacity={
+                    Math.max(
+                      0,
+                      1 - manager,
+                    )
+                  }
+                />
+
+                <ImageLayer
+                  src={managerScreen.src}
+                  alt="Scanfeast manager dashboard"
+                  opacity={
+                    manager
+                  }
+                />
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="sf-manager-metrics"
+            style={{
+              opacity: metrics,
+              transform: `
+                translateY(
+                  ${35 - metrics * 35}px
+                )
+              `,
+            }}
+          >
+            <article>
+              <span>REVENUE</span>
+              <strong>LIVE</strong>
+            </article>
+
+            <article>
+              <span>TABLES</span>
+              <strong>VISIBLE</strong>
+            </article>
+
+            <article>
+              <span>RUSH MODE</span>
+              <strong>CONTROL</strong>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* =========================================================
+   SUPPORTING SURFACES
+   ========================================================= */
+
+function SupportingSurfaces() {
+  return (
+    <div className="sf-supporting-surfaces">
+      <div>
+        <span>
+          PRODUCT SURFACES
+        </span>
+
+        <h3>
+          ONE PRODUCT.
+          <br />
+          MULTIPLE CONTEXTS.
+        </h3>
+      </div>
+
+      <div className="sf-supporting-grid">
+        <SurfaceCard
+          image={tableSelect.src}
+          label="TABLE SELECTION"
+          title="Choose the table before the experience begins."
+        />
+
+        <SurfaceCard
+          image={faqScreen.src}
+          label="HELP / FAQ"
+          title="Support stays inside the ordering experience."
+        />
+
+        <SurfaceCard
+          image={ordersScreen.src}
+          label="LIVE TRACKING"
+          title="The customer sees the order move through the system."
+        />
+      </div>
+    </div>
+  );
+}
+
+function SurfaceCard({
+  image,
+  label,
+  title,
+}: {
+  image: string;
+  label: string;
+  title: string;
+}) {
+  return (
+    <article className="sf-surface-card">
+      <div className="sf-surface-card__image">
+        <img
+          src={image}
+          alt={label}
+        />
+      </div>
+
+      <span>
+        {label}
+      </span>
+
+      <h4>
+        {title}
+      </h4>
+    </article>
+  );
+}
+
+=======================================================
+File: c:\Users\rishi\MAJIN\Website\components\scanfeast\ScanfeastScene.tsx
+=======================================================
+
+"use client";
+
+import {
+    useEffect,
+    useState,
+    type RefObject,
+} from "react";
+
+export function clamp(
+    value: number,
+    min = 0,
+    max = 1,
+) {
+    return Math.min(
+        Math.max(value, min),
+        max,
+    );
+}
+
+export function segment(
+    progress: number,
+    start: number,
+    end: number,
+) {
+    return clamp(
+        (progress - start) /
+        Math.max(end - start, 0.0001),
+    );
+}
+
+export function smooth(
+    value: number,
+) {
+    return value * value * (3 - 2 * value);
+}
+
+export function lerp(
+    start: number,
+    end: number,
+    value: number,
+) {
+    return start + (end - start) * value;
+}
+
+export function useSceneProgress(
+    ref: RefObject<HTMLElement | null>,
+) {
+    const [progress, setProgress] =
+        useState(0);
+
+    useEffect(() => {
+        let raf = 0;
+
+        const update = () => {
+            raf = 0;
+
+            const element = ref.current;
+
+            if (!element) {
+                return;
+            }
+
+            const rect =
+                element.getBoundingClientRect();
+
+            const scrollDistance =
+                Math.max(
+                    element.offsetHeight -
+                    window.innerHeight,
+                    1,
+                );
+
+            const travelled =
+                clamp(
+                    -rect.top,
+                    0,
+                    scrollDistance,
+                );
+
+            setProgress(
+                travelled /
+                scrollDistance,
+            );
+        };
+
+        const requestUpdate = () => {
+            if (raf) return;
+
+            raf =
+                requestAnimationFrame(update);
+        };
+
+        update();
+
+        window.addEventListener(
+            "scroll",
+            requestUpdate,
+            { passive: true },
+        );
+
+        window.addEventListener(
+            "resize",
+            requestUpdate,
+        );
+
+        return () => {
+            window.removeEventListener(
+                "scroll",
+                requestUpdate,
+            );
+
+            window.removeEventListener(
+                "resize",
+                requestUpdate,
+            );
+
+            if (raf) {
+                cancelAnimationFrame(raf);
+            }
+        };
+    }, [ref]);
+
+    return progress;
+}

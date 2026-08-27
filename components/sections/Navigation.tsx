@@ -5,8 +5,6 @@ import Image from 'next/image';
 
 import styles from './Navigation.module.css';
 
-import { TechnicalLabel } from '../ui';
-
 const NAV_LINKS = [
   { label: 'Work', href: '#work' },
   { label: 'Capabilities', href: '#capabilities' },

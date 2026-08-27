@@ -156,180 +156,196 @@ export interface Project {
 
 export const projectsData: Project[] = [
   {
-    id: 'agentic-orchestrator',
+    id: 'scanfeast-platform',
     number: '01',
 
-    category: 'AI SYSTEM',
+    category: 'Web SaaS / Business Application',
 
-    name: 'Agentic Workflow Orchestrator',
+    name: 'Scanfeast Platform',
 
     tagline:
-      'Autonomous multi-agent system for complex software execution.',
+      'A Smart Contactless Ordering System bridging the gap between diners, chefs, and management through real-time web technology.',
 
-    status: 'CONCEPT',
-    isConcept: true,
+    status: 'PRODUCTION',
+    isConcept: false,
 
     accent: 'CYAN',
 
-    visualType: 'agent-network',
+    visualType: 'architecture',
 
     problem:
-      'Traditional automation pipelines lack the reasoning capabilities required for non-deterministic software tasks, leading to brittle integrations.',
+      'Traditional dine-in restaurants often suffer from a fragmented communication loop. Customers rely on physical menus and waitstaff, while kitchens rely on easily lost printed tickets. Managers lack real-time visibility into kitchen bottlenecks and revenue during peak hours.',
 
     solution:
-      'A specialized orchestrator that delegates tasks to specialized AI agents, evaluates intermediate outputs, and coordinates multi-step execution.',
+      'We transformed the traditional dining flow into a fully digitized, real-time ecosystem where every action is broadcasted across the network instantly, keeping diners, chefs, and managers perfectly in sync.',
 
     outcome:
-      'Conceptual architecture demonstrating planner-driven agent orchestration and tool-based execution.',
+      '100% digital workflow with tested order placement flow < 60s, using robust WebSocket + HTTP polling fallback.',
 
     technologies: [
-      'Next.js',
-      'Python',
-      'LangChain',
-      'OpenAI',
-      'PostgreSQL',
+      'React',
+      'Node.js',
+      'Socket.IO',
+      'MongoDB',
+      'Express',
     ],
 
     capabilities: [
       {
-        label: 'Planning',
+        label: 'Diner Experience',
         description:
-          'Break complex objectives into executable steps.',
+          'QR-code scanning for a dynamic mobile menu. Place orders, chat with managers, and track food prep time live.',
       },
       {
-        label: 'Agent orchestration',
+        label: 'Kitchen Display System (KDS)',
         description:
-          'Coordinate specialized agents across a shared workflow.',
+          'Real-time, FIFO-sorted queue. Accept orders, add delays, and monitor countdowns with auto-calculating ETAs.',
       },
       {
-        label: 'Tool execution',
+        label: 'Manager Dashboard',
         description:
-          'Allow agents to interact with external capabilities.',
+          'Full menu control, live revenue tracking, help desk management, and a global "Rush Hour" buffer toggle.',
       },
       {
-        label: 'Evaluation',
+        label: 'Network Resilience & Sync',
         description:
-          'Assess intermediate outputs before continuing execution.',
+          'Client-server time sync for accurate timers, backed by WebSocket delivery and silent HTTP polling fallbacks.',
       },
     ],
 
     architecture: [
       {
-        id: 'ui',
-        label: 'Dashboard',
-        type: 'frontend',
+        id: 'customer-browser',
+        label: 'Customer Browser',
+        type: 'client',
         position: {
-          x: -0.8,
+          x: -0.6,
           y: 0.4,
           z: 0,
         },
-        connections: ['api'],
-        metadata: 'USER INTERFACE',
+        connections: ['express-api', 'socket-server'],
+        metadata: 'DINER EXPERIENCE',
       },
 
       {
-        id: 'api',
-        label: 'REST API',
-        type: 'api',
-        position: {
-          x: -0.4,
-          y: 0.15,
-          z: 0,
-        },
-        connections: ['orch'],
-        metadata: 'REQUEST LAYER',
-      },
-
-      {
-        id: 'orch',
-        label: 'Orchestrator',
-        type: 'backend',
+        id: 'kitchen-kds',
+        label: 'Kitchen Tablet/KDS',
+        type: 'client',
         position: {
           x: 0,
-          y: 0,
+          y: 0.4,
           z: 0,
         },
-        connections: ['agent-planner', 'agent-coder'],
-        metadata: 'COORDINATION CORE',
+        connections: ['express-api', 'socket-server'],
+        metadata: 'SMART TIMERS',
       },
 
       {
-        id: 'agent-planner',
-        label: 'Planner Agent',
-        type: 'agent',
-        position: {
-          x: 0.45,
-          y: 0.35,
-          z: 0,
-        },
-        connections: ['agent-coder'],
-        metadata: 'TASK PLANNING',
-      },
-
-      {
-        id: 'agent-coder',
-        label: 'Coder Agent',
-        type: 'agent',
+        id: 'manager-dashboard',
+        label: 'Manager Dashboard',
+        type: 'client',
         position: {
           x: 0.6,
-          y: -0.25,
+          y: 0.4,
+          z: 0,
+        },
+        connections: ['express-api', 'socket-server'],
+        metadata: 'LIVE CONTROL',
+      },
+
+      {
+        id: 'express-api',
+        label: 'Express REST API',
+        type: 'api',
+        position: {
+          x: -0.3,
+          y: -0.1,
+          z: 0,
+        },
+        connections: ['mongodb'],
+        metadata: 'BACKEND',
+      },
+
+      {
+        id: 'socket-server',
+        label: 'Socket.IO Server',
+        type: 'api',
+        position: {
+          x: 0.3,
+          y: -0.1,
+          z: 0,
+        },
+        connections: ['mongodb'],
+        metadata: 'REAL-TIME LAYER',
+      },
+
+      {
+        id: 'mongodb',
+        label: 'MongoDB Atlas',
+        type: 'database',
+        position: {
+          x: 0,
+          y: -0.5,
           z: 0,
         },
         connections: [],
-        metadata: 'EXECUTION',
+        metadata: 'PERSISTENCE',
       },
     ],
 
     assembly: [
       {
-        id: 'orchestrator-shell',
-        label: 'Orchestrator Shell',
+        id: 'diner-app',
+        label: 'Diner Mobile Web',
         order: 1,
-        type: 'shell',
-        description:
-          'Base product frame and visual environment.',
-      },
-
-      {
-        id: 'workflow-panel',
-        label: 'Workflow Panel',
-        order: 2,
-        type: 'workflow',
-        description:
-          'Visual representation of the active agent workflow.',
-      },
-
-      {
-        id: 'agent-dashboard',
-        label: 'Agent Dashboard',
-        order: 3,
         type: 'dashboard',
         description:
-          'Agent states, execution steps and system activity.',
+          'No-download mobile ordering interface via QR scan.',
       },
 
       {
-        id: 'execution-panel',
-        label: 'Execution Panel',
-        order: 4,
-        type: 'terminal',
+        id: 'kds-panel',
+        label: 'KDS Dashboard',
+        order: 2,
+        type: 'panel',
         description:
-          'Execution events and tool activity.',
+          'Real-time kitchen order queue with automated ETAs.',
+      },
+
+      {
+        id: 'manager-stats',
+        label: 'Manager Stats',
+        order: 3,
+        type: 'chart',
+        description:
+          'Live revenue tracking and emergency SOS alerts.',
+      },
+
+      {
+        id: 'realtime-sync',
+        label: 'Real-time Sync',
+        order: 4,
+        type: 'workflow',
+        description:
+          'Instant WebSocket broadcasting with fallback polling.',
       },
     ],
 
     metrics: [
       {
-        label: 'Task Success',
-        value: '94%',
-        context: 'Concept / simulated metric',
+        label: 'Tested Placement Flow',
+        value: '< 60s',
+        context: 'From scan to kitchen receipt',
       },
       {
-        label: 'Execution Speed',
-        value: '3×',
-        context: 'Concept / simulated comparison',
+        label: 'Digital Workflow',
+        value: '100%',
+        context: 'Eliminated printed tickets',
       },
     ],
+    links: {
+      caseStudy: '/scanfeast'
+    }
   },
 
   {

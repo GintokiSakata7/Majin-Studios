@@ -35,7 +35,7 @@ export function useScrollAnimation(
     callbackRef.current = animationCallback;
   }, [animationCallback]);
 
-  const runAnimation = useCallback(() => {
+  const animate = () => {
     if (typeof window === 'undefined') return;
 
     gsap.registerPlugin(ScrollTrigger);
@@ -63,7 +63,10 @@ export function useScrollAnimation(
     return () => {
       context.revert();
     };
-  }, [options.enabled, ...dependencies]);
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const runAnimation = useCallback(animate, [options.enabled, JSON.stringify(dependencies || [])]);
 
   useEffect(() => {
     const cleanup = runAnimation();
