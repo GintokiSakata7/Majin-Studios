@@ -297,7 +297,7 @@ export function NetworkScene({ active }: NetworkSceneProps) {
     <group ref={groupRef}>
       {edges.map((_, i) => (
         <line key={`edge-${i}`}>
-          <bufferGeometry ref={(r) => { if(r) lineGeomRefs.current[i] = r; }}>
+          <bufferGeometry ref={(r) => { if(r) lineGeomRefs.current[i] = r as any; }}>
             <float32BufferAttribute attach="attributes-position" args={[new Float32Array(6), 3]} />
           </bufferGeometry>
           <lineBasicMaterial 

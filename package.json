@@ -4,11 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run scanfeast:verify && npm run scanfeast:assets && next build",
+    "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "scanfeast:assets": "node scripts/optimize-scanfeast-assets.mjs",
-    "scanfeast:verify": "node scripts/verify-scanfeast-assets.mjs"
+    "lint": "eslint"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

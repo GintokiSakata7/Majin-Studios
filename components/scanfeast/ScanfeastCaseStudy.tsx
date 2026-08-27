@@ -1,6 +1,5 @@
 "use client";
 
-import ScanfeastWalkthrough from "./ScanfeastWalkthrough";
 import ScanfeastProduct from "./ScanfeastProduct";
 import ScanfeastArchitecture from "./ScanfeastArchitecture";
 import ScanfeastEngineering from "./ScanfeastEngineering";
@@ -45,8 +44,6 @@ export default function ScanfeastCaseStudy() {
           </div>
         </div>
       </section>
-
-      <ScanfeastWalkthrough />
 
       <section className="sf-problem">
         <div>
