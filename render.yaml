@@ -1,10 +1,9 @@
 services:
-  - type: web
+  - type: static
     name: majin-studios
-    env: node
     plan: free
     buildCommand: npm install && npm run build
-    startCommand: npx serve@latest out
+    staticPublishPath: ./out
     envVars:
       - key: NODE_VERSION
         value: 20.11.0
