@@ -58,3 +58,8 @@ next-env.d.ts
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+.gemini/
+.tmp/
+update_scene.py
+scanfeast_combined.txt
