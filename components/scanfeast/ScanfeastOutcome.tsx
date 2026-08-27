@@ -1,6 +1,68 @@
+"use client";
+
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+const METRICS = [
+  {
+    value: "100%",
+    label:
+      "DIGITAL ORDERING WORKFLOW",
+  },
+  {
+    value: "<60s",
+    label:
+      "TESTED ORDER PLACEMENT FLOW",
+  },
+  {
+    value: "LIVE",
+    label:
+      "WEBSOCKET + POLLING DELIVERY",
+  },
+];
+
 export default function ScanfeastOutcome() {
+  const ref =
+    useRef<HTMLElement | null>(
+      null,
+    );
+
+  const [visible, setVisible] =
+    useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+
+    if (!element) return;
+
+    const observer =
+      new IntersectionObserver(
+        ([entry]) => {
+          setVisible(
+            entry.isIntersecting,
+          );
+        },
+        {
+          threshold: 0.2,
+        },
+      );
+
+    observer.observe(element);
+
+    return () =>
+      observer.disconnect();
+  }, []);
+
   return (
-    <section className="sf-outcome">
+    <section
+      ref={ref}
+      className={`sf-outcome ${
+        visible ? "is-visible" : ""
+      }`}
+    >
       <div className="sf-outcome__top">
         <span>
           05 / OUTCOME
@@ -29,35 +91,24 @@ export default function ScanfeastOutcome() {
       </div>
 
       <div className="sf-outcome__metrics">
-        <article>
-          <strong>
-            100%
-          </strong>
+        {METRICS.map((metric, index) => (
+          <article
+            key={metric.label}
+            style={{
+              transitionDelay: `${
+                index * 120
+              }ms`,
+            }}
+          >
+            <strong>
+              {metric.value}
+            </strong>
 
-          <span>
-            DIGITAL ORDERING WORKFLOW
-          </span>
-        </article>
-
-        <article>
-          <strong>
-            &lt;60s
-          </strong>
-
-          <span>
-            TESTED ORDER PLACEMENT FLOW
-          </span>
-        </article>
-
-        <article>
-          <strong>
-            LIVE
-          </strong>
-
-          <span>
-            WEBSOCKET + POLLING DELIVERY
-          </span>
-        </article>
+            <span>
+              {metric.label}
+            </span>
+          </article>
+        ))}
       </div>
     </section>
   );

@@ -1,47 +1,38 @@
+"use client";
+
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
 const MODULES = [
   {
     number: "01",
-    eyebrow: "SERVER-AUTHORITATIVE TIMERS",
-    title: "TIME SYNCHRONIZATION",
+    eyebrow:
+      "SERVER-AUTHORITATIVE TIMERS",
+    title:
+      "TIME SYNCHRONIZATION",
     body:
-      "Countdowns are derived from server time instead of trusting a device clock, avoiding visible drift between diner, kitchen and manager surfaces.",
-    diagram: [
-      "CLIENT",
-      "  ×",
-      "SERVER TIME",
-      "  ↓",
-      "CANONICAL TIMER",
-    ],
+      "Countdowns use server-authoritative time so different devices do not visibly drift.",
   },
   {
     number: "02",
-    eyebrow: "RULE-BASED AUTOMATION",
-    title: "SMART PREP",
+    eyebrow:
+      "RULE-BASED AUTOMATION",
+    title:
+      "SMART PREP",
     body:
-      "Cart contents are evaluated against preparation rules so the kitchen receives a useful estimated completion time without manual setup for every order.",
-    diagram: [
-      "CART",
-      "  ↓",
-      "PREP RULES",
-      "  ↓",
-      "ETA",
-    ],
+      "Cart contents are evaluated against preparation rules to create useful ETAs automatically.",
   },
   {
     number: "03",
-    eyebrow: "REALTIME + FALLBACK",
-    title: "NETWORK RESILIENCE",
+    eyebrow:
+      "REALTIME + FALLBACK",
+    title:
+      "NETWORK RESILIENCE",
     body:
-      "WebSockets deliver immediate updates while periodic HTTP synchronization restores canonical state after connectivity interruptions.",
-    diagram: [
-      "WEBSOCKET",
-      "    ↓",
-      "LIVE EVENT",
-      "    ×",
-      "HTTP FALLBACK",
-      "    ↓",
-      "CANONICAL STATE",
-    ],
+      "Realtime delivery is backed by periodic HTTP synchronization so canonical state can recover.",
   },
 ];
 
@@ -57,51 +48,258 @@ export default function ScanfeastEngineering() {
           <h2>
             THE HARD PART
             <br />
-            WASN&apos;T THE UI.
+            WASN'T THE UI.
           </h2>
 
           <p>
-            Accuracy, automation and resilience
-            are what make a restaurant workflow
-            feel instant.
+            Accuracy, automation and
+            resilience are what make
+            a restaurant workflow feel
+            instant.
           </p>
         </div>
       </div>
 
       <div className="sf-engineering__grid">
-        {MODULES.map(
-          (module) => (
-            <article
-              key={module.number}
-              className="sf-engineering-card"
-            >
-              <div className="sf-engineering-card__top">
-                <span>
-                  {module.number}
-                </span>
-
-                <small>
-                  {module.eyebrow}
-                </small>
-              </div>
-
-              <h3>
-                {module.title}
-              </h3>
-
-              <p>
-                {module.body}
-              </p>
-
-              <pre>
-                {module.diagram.join(
-                  "\n",
-                )}
-              </pre>
-            </article>
-          ),
-        )}
+        {MODULES.map((module) => (
+          <EngineeringCard
+            key={module.number}
+            {...module}
+          />
+        ))}
       </div>
     </section>
+  );
+}
+
+function EngineeringCard({
+  number,
+  eyebrow,
+  title,
+  body,
+}: {
+  number: string;
+  eyebrow: string;
+  title: string;
+  body: string;
+}) {
+  const ref =
+    useRef<HTMLDivElement | null>(
+      null,
+    );
+
+  const [visible, setVisible] =
+    useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+
+    if (!element) return;
+
+    const observer =
+      new IntersectionObserver(
+        ([entry]) => {
+          setVisible(
+            entry.isIntersecting,
+          );
+        },
+        {
+          threshold: 0.28,
+        },
+      );
+
+    observer.observe(element);
+
+    return () =>
+      observer.disconnect();
+  }, []);
+
+  return (
+    <article
+      ref={ref}
+      className={`sf-engineering-card ${
+        visible
+          ? "is-visible"
+          : ""
+      }`}
+    >
+      <div className="sf-engineering-card__top">
+        <span>{number}</span>
+
+        <small>
+          {eyebrow}
+        </small>
+      </div>
+
+      <h3>
+        {title}
+      </h3>
+
+      <p>
+        {body}
+      </p>
+
+      {number === "01" && (
+        <TimerDiagram
+          visible={visible}
+        />
+      )}
+
+      {number === "02" && (
+        <PrepDiagram
+          visible={visible}
+        />
+      )}
+
+      {number === "03" && (
+        <ResilienceDiagram
+          visible={visible}
+        />
+      )}
+    </article>
+  );
+}
+
+function TimerDiagram({
+  visible,
+}: {
+  visible: boolean;
+}) {
+  return (
+    <div
+      className={`sf-engineering-visual sf-timer-diagram ${
+        visible ? "is-active" : ""
+      }`}
+    >
+      <div className="sf-timer-device">
+        <span>
+          SERVER
+        </span>
+
+        <strong>
+          09:57
+        </strong>
+
+        <small>
+          AUTHORITATIVE
+        </small>
+      </div>
+
+      <div className="sf-timer-arrow">
+        ↓
+      </div>
+
+      <div className="sf-timer-device">
+        <span>
+          CLIENT
+        </span>
+
+        <strong>
+          09:57
+        </strong>
+
+        <small>
+          OFFSET ADJUSTED
+        </small>
+      </div>
+    </div>
+  );
+}
+
+function PrepDiagram({
+  visible,
+}: {
+  visible: boolean;
+}) {
+  return (
+    <div
+      className={`sf-engineering-visual sf-prep-diagram ${
+        visible ? "is-active" : ""
+      }`}
+    >
+      <div className="sf-prep-step">
+        <span>
+          CART
+        </span>
+
+        <strong>
+          BIRYANI
+          <br />
+          TEA
+          <br />
+          SAMOSA
+        </strong>
+      </div>
+
+      <div className="sf-prep-arrow">
+        →
+      </div>
+
+      <div className="sf-prep-step sf-prep-step--active">
+        <span>
+          RULES
+        </span>
+
+        <strong>
+          PREP TIME
+        </strong>
+      </div>
+
+      <div className="sf-prep-arrow">
+        →
+      </div>
+
+      <div className="sf-prep-step">
+        <span>
+          ETA
+        </span>
+
+        <strong>
+          15 MIN
+        </strong>
+      </div>
+    </div>
+  );
+}
+
+function ResilienceDiagram({
+  visible,
+}: {
+  visible: boolean;
+}) {
+  return (
+    <div
+      className={`sf-engineering-visual sf-resilience-diagram ${
+        visible ? "is-active" : ""
+      }`}
+    >
+      <div className="sf-resilience-line">
+        <span>
+          WEBSOCKET
+        </span>
+
+        <i />
+
+        <b>
+          LIVE EVENT
+        </b>
+      </div>
+
+      <div className="sf-resilience-break">
+        ×
+      </div>
+
+      <div className="sf-resilience-line sf-resilience-line--fallback">
+        <span>
+          HTTP FALLBACK
+        </span>
+
+        <i />
+
+        <b>
+          CANONICAL STATE
+        </b>
+      </div>
+    </div>
   );
 }

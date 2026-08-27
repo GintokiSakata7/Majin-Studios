@@ -13,9 +13,7 @@ export default function ScanfeastCaseStudy() {
       <section className="sf-case-study__intro">
         <div>
           <span>
-            MAJIN STUDIOS
-            {" "}
-            / CASE STUDY
+            MAJIN STUDIOS / CASE STUDY
           </span>
 
           <h1>
@@ -24,9 +22,9 @@ export default function ScanfeastCaseStudy() {
 
           <p>
             A smart contactless ordering
-            system connecting diners,
-            chefs and management through
-            real-time web technology.
+            system connecting diners, chefs
+            and management through real-time
+            web technology.
           </p>
 
           <div className="sf-case-study__meta">
