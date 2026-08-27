@@ -1661,3 +1661,252 @@
         opacity: 0;
     }
 }
+
+
+/* =========================================================
+   V3 CINEMATIC UPGRADE
+   ========================================================= */
+
+.sf-ms-stage {
+    --depth: 0;
+    --edge: rgba(255, 255, 255, .075);
+}
+
+.sf-ms-stage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 120;
+    pointer-events: none;
+    background:
+        linear-gradient(90deg,
+            rgba(255, 255, 255, .018),
+            transparent 18%,
+            transparent 82%,
+            rgba(255, 255, 255, .018)),
+        linear-gradient(180deg,
+            rgba(255, 255, 255, .015),
+            transparent 24%,
+            transparent 76%,
+            rgba(255, 255, 255, .02));
+    mix-blend-mode: screen;
+}
+
+.sf-ms-corner {
+    position: absolute;
+    z-index: 130;
+    color: rgba(255, 255, 255, .22);
+    font:
+        6px ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        monospace;
+    letter-spacing: .14em;
+    pointer-events: none;
+}
+
+.sf-ms-corner--tl {
+    left: 18px;
+    top: 15px;
+}
+
+.sf-ms-corner--tr {
+    right: 18px;
+    top: 15px;
+}
+
+.sf-ms-corner::before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 6px;
+    vertical-align: -1px;
+    border: 1px solid rgba(255, 106, 0, .40);
+    border-radius: 50%;
+    box-shadow: 0 0 13px rgba(255, 106, 0, .12);
+}
+
+.sf-ms-rail {
+    position: absolute;
+    z-index: 130;
+    left: 50%;
+    bottom: 4.3%;
+    display: flex;
+    gap: 7px;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.sf-ms-rail i {
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: rgba(255, 255, 255, .10);
+}
+
+.sf-ms-rail i:first-child,
+.sf-ms-rail i:last-child {
+    opacity: .35;
+}
+
+/* More convincing depth on the main moving surfaces */
+.sf-ms-phone,
+.sf-ms-kitchen,
+.sf-ms-manager,
+.sf-ms-table,
+.sf-ms-handoff-phone,
+.sf-ms-handoff-core {
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, .035));
+}
+
+.sf-ms-phone::before,
+.sf-ms-kitchen::before,
+.sf-ms-manager::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, .035);
+}
+
+/* Thin orange "energy" sweep used throughout the reference language */
+.sf-ms-handoff-wire::after,
+.sf-ms-network-line::after {
+    content: "";
+    position: absolute;
+    inset: -8px 0;
+    background:
+        radial-gradient(ellipse at 50% 50%,
+            rgba(255, 106, 0, .10),
+            transparent 58%);
+    filter: blur(9px);
+    opacity: .7;
+}
+
+/* Give the kitchen and manager panels a slightly more physical edge */
+.sf-ms-kitchen__chrome,
+.sf-ms-manager__chrome {
+    background:
+        linear-gradient(180deg,
+            rgba(255, 255, 255, .025),
+            transparent);
+}
+
+.sf-ms-kitchen__chrome::after,
+.sf-ms-manager__chrome::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    bottom: 0;
+    background:
+        linear-gradient(90deg,
+            transparent,
+            rgba(255, 106, 0, .28),
+            transparent);
+    opacity: .55;
+}
+
+/* Better scene-specific atmospheric accents */
+.sf-ms-handoff-scene .sf-ms-stage {
+    background:
+        radial-gradient(circle at 50% 50%,
+            rgba(255, 106, 0, .14),
+            transparent 21%),
+        radial-gradient(circle at 30% 33%,
+            rgba(255, 255, 255, .025),
+            transparent 24%),
+        linear-gradient(180deg, #0d1117, #07090c);
+}
+
+.sf-ms-system-scene .sf-ms-stage {
+    background:
+        radial-gradient(circle at 50% 50%,
+            rgba(255, 106, 0, .11),
+            transparent 30%),
+        linear-gradient(180deg, #0c1016, #07090c);
+}
+
+/* Add fine grain without external assets */
+.sf-ms-stage {
+    background-blend-mode: normal, normal, normal;
+}
+
+.sf-ms-stage::before {
+    background-image:
+        radial-gradient(rgba(255, 255, 255, .04) .5px,
+            transparent .5px);
+    background-size: 5px 5px;
+    opacity: .055;
+    mix-blend-mode: soft-light;
+}
+
+/* Stronger phone glass / screen depth */
+.sf-ms-phone-screen {
+    box-shadow:
+        inset 0 0 0 1px rgba(0, 0, 0, .07),
+        inset 0 -40px 80px rgba(0, 0, 0, .035);
+}
+
+.sf-ms-phone-screen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(115deg,
+            rgba(255, 255, 255, .10),
+            transparent 20%,
+            transparent 75%,
+            rgba(255, 255, 255, .025));
+    mix-blend-mode: screen;
+}
+
+/* More cinematic type treatment */
+.sf-ms-copy h3,
+.sf-ms-system-title h3 {
+    text-wrap: balance;
+}
+
+.sf-ms-copy>span,
+.sf-ms-system-title>span {
+    text-shadow: 0 0 18px rgba(255, 106, 0, .12);
+}
+
+/* Motion-preserving responsive refinements */
+@media (min-width: 1101px) {
+    .sf-ms-copy--left {
+        max-width: 345px;
+    }
+
+    .sf-ms-copy--right {
+        max-width: 345px;
+    }
+
+    .sf-ms-event--left {
+        transform-origin: left center;
+    }
+
+    .sf-ms-kitchen-callout,
+    .sf-ms-manager-signal {
+        border-color: rgba(255, 106, 0, .22);
+    }
+}
+
+@media (max-width: 760px) {
+    .sf-ms-corner {
+        font-size: 5px;
+    }
+
+    .sf-ms-corner--tr {
+        display: none;
+    }
+
+    .sf-ms-rail i {
+        width: 13px;
+    }
+}
