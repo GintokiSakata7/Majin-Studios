@@ -79,17 +79,25 @@ export default function ScanfeastCaseStudy() {
       <ScanfeastOutcome />
 
       <footer className="sf-footer">
-        <span>
-          BUILT BY
-        </span>
-
-        <strong>
-          MAJIN STUDIOS
-        </strong>
-
-        <small>
-          DESIGN / ENGINEERING / DEPLOYMENT
-        </small>
+        <div className="sf-footer__brand">
+          <h2>DEVELOPED BY<br/><span>MAJIN STUDIOS</span></h2>
+          <p>We design and build intelligent operating systems.</p>
+        </div>
+        
+        <div className="sf-footer__content">
+          <div className="sf-footer__actions">
+            <a className="sf-btn-primary" href="/#contact">Talk to Majin Studios →</a>
+            <a className="sf-btn-secondary" href="#top" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Back to top ↑</a>
+          </div>
+          
+          <div className="sf-footer__tags">
+            <span>WEB</span>
+            <span>SOFTWARE</span>
+            <span>APIs</span>
+            <span>AI</span>
+            <span>AUTOMATION</span>
+          </div>
+        </div>
       </footer>
     </main>
   );
