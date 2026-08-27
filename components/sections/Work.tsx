@@ -9,6 +9,7 @@ import {
   TechnicalLabel,
   Button,
   ProductDashboard,
+  AgentTarget,
 } from '../ui';
 
 import {
@@ -25,14 +26,14 @@ export function Work() {
 
   return (
     <section
-      className={`section relative pt-32 ${styles.section}`}
+      className={`section relative pt-16 md:pt-32 ${styles.section}`}
       id="work"
     >
       <div
         ref={containerRef}
         className="page-container"
       >
-        <div className="mb-24">
+        <div className="mb-12 md:mb-24">
           <SectionHeading
             title="SELECTED SYSTEMS."
             metadata="FIG. 04 — PRODUCTS / CASE STUDIES"
@@ -41,7 +42,7 @@ export function Work() {
 
         <div className={styles.projectList}>
           {projectsData.map(
-            (project) => (
+            (project, index) => (
               <article
                 key={project.id}
                 className={styles.project}
@@ -137,15 +138,18 @@ export function Work() {
                     </div>
                   )}
 
-                  <div className="mt-8">
-                    <Button
-                      href={project.links?.caseStudy || `#project-${project.id}`}
-                      variant="outline"
-                      withArrow
-                      external={!!project.links?.caseStudy}
-                    >
-                      VIEW SYSTEM
-                    </Button>
+                  <div className="mt-8 relative w-max">
+                    <AgentTarget className="w-max" message={`Click here to preview <strong>${project.name}</strong>.`} offsetX={10}>
+                      <Button
+                        href={project.links?.caseStudy || `#project-${project.id}`}
+                        variant="outline"
+                        withArrow
+                        external={!!project.links?.caseStudy}
+                        className={styles.highlightedButton}
+                      >
+                        VIEW SYSTEM
+                      </Button>
+                    </AgentTarget>
                   </div>
                 </div>
 

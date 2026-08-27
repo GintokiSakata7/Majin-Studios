@@ -39,7 +39,7 @@ export function Hero() {
             variant="accent"
             className={styles.label}
           >
-            SYS / 001 — MAJIN CORE
+            MAJIN STUDIOS
           </TechnicalLabel>
 
           <h1
@@ -97,29 +97,6 @@ export function Hero() {
           </div>
         </div>
 
-        <div
-          className={
-            styles.systemReadout
-          }
-        >
-          <span>CORE</span>
-          <span
-            className={
-              styles.readoutAccent
-            }
-          >
-            ACTIVE
-          </span>
-
-          <span>MODE</span>
-          <span>BUILD</span>
-
-          <span>AGENTS</span>
-          <span>READY</span>
-
-          <span>ENV</span>
-          <span>PRODUCTION</span>
-        </div>
       </div>
     </section>
   );

@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react/jsx-no-comment-textnodes */
-/* eslint-disable @next/next/no-img-element */
+
 'use client';
 import React, { useEffect, useRef } from 'react';
 import './quantum.css';
@@ -18,30 +15,19 @@ export function QuantumArena() {
 
     
         const images = [
-            '/quantumarena/images/REPLACE_WITH_SYSTEM_OVERVIEW_SCREENSHOT.png', 
-            '/quantumarena/images/REPLACE_WITH_EVENT_ABOUT_SCREENSHOT.png', 
-            '/quantumarena/images/REPLACE_WITH_PARTICIPANT_EXPERIENCE_SCREENSHOT.png', 
-            '/quantumarena/images/REPLACE_WITH_TRACKS_DISCOVER_SCREENSHOT.png', 
-            '/quantumarena/images/REPLACE_WITH_TRACK_BROWSER_SCREENSHOT.png', 
-            '/quantumarena/images/REPLACE_WITH_TIMELINE_OPERATIONS_SCREENSHOT.png', 
-            '/quantumarena/images/REPLACE_WITH_TIMELINE_EXECUTION_SCREENSHOT.png', 
-            '/quantumarena/images/REPLACE_WITH_PRIZES_OUTCOMES_SCREENSHOT.png', 
-            '/quantumarena/images/REPLACE_WITH_RULES_GOVERNANCE_SCREENSHOT.png', 
-            '/quantumarena/images/REPLACE_WITH_REGISTRATION_CONVERSION_SCREENSHOT.png', 
-            '/quantumarena/images/REPLACE_WITH_EVENT_LOCATION_CONTEXT_SCREENSHOT.png', 
-            '/quantumarena/images/REPLACE_WITH_ADDITIONAL_INTERFACE_SCREENSHOT.png'
+            '/quantumarena/images/Screenshot 2026-08-25 204631.png', '/quantumarena/images/Screenshot 2026-08-25 204657.png', '/quantumarena/images/Screenshot 2026-08-25 204713.png', '/quantumarena/images/Screenshot 2026-08-25 204731.png', '/quantumarena/images/Screenshot 2026-08-25 204746.png', '/quantumarena/images/Screenshot 2026-08-25 204800.png', '/quantumarena/images/Screenshot 2026-08-25 204814.png', '/quantumarena/images/Screenshot 2026-08-25 204825.png', '/quantumarena/images/Screenshot 2026-08-25 204842.png', '/quantumarena/images/Screenshot 2026-08-25 204859.png', '/quantumarena/images/Screenshot 2026-08-25 204916.png'
         ];
-        const labels = ['System Overview', 'Event About', 'Participant Experience', 'Tracks / Discover', 'Track Browser', 'Timeline / Operations', 'Timeline / Execution', 'Prizes / Outcomes', 'Rules / Governance', 'Registration / Conversion', 'Event Location / Context', 'Additional Interface'];
+        const labels = ['System Overview', 'Event About', 'Participant Experience', 'Tracks / Discover', 'Timeline / Operations', 'Timeline / Execution', 'Prizes / Outcomes', 'Rules / Governance', 'Registration / Conversion', 'Event Location / Context', 'Additional Interface'];
         const workflow = [
-            ['SYSTEM / REGISTRATION', 'Participant intake', 'Teams register with 1–5 members, submit payment and identity material, and move through a trackable approval process.', 'registered → submitted → verified → approved'],
-            ['SYSTEM / CHECK-IN', 'Live event operations', 'QR-based check-in and multi-day attendance tracking turned event-day entry into a controlled digital workflow.', 'scan → identify → verify → check-in → attendance'],
-            ['SYSTEM / EVALUATION', 'Judge workflow', 'Judges and super-admins access structured team information and evaluate projects through dedicated portals.', 'login → roster → abstract → stack → evaluation → score'],
-            ['SYSTEM / RANKING', 'Results processing', 'Evaluation inputs can be consolidated into master sheets and top-ranking reports for the final event workflow.', 'evaluations → scores → ranking → top-3 report'],
-            ['SYSTEM / CERTIFICATION', 'Post-event automation', 'Approved, checked-in participants flow into image generation and email distribution.', 'eligible → render → queue → email → delivered']
+            ['REGISTRATION', 'Participant intake', 'Teams register with 1–5 members, submit payment and identity material, and move through a trackable approval process.', 'registered → submitted → verified → approved'],
+            ['CHECK-IN', 'Live event operations', 'QR-based check-in and multi-day attendance tracking turned event-day entry into a controlled digital workflow.', 'scan → identify → verify → check-in → attendance'],
+            ['EVALUATION', 'Judge workflow', 'Judges and super-admins access structured team information and evaluate projects through dedicated portals.', 'login → roster → abstract → stack → evaluation → score'],
+            ['RANKING', 'Results processing', 'Evaluation inputs can be consolidated into master sheets and top-ranking reports for the final event workflow.', 'evaluations → scores → ranking → top-3 report'],
+            ['CERTIFICATION', 'Post-event automation', 'Approved, checked-in participants flow into image generation and email distribution.', 'eligible → render → queue → email → delivered']
         ];
 
         // loader
-        const startLoader = () => { const bar = getEl("loadBar"), pct = getEl("loadPct"), status = getEl("loadStatus"); let n = 0; const timer = setInterval(() => { n += Math.floor(Math.random() * 14) + 8; if (n > 100) n = 100; bar.style.width = n + '%'; pct.textContent = String(n).padStart(2, '0') + '%'; status.textContent = n < 45 ? 'LOADING ASSETS' : n < 78 ? 'MAPPING INTERFACES' : n < 100 ? 'STARTING EXPERIENCE' : 'SYSTEM READY'; if (n === 100) { clearInterval(timer); setTimeout(() => { getEl("loader").classList.add('hide'); container.classList.remove('lock') }, 350) } }, 80) };
+        const startLoader = () => { const bar = getEl("loadBar"), pct = getEl("loadPct"), status = getEl("loadStatus"); let n = 0; const timer = setInterval(() => { n += Math.floor(Math.random() * 14) + 8; if (n > 100) n = 100; bar.style.width = n + '%'; pct.textContent = String(n).padStart(2, '0') + '%'; status.textContent = n < 45 ? 'LOADING ASSETS' : n < 78 ? 'PREPARING' : n < 100 ? 'STARTING' : 'READY'; if (n === 100) { clearInterval(timer); setTimeout(() => { getEl("loader").classList.add('hide'); container.classList.remove('lock') }, 350) } }, 80) };
         if (document.readyState === 'complete') startLoader(); else window.addEventListener('load', startLoader);
 
         // cursor
@@ -127,7 +113,7 @@ export function QuantumArena() {
             const mouseY = cy - rect.top;
             
             for (let i = 0; i < particles.length; i++) {
-                const p = particles[i];
+                let p = particles[i];
                 p.x += p.vx;
                 p.y += p.vy;
                 
@@ -148,7 +134,7 @@ export function QuantumArena() {
                 sCtx.fill();
                 
                 for (let j = i + 1; j < particles.length; j++) {
-                    const p2 = particles[j];
+                    let p2 = particles[j];
                     const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
                     if (dist < 70) {
                         sCtx.strokeStyle = activeStoryColor + '20';
@@ -205,8 +191,71 @@ export function QuantumArena() {
             storyList.appendChild(row); 
         });
 
-        // gallery
-        const gallery = getEl("gallery"); gallery.innerHTML = ''; images.forEach((src, i) => { const card = document.createElement('article'); card.className = 'shot reveal'; card.innerHTML = `<img src="${src}" alt="${labels[i]}" loading="lazy"><div class="shot-meta"><div><strong>${labels[i]}</strong><div style="margin-top:5px"><span>${String(i + 1).padStart(2, '0')} // INTERFACE</span></div></div><div class="shot-open">OPEN ↗</div></div>`; card.onclick = () => openModal(src, labels[i]); gallery.appendChild(card); revealObs.observe(card) });
+        // gallery slideshow (Native Scroll + Auto Slide)
+        const gallery = getEl("gallery"); 
+        const wrapper = getEl("galleryWrapper");
+        gallery.innerHTML = '';
+        
+        const dotsContainer = document.createElement('div');
+        dotsContainer.className = 'slider-dots';
+        
+        images.forEach((src, i) => { 
+            const card = document.createElement('article'); 
+            card.className = 'shot'; 
+            card.innerHTML = `<img src="${src}" alt="${labels[i]}" loading="lazy"><div class="shot-meta"><div><strong>${labels[i]}</strong><div style="margin-top:5px"><span>${String(i + 1).padStart(2, '0')} // INTERFACE</span></div></div><div class="shot-open">OPEN ↗</div></div>`; 
+            card.onclick = () => openModal(src, labels[i]); 
+            gallery.appendChild(card); 
+            
+            const dot = document.createElement('button');
+            dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+            dot.onclick = () => {
+                // Calculate scroll position to center the card
+                const scrollLeft = card.offsetLeft - (gallery.clientWidth - card.clientWidth) / 2;
+                gallery.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+                resetTimer();
+            };
+            dotsContainer.appendChild(dot);
+        });
+        
+        wrapper.appendChild(dotsContainer);
+        
+        // Auto slide logic
+        let slideTimer: any;
+        const autoSlide = () => {
+            const maxScroll = gallery.scrollWidth - gallery.clientWidth;
+            if (gallery.scrollLeft >= maxScroll - 10) {
+                gallery.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                gallery.scrollBy({ left: gallery.clientWidth * 0.7, behavior: 'smooth' });
+            }
+        };
+        
+        const resetTimer = () => {
+            clearInterval(slideTimer);
+            slideTimer = setInterval(autoSlide, 2000); // 2 seconds
+        };
+        
+        gallery.addEventListener('scroll', () => {
+            const cards = gallery.querySelectorAll('.shot');
+            let activeIdx = 0;
+            let minDiff = Infinity;
+            cards.forEach((card, idx) => {
+                const diff = Math.abs((card as HTMLElement).offsetLeft - gallery.scrollLeft - (gallery.clientWidth - card.clientWidth) / 2);
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    activeIdx = idx;
+                }
+            });
+            const dots = dotsContainer.querySelectorAll('.slider-dot');
+            dots.forEach((dot, idx) => dot.classList.toggle('active', idx === activeIdx));
+        }, { passive: true });
+        
+        wrapper.addEventListener('mouseenter', () => clearInterval(slideTimer));
+        wrapper.addEventListener('mouseleave', () => resetTimer());
+        wrapper.addEventListener('touchstart', () => clearInterval(slideTimer), {passive: true});
+        wrapper.addEventListener('touchend', () => resetTimer(), {passive: true});
+        
+        resetTimer();
 
         // modal
         const modal = getEl("modal"), modalImg = getEl("modalImg") as HTMLImageElement, modalTitle = getEl("modalTitle"); function openModal(src: string, title: string) { modalImg.src = src; modalTitle.textContent = 'QUANTUM ARENA // ' + title.toUpperCase(); modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); container.classList.add('lock') } function closeModal() { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); modalImg.removeAttribute('src'); if (!getEl("loader").classList.contains('hide')) return; container.classList.remove('lock') } getEl("modalClose").onclick = closeModal; modal.addEventListener("click", (e: any) => { if (e.target === modal) closeModal() }); document.addEventListener("keydown", (e: any) => { if (e.key === 'Escape') closeModal() });
@@ -329,7 +378,7 @@ export function QuantumArena() {
                             className="dot"
                             style={{background:"#20d998",width:"7px",height:"7px",borderRadius:"50%"}}></span><b>quantum_arena
                             // system overview</b></div><img className="hero-shot"
-                        src="/quantumarena/images/REPLACE_WITH_SYSTEM_OVERVIEW_SCREENSHOT.png" alt="Quantum Arena interface" />
+                        src="/quantumarena/images/Screenshot 2026-08-25 204631.png" alt="Quantum Arena interface" />
                     </div>
                     <div className="hero-tag">
                         <div className="t1">SYSTEM / OPERATIONAL</div>
@@ -459,7 +508,9 @@ export function QuantumArena() {
                         actual system screens and open them full-size.</p>
                 </div>
             </div>
-            <div className="gallery" id="gallery" style={{marginTop:"42px"}}></div>
+            <div className="gallery-wrapper" id="galleryWrapper" style={{marginTop:"42px", position: "relative"}}>
+                <div className="gallery" id="gallery"></div>
+            </div>
         </section>
 
         <section id="architecture" className="wrap">
@@ -526,7 +577,7 @@ export function QuantumArena() {
                     <div className="arch-line l3"></div>
                     <div className="arch-line l4"></div>
                 </div>
-                <div className="arch-console"><b>[SYSTEM MAP]</b> React 19 → Node/Express → MongoDB / Cloudinary / Mail →
+                <div className="arch-console"><b>ARCHITECTURE</b> React 19 → Node/Express → MongoDB / Cloudinary / Mail →
                     live event operations<br /><span style={{color:"#5f6b75"}}>STACK //</span> React 19 · Vite · Node.js ·
                     Express 5 · MongoDB · Mongoose · Cloudinary · Multer · Jimp · Nodemailer · Resend · JWT · bcryptjs
                 </div>
@@ -590,14 +641,14 @@ export function QuantumArena() {
                     <p className="final-sub">Quantum Arena is one example of the work Majin Studios can take from
                         requirement to deployed product — interfaces, backend workflows, integrations, automation and
                         operational tooling working as one system.</p>
-                    <div className="final-links"><a className="btn primary magnetic" href="mailto:majinstudios03@gmail.com">Talk
+                    <div className="final-links"><a className="btn primary magnetic" href="/#contact">Talk
                             to Majin Studios →</a><a className="btn magnetic" href="#top">Back to top ↑</a></div>
                     <div className="final-tags">
                         <span>WEB</span><span>SOFTWARE</span><span>APIs</span><span>AI</span><span>AUTOMATION</span>
                     </div>
                 </div>
                 <div className="final-art">
-                    <div className="screen"><img src="/quantumarena/images/REPLACE_WITH_ADDITIONAL_INTERFACE_SCREENSHOT.png"
+                    <div className="screen"><img src="/quantumarena/images/Screenshot 2026-08-25 204916.png"
                             alt="Quantum Arena interface preview" /></div>
                 </div>
             </div>

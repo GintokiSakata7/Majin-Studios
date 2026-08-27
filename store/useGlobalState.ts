@@ -58,6 +58,35 @@ interface GlobalState {
   // Progress (0 to 1 across the whole universe)
   scrollProgress: number;
   setScrollProgress: (progress: number) => void;
+
+  // Boot sequence state
+  hasBooted: boolean;
+  setHasBooted: (status: boolean) => void;
+
+  // Tutorial state
+  hasSeenTutorial: boolean;
+  setHasSeenTutorial: (status: boolean) => void;
+
+  // Global AI Agent state
+  agentIsVisible: boolean;
+  setAgentIsVisible: (visible: boolean) => void;
+  agentTarget: { x: number, y: number } | null;
+  setAgentTarget: (target: { x: number, y: number } | null) => void;
+  agentMessage: string | null;
+  setAgentMessage: (message: string | null) => void;
+
+  // Agent Target Registry
+  activeTargetId: string | null;
+  setActiveTargetId: (id: string | null) => void;
+  targetRegistry: Record<string, { 
+    ref: any; 
+    message: string; 
+    offsetX?: number; 
+    offsetY?: number; 
+    vanishAfterMs?: number;
+  }>;
+  registerTarget: (id: string, ref: any, message: string, offsetX?: number, offsetY?: number, vanishAfterMs?: number) => void;
+  unregisterTarget: (id: string) => void;
 }
 
 export const useGlobalState = create<GlobalState>((set) => ({
@@ -85,6 +114,34 @@ export const useGlobalState = create<GlobalState>((set) => ({
   
   scrollProgress: 0,
   setScrollProgress: (progress) => set({ scrollProgress: progress }),
+  
+  hasBooted: false,
+  setHasBooted: (status) => set({ hasBooted: status }),
+
+  hasSeenTutorial: false,
+  setHasSeenTutorial: (status) => set({ hasSeenTutorial: status }),
+
+  agentIsVisible: true,
+  setAgentIsVisible: (visible) => set({ agentIsVisible: visible }),
+  agentTarget: null,
+  setAgentTarget: (target) => set({ agentTarget: target }),
+  agentMessage: null,
+  setAgentMessage: (message) => set({ agentMessage: message }),
+
+  activeTargetId: null,
+  setActiveTargetId: (id) => set({ activeTargetId: id }),
+  targetRegistry: {},
+  registerTarget: (id, ref, message, offsetX, offsetY, vanishAfterMs) => set((state) => ({
+    targetRegistry: {
+      ...state.targetRegistry,
+      [id]: { ref, message, offsetX, offsetY, vanishAfterMs }
+    }
+  })),
+  unregisterTarget: (id) => set((state) => {
+    const newRegistry = { ...state.targetRegistry };
+    delete newRegistry[id];
+    return { targetRegistry: newRegistry };
+  }),
 }));
 
 // Helper to get CSS variable for active accent

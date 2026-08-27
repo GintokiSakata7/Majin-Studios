@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { label: 'Work', href: '#work' },
   { label: 'Capabilities', href: '#capabilities' },
   { label: 'Systems', href: '#systems' },
+  { label: 'Builder', href: '/tools/builder' },
   { label: 'Studio', href: '#studio' },
   { label: 'Why Us', href: '#why-majin' },
   { label: 'Contact', href: '#contact' }
@@ -74,6 +75,28 @@ export function Navigation() {
           >
             Systems
           </a>
+
+          <div className="relative flex flex-col items-center">
+            <a
+              href="/tools/builder"
+              className={styles.link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Builder
+            </a>
+            <div className="absolute -bottom-5 right-0 translate-x-1/2 z-20">
+              <span className="block text-[9px] tracking-widest text-[#050505] bg-accent-current font-mono font-bold px-1.5 py-0.5 rounded shadow-[0_0_10px_rgba(var(--color-accent-current-rgb),0.6)] cursor-default" style={{ animation: 'stickerWiggle 2s ease-in-out infinite' }}>
+                NEW
+              </span>
+            </div>
+            <style>{`
+              @keyframes stickerWiggle {
+                0%, 100% { transform: rotate(-15deg) scale(1); }
+                50% { transform: rotate(-5deg) scale(1.15); }
+              }
+            `}</style>
+          </div>
 
           <a
             href="#studio"

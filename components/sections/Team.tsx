@@ -75,23 +75,23 @@ export function Team() {
 
   return (
     <section
-      className="section relative min-h-screen py-32"
+      className="section relative min-h-[auto] md:min-h-screen py-16 md:py-32"
       id="studio"
     >
       <div
         ref={containerRef}
         className="page-container"
       >
-        <div className="mb-20">
+        <div className="mb-10">
           <SectionHeading
             title="SIX PEOPLE. ONE BUILD SYSTEM."
             metadata="FIG. 06 — CORE TEAM"
           />
         </div>
 
-        <div className="grid grid-cols-12 gap-8 min-h-[760px]">
+        <div className="grid grid-cols-12 gap-8 min-h-[auto] md:min-h-[450px]">
           {/* MATRIX */}
-          <div className="col-span-12 lg:col-span-8 relative min-h-[650px] border border-line-structural overflow-hidden hidden lg:block">
+          <div className="col-span-12 lg:col-span-7 relative min-h-[450px] border border-line-structural overflow-hidden hidden lg:block">
             <div
               className="absolute inset-0 opacity-25"
               style={{
@@ -111,7 +111,28 @@ export function Team() {
               }}
             />
 
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[600px] aspect-square flex items-center justify-center">
+              <style>{`
+                @keyframes signalFlow {
+                  0% { right: 0; opacity: 0; }
+                  20% { opacity: 1; }
+                  100% { right: 100%; opacity: 0; }
+                }
+                @keyframes radarScan {
+                  0% { transform: scale(0.8); opacity: 0.8; }
+                  100% { transform: scale(2); opacity: 0; }
+                }
+                @keyframes dataDecode {
+                  0% { opacity: 0; transform: translateY(15px); filter: blur(8px); }
+                  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+                }
+                @keyframes scanlineSweep {
+                  0% { top: -5%; opacity: 0; }
+                  10% { opacity: 1; }
+                  90% { opacity: 1; }
+                  100% { top: 105%; opacity: 0; }
+                }
+              `}</style>
               {/* Core */}
               <div
                 className="relative w-48 h-48 rounded-full border border-line-active flex items-center justify-center"
@@ -119,6 +140,12 @@ export function Team() {
               >
                 <div
                   className="absolute inset-6 rounded-full border border-accent-current opacity-45"
+                />
+                
+                {/* Radar scanning pulse when receiving signal */}
+                <div
+                  className="absolute inset-6 rounded-full border border-accent-current"
+                  style={{ animation: 'radarScan 1.5s ease-out infinite' }}
                 />
 
                 <div className="text-center">
@@ -150,20 +177,25 @@ export function Team() {
                       <div
                         className="absolute left-1/2 top-1/2 origin-left"
                         style={{
-                          width: `${Math.max(
-                            90,
-                            Math.abs(position.x) * 260
-                          )}px`,
+                          width: `calc(${Math.sqrt(position.x*position.x + position.y*position.y) * 43}%)`,
                           transform: `translateY(-50%) rotate(${Math.atan2(
-                            position.y,
+                            -position.y,
                             position.x
                           ).toFixed(5)}rad)`,
                           opacity: activeId === member.id ? 1 : 0.35,
                         }}
                       >
                         <div
-                          className="h-px bg-line-structural"
-                        />
+                          className="h-px w-full bg-line-structural relative"
+                        >
+                          {/* Signal flowing to center */}
+                          {activeId === member.id && (
+                            <div 
+                              className="absolute top-0 h-full w-12 bg-accent-current shadow-[0_0_12px_rgba(var(--accent-current-rgb),0.8)]"
+                              style={{ animation: 'signalFlow 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite' }}
+                            />
+                          )}
+                        </div>
                       </div>
 
                       <button
@@ -171,12 +203,10 @@ export function Team() {
                         className="absolute"
                         style={{
                           left: `calc(50% + ${
-                            position.x *
-                            34
+                            position.x * 43
                           }%)`,
                           top: `calc(50% - ${
-                            position.y *
-                            34
+                            position.y * 43
                           }%)`,
                           transform:
                             'translate(-50%, -50%)',
@@ -234,7 +264,20 @@ export function Team() {
           </div>
 
           {/* ACTIVE MEMBER */}
-          <div className="col-span-12 lg:col-span-4 hidden lg:flex flex-col justify-center">
+          <div 
+            key={activeId} 
+            className="col-span-12 lg:col-span-5 hidden lg:flex flex-col justify-center relative"
+            style={{ animation: 'dataDecode 0.4s ease-out forwards' }}
+          >
+            {/* Scanner line that sweeps down */}
+            <div 
+              className="absolute left-0 right-0 h-0.5 bg-accent-current z-10 pointer-events-none opacity-0"
+              style={{ 
+                animation: 'scanlineSweep 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+                boxShadow: '0 0 15px 2px rgba(var(--accent-current-rgb), 0.8)'
+              }}
+            />
+
             <TechnicalLabel variant="accent">
               ACTIVE TEAM
             </TechnicalLabel>
