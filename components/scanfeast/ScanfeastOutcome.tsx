@@ -83,10 +83,11 @@ export default function ScanfeastOutcome() {
         </h2>
 
         <p>
-          A contactless ordering workflow
-          connecting the guest experience,
-          kitchen execution and management
-          visibility through one live system.
+          By replacing fragmented manual processes 
+          with a unified real-time architecture, 
+          Scanfeast eliminated communication delays 
+          and delivered a frictionless experience 
+          for both staff and guests.
         </p>
       </div>
 

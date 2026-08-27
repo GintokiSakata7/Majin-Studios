@@ -89,7 +89,7 @@ export default function ScanfeastHero() {
                     </div>
 
                     <div className="sf-hero-mobile__headline">
-                      Today's
+                      Today&apos;s
                       <br />
                       picks
                     </div>

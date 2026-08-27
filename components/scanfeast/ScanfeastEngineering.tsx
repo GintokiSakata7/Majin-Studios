@@ -48,7 +48,7 @@ export default function ScanfeastEngineering() {
           <h2>
             THE HARD PART
             <br />
-            WASN'T THE UI.
+            WASN&apos;T THE UI.
           </h2>
 
           <p>

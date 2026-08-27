@@ -9,7 +9,6 @@ import React, {
 
 import {
   Canvas,
-  useThree,
   useFrame,
 } from '@react-three/fiber';
 
@@ -85,8 +84,8 @@ function UniverseCamera({
         );
 
       // Base path
-      let tx = THREE.MathUtils.lerp(-1.5, 1.2, p);
-      let ty = THREE.MathUtils.lerp(0.3, -0.35, p);
+      const tx = THREE.MathUtils.lerp(-1.5, 1.2, p);
+      const ty = THREE.MathUtils.lerp(0.3, -0.35, p);
       let tz = THREE.MathUtils.lerp(15, 10.5, p);
       const trx = THREE.MathUtils.lerp(0, -0.06, p);
       const try_ = THREE.MathUtils.lerp(0.08, -0.12, p);

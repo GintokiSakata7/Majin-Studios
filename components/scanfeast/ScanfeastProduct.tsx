@@ -418,13 +418,14 @@ function RealtimeScene() {
         style={{
           opacity: card * (1 - core * .25),
           transform: `
+            translate(-50%, -50%)
             translate3d(
-              ${lerp(-190, -30, move)}px,
-              ${lerp(25, 0, move)}px,
+              ${lerp(-60, 0, move)}px,
+              0,
               0
             )
-            rotateZ(${lerp(-4, 0, move)}deg)
-            scale(${lerp(.82, 1, move)})
+            rotateZ(${lerp(-2, 0, move)}deg)
+            scale(${lerp(.9, 1, move)})
           `,
         }}
       >
@@ -434,17 +435,10 @@ function RealtimeScene() {
       </div>
 
       <div
-        className="sf-r4-wire sf-r4-wire--a"
-        style={{ transform: `scaleX(${move}) rotate(-11deg)` }}
+        className="sf-r4-wire sf-r4-wire--in"
+        style={{ transform: `scaleX(${move})` }}
       >
-        <i style={{ left: `${move * 100}%` }} />
-      </div>
-
-      <div
-        className="sf-r4-wire sf-r4-wire--b"
-        style={{ transform: `scaleX(${move}) rotate(11deg)` }}
-      >
-        <i style={{ left: `${move * 100}%` }} />
+        <i style={{ left: `${move * 100}%`, opacity: move > 0.99 ? 0 : 1 }} />
       </div>
 
       <div
@@ -453,7 +447,7 @@ function RealtimeScene() {
           opacity: core,
           transform: `
             translate(-50%, -50%)
-            scale(${lerp(.55, 1, core)})
+            scale(${lerp(.8, 1, core)})
           `,
         }}
       >
@@ -463,10 +457,27 @@ function RealtimeScene() {
       </div>
 
       <div
-        className="sf-r4-handoff-target sf-r4-handoff-target--left"
+        className="sf-r4-wire sf-r4-wire--out-1"
+        style={{ transform: `rotate(-30deg) scaleX(${split})` }}
+      >
+        <i style={{ left: `${split * 100}%`, opacity: split > 0.99 ? 0 : 1 }} />
+      </div>
+
+      <div
+        className="sf-r4-wire sf-r4-wire--out-2"
+        style={{ transform: `rotate(30deg) scaleX(${split})` }}
+      >
+        <i style={{ left: `${split * 100}%`, opacity: split > 0.99 ? 0 : 1 }} />
+      </div>
+
+      <div
+        className="sf-r4-handoff-target sf-r4-handoff-target--kds"
         style={{
           opacity: split,
-          transform: `translateY(${lerp(24, 0, split)}px)`,
+          transform: `
+            translate(-50%, -50%)
+            translateY(${lerp(24, 0, split)}px)
+          `,
         }}
       >
         <span>KDS</span>
@@ -474,10 +485,13 @@ function RealtimeScene() {
       </div>
 
       <div
-        className="sf-r4-handoff-target sf-r4-handoff-target--right"
+        className="sf-r4-handoff-target sf-r4-handoff-target--manager"
         style={{
           opacity: split,
-          transform: `translateY(${lerp(24, 0, split)}px)`,
+          transform: `
+            translate(-50%, -50%)
+            translateY(${lerp(-24, 0, split)}px)
+          `,
         }}
       >
         <span>MANAGER</span>
@@ -488,10 +502,13 @@ function RealtimeScene() {
         className="sf-r4-signal-text"
         style={{
           opacity: split,
-          transform: `translateY(${lerp(18, 0, split)}px)`,
+          transform: `
+            translateX(-50%)
+            translateY(${lerp(18, 0, split)}px)
+          `,
         }}
       >
-        ORDER #104 ARRIVED
+        ORDER #104 SYNCHRONIZED
       </div>
     </Scene>
   );
@@ -858,21 +875,21 @@ function SystemScene() {
 
         <div
           className="sf-r4-system-line sf-r4-system-line--a"
-          style={{ transform: `scaleX(${lines}) rotate(-14deg)` }}
+          style={{ transform: `scaleX(${lines}) rotate(0deg)` }}
         >
           <i />
         </div>
 
         <div
           className="sf-r4-system-line sf-r4-system-line--b"
-          style={{ transform: `scaleX(${lines}) rotate(3deg)` }}
+          style={{ transform: `scaleX(${lines}) rotate(0deg)` }}
         >
           <i />
         </div>
 
         <div
           className="sf-r4-system-line sf-r4-system-line--c"
-          style={{ transform: `scaleX(${lines}) rotate(36deg)` }}
+          style={{ transform: `scaleX(${lines}) rotate(53deg)` }}
         >
           <i />
         </div>
@@ -883,14 +900,14 @@ function SystemScene() {
             opacity: core,
             transform: `
               translate(-50%, -50%)
-              scale(${lerp(.55, 1, core)})
+              scale(${lerp(.8, 1, core)})
             `,
           }}
         >
           <div className="sf-r4-core-ring" />
-          <span>REAL-TIME</span>
+          <span>ECOSYSTEM</span>
           <strong>SCANFEAST</strong>
-          <small>ONE SYSTEM / MANY SURFACES</small>
+          <small>CENTRALIZED DATA LAYER</small>
         </div>
       </div>
 
@@ -901,8 +918,8 @@ function SystemScene() {
           transform: `translate3d(-50%, ${lerp(30, 0, finale)}px, 0)`,
         }}
       >
-        <span>DESIGNED / ENGINEERED / DEPLOYED</span>
-        <strong>THE RESTAURANT MOVES AS ONE.</strong>
+        <span>FULLY DIGITIZED FLOW</span>
+        <strong>EVERY ACTION, INSTANTLY BROADCASTED.</strong>
       </div>
     </Scene>
   );

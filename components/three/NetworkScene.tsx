@@ -2,7 +2,6 @@
 
 import React, { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Line } from '@react-three/drei';
 import * as THREE from 'three';
 import { useGlobalState } from '../../store/useGlobalState';
 
@@ -297,7 +296,7 @@ export function NetworkScene({ active }: NetworkSceneProps) {
     <group ref={groupRef}>
       {edges.map((_, i) => (
         <line key={`edge-${i}`}>
-          <bufferGeometry ref={(r) => { if(r) lineGeomRefs.current[i] = r as any; }}>
+          <bufferGeometry ref={(r) => { if(r) lineGeomRefs.current[i] = r as THREE.BufferGeometry; }}>
             <float32BufferAttribute attach="attributes-position" args={[new Float32Array(6), 3]} />
           </bufferGeometry>
           <lineBasicMaterial 
