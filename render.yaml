@@ -1,6 +1,7 @@
 services:
-  - type: static
+  - type: web
     name: majin-studios
+    env: static
     plan: free
     buildCommand: npm install && npm run build
     staticPublishPath: ./out
