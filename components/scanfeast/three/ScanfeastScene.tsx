@@ -1,37 +1,38 @@
 "use client";
 
 import {
-  Suspense,
+  useFrame,
+} from "@react-three/fiber";
+
+import {
   useRef,
   useState,
 } from "react";
 
-import {
-  ContactShadows,
-  Environment,
-} from "@react-three/drei";
-
-import {
-  useFrame,
-} from "@react-three/fiber";
-
-import * as THREE from "three";
-
-import CameraDirector, {
-  type ScanfeastProgressRef,
+import type {
+  ScanfeastProgressRef,
 } from "./CameraDirector";
 
-import DinerZone from "./DinerZone";
+import CameraDirector from "./CameraDirector";
+import SceneLighting from "./SceneLighting";
+import SceneLabels from "./SceneLabels";
+import CinematicTransition from "./CinematicTransition";
+import WorldFade from "./WorldFade";
 
-import KitchenZone from "./KitchenZone";
+import SystemTransform from "./system/SystemTransform";
+import SystemArchitecture3D from "./system/SystemArchitecture3D";
 
-import OrderFlow from "./OrderFlow";
+import DinerSet from "./diner/DinerSet";
 
-import OrderTray from "./OrderTray";
+import ServiceCorridor from "./service/ServiceCorridor";
+import OrderFlow from "./service/OrderFlow";
+import ServicePass from "./service/ServicePass";
 
-import ServerActor from "./ServerActor";
+import KitchenSet from "./kitchen/KitchenSet";
 
-import SystemArchitecture from "./SystemArchitecture";
+import ReadySet from "./ready/ReadySet";
+
+import OperationsZone from "./operations/OperationsZone";
 
 import type {
   OrderPhase,
@@ -44,103 +45,41 @@ import {
 export default function ScanfeastScene({
   progressRef,
 }: {
-  progressRef:
-    ScanfeastProgressRef;
+  progressRef: ScanfeastProgressRef;
 }) {
   const [
     phase,
     setPhase,
   ] =
-    useState<OrderPhase>(
-      "idle"
-    );
+    useState<OrderPhase>("idle");
 
-  const previous =
-    useRef<OrderPhase>(
-      "idle"
-    );
+  const previousPhase =
+    useRef<OrderPhase>("idle");
 
   useFrame(() => {
-    const next =
+    const nextPhase =
       getOrderPhase(
-        progressRef.current
+        progressRef.current,
       );
 
     if (
-      next !== previous.current
+      nextPhase !==
+      previousPhase.current
     ) {
-      previous.current =
-        next;
+      previousPhase.current =
+        nextPhase;
 
-      setPhase(next);
+      setPhase(nextPhase);
     }
   });
 
   return (
     <>
-      <color
-        attach="background"
-        args={["#0a0d12"]}
-      />
-
-      <fog
-        attach="fog"
-        args={[
-          "#0a0d12",
-          15,
-          36,
-        ]}
-      />
-
-      <ambientLight
-        intensity={0.75}
-      />
-
-      <hemisphereLight
-        intensity={1.2}
-        color="#ffffff"
-        groundColor="#171b22"
-      />
-
-      <directionalLight
-        position={[
-          -6,
-          10,
-          8,
-        ]}
-        intensity={2.2}
-        castShadow
-        shadow-mapSize-width={
-          2048
+      {/* WORLD */}
+      <SceneLighting
+        progressRef={
+          progressRef
         }
-        shadow-mapSize-height={
-          2048
-        }
-      />
-
-      <directionalLight
-        position={[
-          7,
-          4,
-          -3,
-        ]}
-        intensity={0.55}
-      />
-
-      <pointLight
-        position={[
-          -3,
-          4,
-          4,
-        ]}
-        color="#ff7a1a"
-        intensity={2.5}
-        distance={11}
-      />
-
-      <Environment
-        preset="studio"
-        environmentIntensity={0.45}
       />
 
       <CameraDirector
@@ -149,27 +88,15 @@ export default function ScanfeastScene({
         }
       />
 
-      <RestaurantBase />
-
-      <Suspense fallback={null}>
-        <DinerZone />
-      </Suspense>
-
-      <Suspense fallback={null}>
-        <KitchenZone
-          phase={phase}
-        />
-      </Suspense>
-
-      <ServerActor
-        active={
-          phase === "ready"
+      <DinerSet
+        progressRef={
+          progressRef
         }
       />
 
-      <OrderTray
-        visible={
-          phase === "ready"
+      <ServiceCorridor
+        progressRef={
+          progressRef
         }
       />
 
@@ -180,93 +107,66 @@ export default function ScanfeastScene({
         phase={phase}
       />
 
-      <SystemArchitecture
+      <KitchenSet
+        progressRef={
+          progressRef
+        }
+        phase={phase}
+      />
+
+      <ServicePass
+        progressRef={
+          progressRef
+        }
+        phase={phase}
+      />
+
+      <ReadySet
+        progressRef={
+          progressRef
+        }
+        phase={phase}
+      />
+
+      <OperationsZone
         progressRef={
           progressRef
         }
       />
 
-      <ContactShadows
-        position={[
-          0,
-          0,
-          0,
-        ]}
-        scale={18}
-        far={10}
-        blur={2.4}
-        opacity={0.24}
-        frames={1}
+      {/* TRANSFORMATION */}
+      <CinematicTransition
+        progressRef={
+          progressRef
+        }
+      />
+
+      <WorldFade
+        progressRef={
+          progressRef
+        }
+      />
+
+      <SystemTransform
+        progressRef={
+          progressRef
+        }
+      />
+
+      {/* SOFTWARE */}
+      <SystemArchitecture3D
+        progressRef={
+          progressRef
+        }
+      />
+
+      {/* EDITORIAL */}
+      <SceneLabels
+        progressRef={
+          progressRef
+        }
+        phase={phase}
       />
     </>
-  );
-}
-
-function RestaurantBase() {
-  return (
-    <group>
-      <mesh
-        position={[
-          0,
-          -0.12,
-          0,
-        ]}
-        receiveShadow
-      >
-        <boxGeometry
-          args={[
-            28,
-            0.24,
-            26,
-          ]}
-        />
-
-        <meshStandardMaterial
-          color="#141920"
-          roughness={0.92}
-        />
-      </mesh>
-
-      <mesh
-        position={[
-          0,
-          2.3,
-          -1.7,
-        ]}
-      >
-        <boxGeometry
-          args={[
-            0.08,
-            4.6,
-            7,
-          ]}
-        />
-
-        <meshStandardMaterial
-          color="#1a2028"
-          roughness={0.88}
-        />
-      </mesh>
-
-      <mesh
-        position={[
-          -1.8,
-          3.7,
-          -1.7,
-        ]}
-      >
-        <boxGeometry
-          args={[
-            3.4,
-            0.018,
-            0.018,
-          ]}
-        />
-
-        <meshBasicMaterial
-          color="#ff6a00"
-        />
-      </mesh>
-    </group>
   );
 }

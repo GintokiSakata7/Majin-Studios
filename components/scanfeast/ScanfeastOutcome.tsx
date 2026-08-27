@@ -1,17 +1,32 @@
 export default function ScanfeastOutcome() {
   return (
     <section className="sf-outcome">
-      <span>
-        05 / OUTCOME
-      </span>
+      <div className="sf-outcome__top">
+        <span>
+          05 / OUTCOME
+        </span>
 
-      <h2>
-        THE RESTAURANT
-        <br />
-        <em>
-          MOVES AS ONE.
-        </em>
-      </h2>
+        <small>
+          SCANFEAST / SYSTEM COMPLETE
+        </small>
+      </div>
+
+      <div className="sf-outcome__headline">
+        <h2>
+          THE RESTAURANT
+          <br />
+          <em>
+            MOVES AS ONE.
+          </em>
+        </h2>
+
+        <p>
+          A contactless ordering workflow
+          connecting the guest experience,
+          kitchen execution and management
+          visibility through one live system.
+        </p>
+      </div>
 
       <div className="sf-outcome__metrics">
         <article>
@@ -36,7 +51,7 @@ export default function ScanfeastOutcome() {
 
         <article>
           <strong>
-            RESILIENT
+            LIVE
           </strong>
 
           <span>

@@ -1,20 +1,17 @@
 import {
   execFileSync,
 } from "node:child_process";
-
 import {
   existsSync,
   mkdirSync,
-  readdirSync,
 } from "node:fs";
-
 import {
+  basename,
+  extname,
   join,
   relative,
-  dirname,
-  extname,
-  basename,
 } from "node:path";
+import { readdirSync } from "node:fs";
 
 const SOURCE =
   "public/scanfeast/models/kaykit";
@@ -22,36 +19,25 @@ const SOURCE =
 const OUTPUT =
   "public/scanfeast/models";
 
+mkdirSync(OUTPUT, {
+  recursive: true,
+});
+
 function walk(dir) {
   const result = [];
 
-  for (
-    const entry of
-    readdirSync(dir, {
-      withFileTypes: true,
-    })
-  ) {
+  for (const entry of readdirSync(dir, {
+    withFileTypes: true,
+  })) {
     const full =
-      join(
-        dir,
-        entry.name
-      );
+      join(dir, entry.name);
 
-    if (
-      entry.isDirectory()
-    ) {
-      result.push(
-        ...walk(full)
-      );
-
+    if (entry.isDirectory()) {
+      result.push(...walk(full));
       continue;
     }
 
-    if (
-      /\.(gltf|glb)$/i.test(
-        entry.name
-      )
-    ) {
+    if (/\.(gltf|glb)$/i.test(entry.name)) {
       result.push(full);
     }
   }
@@ -59,54 +45,29 @@ function walk(dir) {
   return result;
 }
 
-if (
-  !existsSync(SOURCE)
-) {
+if (!existsSync(SOURCE)) {
   throw new Error(
-    `Missing asset source directory: ${SOURCE}`
+    `Missing Scanfeast source: ${SOURCE}`,
   );
 }
 
-mkdirSync(
-  OUTPUT,
-  {
-    recursive: true,
-  }
-);
-
-const assets =
-  walk(SOURCE);
+const assets = walk(SOURCE);
 
 console.log(
-  `Found ${assets.length} source assets.`
+  `Found ${assets.length} source assets.`,
 );
 
-for (
-  const input of assets
-) {
-  const relativePath =
-    relative(
-      SOURCE,
-      input
-    );
+for (const input of assets) {
+  const rel =
+    relative(SOURCE, input);
 
   const name =
-    basename(
-      relativePath,
-      extname(
-        relativePath
-      )
-    );
+    basename(rel, extname(rel));
 
   const output =
-    join(
-      OUTPUT,
-      `${name}.glb`
-    );
+    join(OUTPUT, `${name}.glb`);
 
-  console.log(
-    `→ ${relativePath}`
-  );
+  console.log(`Optimizing ${rel}`);
 
   execFileSync(
     "npx",
@@ -117,16 +78,13 @@ for (
       output,
     ],
     {
-      stdio:
-        "inherit",
-
+      stdio: "inherit",
       shell:
-        process.platform ===
-        "win32",
-    }
+        process.platform === "win32",
+    },
   );
 }
 
 console.log(
-  "\nScanfeast assets optimized."
+  "Scanfeast assets optimized.",
 );

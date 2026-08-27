@@ -1,31 +1,24 @@
-"use client";
-
 const MODULES = [
   {
     number: "01",
-    title:
-      "TIME SYNCHRONIZATION",
-    eyebrow:
-      "SERVER-AUTHORITATIVE TIMERS",
+    eyebrow: "SERVER-AUTHORITATIVE TIMERS",
+    title: "TIME SYNCHRONIZATION",
     body:
-      "Client devices cannot be trusted for mission-critical countdowns. The interface calculates remaining time from the server timestamp and a synchronized offset.",
+      "Countdowns are derived from server time instead of trusting a device clock, avoiding visible drift between diner, kitchen and manager surfaces.",
     diagram: [
-      "CLIENT CLOCK",
-      "       ×",
+      "CLIENT",
+      "  ×",
       "SERVER TIME",
-      "       ↓",
+      "  ↓",
       "CANONICAL TIMER",
     ],
   },
-
   {
     number: "02",
-    title:
-      "SMART PREP",
-    eyebrow:
-      "RULE-BASED AUTOMATION",
+    eyebrow: "RULE-BASED AUTOMATION",
+    title: "SMART PREP",
     body:
-      "Preparation time is inferred from cart contents so kitchen teams do not have to manually configure every incoming order.",
+      "Cart contents are evaluated against preparation rules so the kitchen receives a useful estimated completion time without manual setup for every order.",
     diagram: [
       "CART",
       "  ↓",
@@ -34,15 +27,12 @@ const MODULES = [
       "ETA",
     ],
   },
-
   {
     number: "03",
-    title:
-      "NETWORK RESILIENCE",
-    eyebrow:
-      "REALTIME + FALLBACK",
+    eyebrow: "REALTIME + FALLBACK",
+    title: "NETWORK RESILIENCE",
     body:
-      "WebSockets provide immediate updates, while periodic HTTP synchronization guarantees the KDS can recover the canonical state after connectivity interruptions.",
+      "WebSockets deliver immediate updates while periodic HTTP synchronization restores canonical state after connectivity interruptions.",
     diagram: [
       "WEBSOCKET",
       "    ↓",
@@ -63,18 +53,19 @@ export default function ScanfeastEngineering() {
           04 / ENGINEERING
         </span>
 
-        <h2>
-          THE HARD PART
-          <br />
-          WASN'T THE UI.
-        </h2>
+        <div>
+          <h2>
+            THE HARD PART
+            <br />
+            WASN&apos;T THE UI.
+          </h2>
 
-        <p>
-          The system had to remain accurate
-          when clocks drifted, traffic increased
-          and restaurant connectivity became
-          unreliable.
-        </p>
+          <p>
+            Accuracy, automation and resilience
+            are what make a restaurant workflow
+            feel instant.
+          </p>
+        </div>
       </div>
 
       <div className="sf-engineering__grid">
@@ -104,11 +95,11 @@ export default function ScanfeastEngineering() {
 
               <pre>
                 {module.diagram.join(
-                  "\n"
+                  "\n",
                 )}
               </pre>
             </article>
-          )
+          ),
         )}
       </div>
     </section>

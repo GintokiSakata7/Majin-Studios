@@ -63,6 +63,7 @@ export function useScrollAnimation(
     return () => {
       context.revert();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options.enabled, ...dependencies]);
 
   useEffect(() => {

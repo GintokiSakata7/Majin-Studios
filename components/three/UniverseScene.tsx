@@ -60,9 +60,6 @@ interface UniverseCameraProps {
 function UniverseCamera({
   progressRef,
 }: UniverseCameraProps) {
-  const { camera } =
-    useThree();
-
   const { whyStage, currentScene } = useGlobalState();
 
   const target =
@@ -76,7 +73,7 @@ function UniverseCamera({
     });
 
   useFrame(
-    (_, delta) => {
+    (state, delta) => {
       const progress =
         progressRef.current;
 
@@ -91,22 +88,22 @@ function UniverseCamera({
       let tx = THREE.MathUtils.lerp(-1.5, 1.2, p);
       let ty = THREE.MathUtils.lerp(0.3, -0.35, p);
       let tz = THREE.MathUtils.lerp(15, 10.5, p);
-      let trx = THREE.MathUtils.lerp(0, -0.06, p);
-      let try_ = THREE.MathUtils.lerp(0.08, -0.12, p);
+      const trx = THREE.MathUtils.lerp(0, -0.06, p);
+      const try_ = THREE.MathUtils.lerp(0.08, -0.12, p);
 
       if (currentScene === 'WHY_MAJIN') {
         if (whyStage === 'complexity' || whyStage === 'systems') {
           tz = 12.0; 
         } else if (whyStage === 'build') {
-          tz = 10.5; 
-          tx += 0.5;
+          // tz = 10.5; 
+          // tx += 0.5;
         } else if (whyStage === 'ai' || whyStage === 'problem') {
-          tx -= 1.0; 
-          tz = 10.5;
+          // tx -= 1.0; 
+          // tz = 10.5;
         } else if (whyStage === 'resolve') {
-          tz = 9.0; 
-          tx += 1.0;
-          ty += 0.5;
+          // tz = 9.0; 
+          // tx += 1.0;
+          // ty += 0.5;
         }
       }
 
@@ -116,11 +113,11 @@ function UniverseCamera({
       target.current.rx = trx;
       target.current.ry = try_;
 
-      camera.position.x = THREE.MathUtils.damp(camera.position.x, target.current.x, 2.6, delta);
-      camera.position.y = THREE.MathUtils.damp(camera.position.y, target.current.y, 2.6, delta);
-      camera.position.z = THREE.MathUtils.damp(camera.position.z, target.current.z, 2.6, delta);
-      camera.rotation.x = THREE.MathUtils.damp(camera.rotation.x, target.current.rx, 2.6, delta);
-      camera.rotation.y = THREE.MathUtils.damp(camera.rotation.y, target.current.ry, 2.6, delta);
+      state.camera.position.x = THREE.MathUtils.damp(state.camera.position.x, target.current.x, 2.6, delta);
+      state.camera.position.y = THREE.MathUtils.damp(state.camera.position.y, target.current.y, 2.6, delta);
+      state.camera.position.z = THREE.MathUtils.damp(state.camera.position.z, target.current.z, 2.6, delta);
+      state.camera.rotation.x = THREE.MathUtils.damp(state.camera.rotation.x, target.current.rx, 2.6, delta);
+      state.camera.rotation.y = THREE.MathUtils.damp(state.camera.rotation.y, target.current.ry, 2.6, delta);
     }
   );
 
@@ -247,6 +244,7 @@ export function UniverseScene() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 

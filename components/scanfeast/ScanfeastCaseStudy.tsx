@@ -57,7 +57,7 @@ export default function ScanfeastCaseStudy() {
           <h2>
             RESTAURANTS
             <br />
-            SHOULDN'T RUN
+            SHOULDN&apos;T RUN
             <br />
             ON FRAGMENTED
             <br />

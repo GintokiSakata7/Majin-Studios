@@ -1,8 +1,5 @@
-import ScanfeastCaseStudy
-  from "@/components/scanfeast/ScanfeastCaseStudy";
+import ScanfeastCaseStudy from "@/components/scanfeast/ScanfeastCaseStudy";
 
 export default function ScanfeastPage() {
-  return (
-    <ScanfeastCaseStudy />
-  );
+  return <ScanfeastCaseStudy />;
 }

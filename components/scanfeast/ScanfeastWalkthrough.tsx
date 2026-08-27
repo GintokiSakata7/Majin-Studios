@@ -1,19 +1,20 @@
 "use client";
 
 import {
+  useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
+  Suspense,
 } from "react";
+
+import { Loader } from "@react-three/drei";
 
 import {
   Canvas,
 } from "@react-three/fiber";
 
-import {
-  ScanfeastProgressRef,
-} from "./three/CameraDirector";
+import * as THREE from "three";
 
 import {
   SCANFEAST_TIMELINE,
@@ -23,157 +24,264 @@ import {
 
 import ScanfeastScene from "./three/ScanfeastScene";
 
+import type {
+  ScanfeastProgressRef,
+} from "./three/CameraDirector";
+
 export default function ScanfeastWalkthrough() {
+  const sectionRef =
+    useRef<HTMLElement>(null);
+
   const progressRef =
-    useRef(0);
+    useRef<ScanfeastProgressRef>({
+      current: 0,
+    });
 
   const [
     chapterId,
     setChapterId,
   ] =
-    useState<ChapterId>(
-      "arrival"
-    );
+    useState<ChapterId>("arrival");
 
   const [
-    ready,
-    setReady,
+    sceneActive,
+    setSceneActive,
   ] =
-    useState(false);
+    useState(true);
+
+  const updateProgress =
+    useCallback(() => {
+      const section =
+        sectionRef.current;
+
+      if (!section) {
+        return;
+      }
+
+      const rect =
+        section.getBoundingClientRect();
+
+      const distance = Math.max(
+        section.offsetHeight -
+        window.innerHeight,
+        1,
+      );
+
+      const progress = THREE.MathUtils.clamp(
+        -rect.top / distance,
+        0,
+        1,
+      );
+
+      progressRef.current.current =
+        progress;
+
+      const chapter =
+        getChapter(progress);
+
+      setChapterId(
+        (previous) =>
+          previous === chapter.id
+            ? previous
+            : chapter.id,
+      );
+    }, []);
 
   useEffect(() => {
     let raf = 0;
 
-    let previous =
-      "arrival";
+    const schedule = () => {
+      cancelAnimationFrame(raf);
 
-    let last =
-      performance.now();
+      raf =
+        requestAnimationFrame(
+          updateProgress,
+        );
+    };
 
-    const tick =
-      (time: number) => {
-        const delta =
-          Math.min(
-            0.05,
-            (
-              time -
-              last
-            ) / 1000
-          );
+    updateProgress();
 
-        last =
-          time;
+    window.addEventListener(
+      "scroll",
+      schedule,
+      {
+        passive: true,
+      },
+    );
 
-        const max =
-          document.documentElement
-            .scrollHeight -
-          window.innerHeight;
+    window.addEventListener(
+      "resize",
+      schedule,
+    );
 
-        const target =
-          max <= 0
-            ? 0
-            : Math.min(
-                1,
-                Math.max(
-                  0,
-                  window.scrollY /
-                    max
-                )
-              );
-
-        const smoothing =
-          1 -
-          Math.exp(
-            -11 * delta
-          );
-
-        progressRef.current =
-          progressRef.current +
-          (
-            target -
-            progressRef.current
-          ) *
-            smoothing;
-
-        const chapter =
-          getChapter(
-            target
-          );
-
-        if (
-          chapter.id !==
-          previous
-        ) {
-          previous =
-            chapter.id;
-
-          setChapterId(
-            chapter.id
-          );
-        }
-
-        raf =
-          requestAnimationFrame(
-            tick
-          );
-      };
-
-    raf =
-      requestAnimationFrame(
-        tick
+    return () => {
+      window.removeEventListener(
+        "scroll",
+        schedule,
       );
+
+      window.removeEventListener(
+        "resize",
+        schedule,
+      );
+
+      cancelAnimationFrame(raf);
+    };
+  }, [updateProgress]);
+
+  useEffect(() => {
+    const section =
+      sectionRef.current;
+
+    if (!section) {
+      return;
+    }
+
+    const observer =
+      new IntersectionObserver(
+        ([entry]) => {
+          setSceneActive(
+            entry.isIntersecting,
+          );
+        },
+        {
+          rootMargin:
+            "200px 0px 200px 0px",
+        },
+      );
+
+    observer.observe(section);
 
     return () =>
-      cancelAnimationFrame(
-        raf
-      );
+      observer.disconnect();
   }, []);
 
   const chapter =
-    useMemo(
-      () =>
-        SCANFEAST_TIMELINE.find(
-          (item) =>
-            item.id ===
-            chapterId
-        )!,
-      [chapterId]
+    SCANFEAST_TIMELINE.find(
+      (item) =>
+        item.id === chapterId,
+    ) ??
+    SCANFEAST_TIMELINE[0];
+
+  const jumpTo = (
+    progress: number,
+  ) => {
+    const section =
+      sectionRef.current;
+
+    if (!section) {
+      return;
+    }
+
+    const top =
+      window.scrollY +
+      section.getBoundingClientRect()
+        .top;
+
+    const distance = Math.max(
+      section.offsetHeight -
+      window.innerHeight,
+      1,
     );
 
+    window.scrollTo({
+      top:
+        top +
+        distance *
+        THREE.MathUtils.clamp(
+          progress,
+          0,
+          1,
+        ),
+      behavior: "smooth",
+    });
+  };
+
   return (
-    <section className="sf-walkthrough">
-      <div className="sf-walkthrough__scene">
+    <section
+      ref={sectionRef}
+      className="sf-walkthrough"
+    >
+      <div className="sf-walkthrough__sticky">
         <Canvas
+          frameloop={
+            sceneActive
+              ? "always"
+              : "demand"
+          }
+          dpr={
+            typeof window !== "undefined" &&
+            window.innerWidth < 768
+              ? [1, 1.1]
+              : [1, 1.45]
+          }
           camera={{
             position: [
-              -10.5,
-              5.6,
-              12.5,
+              -8.6,
+              5.25,
+              11.8,
             ],
-            fov: 48,
+            fov: 47,
             near: 0.1,
-            far: 100,
+            far: 80,
           }}
-          dpr={[
-            1,
-            1.5,
-          ]}
           shadows
           gl={{
-            antialias: true,
+            antialias:
+              typeof window !==
+              "undefined"
+                ? window.innerWidth >= 900
+                : true,
+            alpha: false,
+            depth: true,
+            stencil: false,
             powerPreference:
               "high-performance",
           }}
+          performance={{
+            min: 0.65,
+            max: 1.25,
+            debounce: 200,
+          }}
+          onCreated={({ gl, scene }) => {
+            gl.outputColorSpace =
+              THREE.SRGBColorSpace;
+
+            gl.toneMapping =
+              THREE.ACESFilmicToneMapping;
+
+            gl.toneMappingExposure =
+              1.03;
+
+            gl.shadowMap.enabled = true;
+            gl.shadowMap.type = THREE.PCFShadowMap;
+
+            scene.background =
+              new THREE.Color(
+                "#070a0d",
+              );
+
+            scene.fog =
+              new THREE.FogExp2(
+                "#070a0d",
+                0.028,
+              );
+          }}
         >
-          <ScanfeastScene
-            progressRef={
-              progressRef
-            }
-          />
+          <Suspense fallback={null}>
+            {/* eslint-disable react-hooks/refs */}
+            <ScanfeastScene
+              progressRef={
+                progressRef.current
+              }
+            />
+            {/* eslint-enable react-hooks/refs */}
+          </Suspense>
         </Canvas>
+        <Loader />
       </div>
 
-      <div className="sf-walkthrough__top">
+      <div className="sf-walkthrough__topbar">
         <span>
           MAJIN STUDIOS / CASE STUDY
         </span>
@@ -183,84 +291,46 @@ export default function ScanfeastWalkthrough() {
         </span>
       </div>
 
-      {chapterId ===
-        "arrival" && (
-        <div className="sf-walkthrough__hero">
-          <span>
-            RESTAURANT OPERATING SYSTEM
-          </span>
+      <div
+        className={
+          chapterId === "arrival"
+            ? "sf-walkthrough__hero"
+            : "sf-walkthrough__chapter"
+        }
+      >
+        <span>
+          {chapter.number} /{" "}
+          {chapter.label}
+        </span>
 
-          <h1>
-            SCANFEAST
-            <br />
-            <em>
-              CONNECTS
-            </em>
-            <br />
-            THE FLOOR.
-          </h1>
+        <h1>
+          {chapter.title}
+        </h1>
 
-          <p>
-            A smart contactless
-            ordering system
-            connecting diners,
-            chefs and management
-            through real-time
-            web technology.
-          </p>
-        </div>
-      )}
+        <p>
+          {chapter.body}
+        </p>
 
-      {chapterId !==
-        "arrival" && (
-        <div
-          key={chapter.id}
-          className="sf-walkthrough__chapter"
-        >
-          <span>
-            {chapter.number}
-            {" "}
-            /
-            {" "}
-            {chapter.label}
-          </span>
+        <small className="sf-walkthrough__scene-code">
+          {chapter.scene}
+        </small>
+      </div>
 
-          <h2>
-            {chapter.title}
-          </h2>
-
-          <p>
-            {chapter.body}
-          </p>
-        </div>
-      )}
-
-      <div className="sf-walkthrough__timeline">
+      <aside className="sf-walkthrough__rail">
         {SCANFEAST_TIMELINE.map(
           (item) => (
             <button
               key={item.id}
               type="button"
               className={
-                item.id ===
-                chapterId
+                item.id === chapterId
                   ? "active"
                   : ""
               }
-              onClick={() => {
-                const max =
-                  document.documentElement
-                    .scrollHeight -
-                  window.innerHeight;
-
-                window.scrollTo({
-                  top:
-                    max *
-                    item.start,
-                  behavior:
-                    "smooth",
-                });
-              }}
+              aria-label={`Go to ${item.label}`}
+              onClick={() =>
+                jumpTo(item.start)
+              }
             >
               <span>
                 {item.number}
@@ -270,42 +340,23 @@ export default function ScanfeastWalkthrough() {
                 {item.label}
               </strong>
             </button>
-          )
+          ),
         )}
+      </aside>
+
+      <div className="sf-walkthrough__hint">
+        <span>
+          SCROLL TO MOVE
+        </span>
+
+        <i />
       </div>
 
-      <div className="sf-walkthrough__progress">
-        <span
-          style={{
-            transform: `scaleX(${progressRef.current})`,
-          }}
-        />
+      <div className="sf-walkthrough__end">
+        <span>
+          SYSTEM ONLINE / EXPERIENCE COMPLETE
+        </span>
       </div>
-
-      {!ready && (
-        <div
-          className="sf-walkthrough__loader"
-          ref={() => {
-            if (!ready) {
-              window.setTimeout(
-                () =>
-                  setReady(
-                    true
-                  ),
-                700
-              );
-            }
-          }}
-        >
-          <strong>
-            SCANFEAST
-          </strong>
-
-          <span>
-            LOADING EXPERIENCE
-          </span>
-        </div>
-      )}
     </section>
   );
 }

@@ -18,16 +18,20 @@ import * as THREE from "three";
 
 import type {
   ScanfeastProgressRef,
-} from "./CameraDirector";
+} from "../CameraDirector";
 
 type Props = {
   active: boolean;
   progressRef: ScanfeastProgressRef;
+  position?: [number, number, number];
+  scale?: number;
 };
 
-export default function ServerActor({
+export default function ChefActor({
   active,
   progressRef,
+  position = [0, 0, 0],
+  scale = 1,
 }: Props) {
   const group =
     useRef<THREE.Group>(null);
@@ -36,7 +40,7 @@ export default function ServerActor({
     scene,
     animations,
   } = useGLTF(
-    "/scanfeast/models/server.glb",
+    "/scanfeast/models/chef.glb",
   );
 
   const {
@@ -46,28 +50,10 @@ export default function ServerActor({
     group,
   );
 
-  const currentAction =
+  const activeAction =
     useRef<
       THREE.AnimationAction | null
     >(null);
-
-  const start =
-    useRef(
-      new THREE.Vector3(
-        5.8,
-        0,
-        -5.05,
-      ),
-    );
-
-  const target =
-    useRef(
-      new THREE.Vector3(
-        3.75,
-        0,
-        -5.05,
-      ),
-    );
 
   useEffect(() => {
     if (!actions) {
@@ -77,26 +63,21 @@ export default function ServerActor({
     const names =
       Object.keys(actions);
 
-    const walkName =
+    const workName =
       names.find((name) =>
-        /walk|move|run/i.test(
-          name,
-        ),
-      );
+        /cook|work/i.test(name),
+      ) ??
+      names.find((name) =>
+        /idle|stand/i.test(name),
+      ) ??
+      names[0];
 
-    const idleName =
-      names.find((name) =>
-        /idle|stand/i.test(
-          name,
-        ),
-      );
+    if (!workName) {
+      return;
+    }
 
     const action =
-      walkName
-        ? actions[walkName]
-        : idleName
-          ? actions[idleName]
-          : actions[names[0]];
+      actions[workName];
 
     if (!action) {
       return;
@@ -107,10 +88,10 @@ export default function ServerActor({
       THREE.LoopRepeat,
       Infinity,
     );
-    action.fadeIn(0.3);
+    action.fadeIn(0.35);
     action.play();
 
-    currentAction.current =
+    activeAction.current =
       action;
 
     return () => {
@@ -124,13 +105,12 @@ export default function ServerActor({
       return;
     }
 
-    const p =
-      progressRef.current;
+    const p = progressRef.current;
 
-    const entrance =
+    const reveal =
       THREE.MathUtils.smootherstep(
         THREE.MathUtils.clamp(
-          (p - 0.54) / 0.10,
+          (p - 0.33) / 0.11,
           0,
           1,
         ),
@@ -138,10 +118,10 @@ export default function ServerActor({
         1,
       );
 
-    const exit =
+    const retreat =
       THREE.MathUtils.smootherstep(
         THREE.MathUtils.clamp(
-          (p - 0.66) / 0.10,
+          (p - 0.55) / 0.11,
           0,
           1,
         ),
@@ -149,41 +129,36 @@ export default function ServerActor({
         1,
       );
 
-    /*
-     * The server follows the service path.
-     */
-    const travel =
-      entrance *
-      (1 - exit);
+    const actorVisibility =
+      reveal * (1 - retreat);
 
     const targetX =
+      position[0] +
       THREE.MathUtils.lerp(
-        start.current.x,
-        target.current.x,
-        travel,
-      );
+        0.65,
+        0,
+        reveal,
+      ) +
+      retreat * 1.2;
 
     const targetY =
+      position[1] +
       THREE.MathUtils.lerp(
-        -0.15,
+        -0.35,
         0,
-        entrance,
+        reveal,
       ) -
-      exit * 0.2;
+      retreat * 0.2;
 
     const targetZ =
-      THREE.MathUtils.lerp(
-        start.current.z,
-        target.current.z - 0.35,
-        travel,
-      ) +
-      exit * 0.8;
+      position[2] -
+      retreat * 0.45;
 
     group.current.position.x =
       THREE.MathUtils.damp(
         group.current.position.x,
         targetX,
-        4.8,
+        7,
         delta,
       );
 
@@ -191,7 +166,7 @@ export default function ServerActor({
       THREE.MathUtils.damp(
         group.current.position.y,
         targetY,
-        5.5,
+        7,
         delta,
       );
 
@@ -199,47 +174,59 @@ export default function ServerActor({
       THREE.MathUtils.damp(
         group.current.position.z,
         targetZ,
-        5.5,
+        7,
         delta,
       );
 
-    const facing =
+    const breathing =
+      1 +
+      Math.sin(
+        performance.now() * 0.0012,
+      ) *
+      0.006;
+
+    const finalScale =
+      scale *
       THREE.MathUtils.lerp(
-        Math.PI * 0.5,
-        Math.PI,
-        travel,
-      );
+        0.92,
+        1,
+        actorVisibility,
+      ) *
+      breathing;
+
+    group.current.scale.set(
+      finalScale,
+      finalScale,
+      finalScale,
+    );
+
+    const lookTarget =
+      THREE.MathUtils.lerp(
+        -0.25,
+        0.18,
+        reveal,
+      ) -
+      retreat * 0.3;
 
     group.current.rotation.y =
       THREE.MathUtils.damp(
         group.current.rotation.y,
-        facing,
-        5,
+        lookTarget,
+        6,
         delta,
       );
 
-    const scale =
-      THREE.MathUtils.lerp(
-        0.82,
-        0.9,
-        travel,
-      );
-
-    group.current.scale.setScalar(
-      scale,
-    );
-
     group.current.visible =
       active &&
-      p > 0.51 &&
-      p < 0.74;
+      actorVisibility >
+      0.015;
 
-    if (currentAction.current) {
-      currentAction.current.timeScale =
+    if (activeAction.current) {
+      activeAction.current.timeScale =
         THREE.MathUtils.lerp(
-          0.5,
-          1.0,
-          travel,
+          0.35,
+          1,
+          actorVisibility,
         );
     }
   });
@@ -247,11 +234,7 @@ export default function ServerActor({
   return (
     <group
       ref={group}
-      position={[
-        5.8,
-        0,
-        -5.05,
-      ]}
+      position={position}
     >
       <primitive
         object={scene}
@@ -261,5 +244,5 @@ export default function ServerActor({
 }
 
 useGLTF.preload(
-  "/scanfeast/models/server.glb",
+  "/scanfeast/models/chef.glb",
 );
