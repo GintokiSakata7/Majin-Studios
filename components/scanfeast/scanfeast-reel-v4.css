@@ -1461,9 +1461,10 @@
     }
 
     .sf-r4-sticky {
-        min-height: 640px;
+        min-height: 600px;
     }
 
+    .sf-r4-system-heading,
     .sf-r4-copy,
     .sf-r4-copy--left,
     .sf-r4-copy--right {
@@ -1474,18 +1475,27 @@
         text-align: left;
     }
 
+    .sf-r4-system-heading h3,
     .sf-r4-copy h3 {
-        font-size: 37px;
+        font-size: 32px;
+        margin-top: 10px;
+        line-height: 0.95;
+        letter-spacing: -0.06em;
+    }
+
+    .sf-r4-copy p {
+        margin-top: 12px;
+        font-size: 11px;
     }
 
     .sf-r4-phone {
         left: 50%;
-        top: 58%;
-        width: 205px;
+        top: 65%;
+        width: 175px;
     }
 
     .sf-r4-phone-screen {
-        height: 425px;
+        height: 360px;
     }
 
     .sf-r4-chip,
@@ -1498,8 +1508,8 @@
 
     .sf-r4-big-order {
         left: 50%;
-        top: 51%;
-        width: 225px;
+        top: 65%;
+        width: 190px;
         transform-origin: center;
     }
 
@@ -1510,6 +1520,7 @@
 
     .sf-r4-realtime-core {
         left: 50%;
+        top: 65%;
         width: 160px;
         padding: 20px;
     }
@@ -1531,8 +1542,8 @@
     .sf-r4-kds-frame,
     .sf-r4-dashboard {
         left: 50%;
-        top: 61%;
-        width: 94vw;
+        top: 65%;
+        width: 90vw;
     }
 
     .sf-r4-kds-body {
@@ -1548,7 +1559,8 @@
     }
 
     .sf-r4-timer-card,
-    .sf-r4-rush {
+    .sf-r4-rush,
+    .sf-r4-chart-panel {
         display: none;
     }
 
@@ -1569,36 +1581,55 @@
     }
 
     .sf-r4-node--diner {
-        left: 3%;
+        left: 5%;
+        top: 44%;
     }
 
     .sf-r4-node--kds {
-        left: 15%;
+        left: 50%;
+        top: 20%;
     }
 
     .sf-r4-node--manager {
-        right: 3%;
+        right: 5%;
+        top: 44%;
+    }
+
+    .sf-r4-node--socket {
+        left: 50%;
+        top: 32%;
     }
 
     .sf-r4-system-line--a {
-        width: 34%;
+        left: 5%;
+        top: 44%;
+        width: 49vw;
+        --sf-line-a-rot: -23deg;
     }
 
     .sf-r4-system-line--b {
-        width: 33%;
+        left: 50%;
+        top: 32%;
+        width: 49vw;
+        --sf-line-b-rot: 23deg;
     }
 
     .sf-r4-system-line--c {
-        width: 28%;
+        left: 50%;
+        top: 20%;
+        width: 12vh;
+        --sf-line-c-rot: 90deg;
     }
 
     .sf-r4-core {
+        left: 50%;
+        top: 60%;
         width: 155px;
         padding: 18px;
     }
 
     .sf-r4-finale {
-        bottom: 8%;
+        bottom: 4%;
     }
 
     .sf-r4-finale strong {

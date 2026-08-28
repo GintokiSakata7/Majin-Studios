@@ -875,21 +875,21 @@ function SystemScene() {
 
         <div
           className="sf-r4-system-line sf-r4-system-line--a"
-          style={{ transform: `scaleX(${lines}) rotate(0deg)` }}
+          style={{ transform: `scaleX(${lines}) rotate(var(--sf-line-a-rot, 0deg))` }}
         >
           <i />
         </div>
 
         <div
           className="sf-r4-system-line sf-r4-system-line--b"
-          style={{ transform: `scaleX(${lines}) rotate(0deg)` }}
+          style={{ transform: `scaleX(${lines}) rotate(var(--sf-line-b-rot, 0deg))` }}
         >
           <i />
         </div>
 
         <div
           className="sf-r4-system-line sf-r4-system-line--c"
-          style={{ transform: `scaleX(${lines}) rotate(53deg)` }}
+          style={{ transform: `scaleX(${lines}) rotate(var(--sf-line-c-rot, 53deg))` }}
         >
           <i />
         </div>
