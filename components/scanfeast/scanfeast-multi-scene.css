@@ -1498,7 +1498,7 @@
     }
 
     .sf-ms-sticky {
-        min-height: 640px;
+        min-height: 600px;
     }
 
     .sf-ms-copy,
@@ -1512,25 +1512,28 @@
     }
 
     .sf-ms-copy h3 {
-        font-size: 38px;
+        font-size: 26px;
+        margin-top: 10px;
     }
 
     .sf-ms-copy p {
+        margin-top: 12px;
+        font-size: 11px;
         max-width: 290px;
     }
 
     .sf-ms-table {
-        top: 65%;
-        width: 300px;
+        top: 68%;
+        width: 270px;
     }
 
     .sf-ms-phone {
-        top: 57%;
-        width: 205px;
+        top: 62%;
+        width: 175px;
     }
 
     .sf-ms-phone-screen {
-        min-height: 432px;
+        min-height: 360px;
     }
 
     .sf-ms-event {
@@ -1562,8 +1565,8 @@
     .sf-ms-kitchen,
     .sf-ms-manager {
         left: 50%;
-        top: 62%;
-        width: 94vw;
+        top: 66%;
+        width: 90vw;
     }
 
     .sf-ms-kitchen__body {
@@ -1629,6 +1632,7 @@
     }
 
     .sf-ms-network-core {
+        top: 66%;
         width: 155px;
         padding: 18px;
     }

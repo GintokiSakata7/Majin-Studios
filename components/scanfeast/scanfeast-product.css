@@ -1347,11 +1347,11 @@
 
 @media (max-width: 760px) {
     .sf-product-cinematic {
-        height: 520vh;
+        height: 250vh;
     }
 
     .sf-product-sticky {
-        min-height: 640px;
+        min-height: 600px;
     }
 
     .sf-product-copy,
@@ -1365,25 +1365,28 @@
     }
 
     .sf-product-copy h3 {
-        font-size: 37px;
+        font-size: 26px;
+        margin-top: 10px;
     }
 
     .sf-product-copy p {
+        margin-top: 12px;
+        font-size: 11px;
         max-width: 280px;
     }
 
     .sf-product-table {
-        top: 65%;
-        width: 300px;
+        top: 68%;
+        width: 260px;
     }
 
     .sf-product-phone {
-        top: 56%;
-        width: 205px;
+        top: 62%;
+        width: 175px;
     }
 
     .sf-product-phone__screen {
-        height: 430px;
+        height: 360px;
     }
 
     .sf-event-card {

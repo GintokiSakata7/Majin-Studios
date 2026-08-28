@@ -1995,20 +1995,28 @@
   }
 
   .sf-engineering-card {
-    min-height: 520px;
+    min-height: 600px;
   }
 }
 
 @media (max-width: 760px) {
   .sf-case-study__intro {
     padding:
-      120px 20px;
+      60px 20px;
+    min-height: auto;
+  }
+
+  .sf-case-study__intro h1 {
+    font-size: clamp(46px, 12vw, 78px);
+  }
+
+  .sf-case-study__intro::after {
+    display: none;
   }
 
   .sf-problem,
   .sf-section {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 60px 20px;
   }
 
   .sf-section__intro,
@@ -2025,7 +2033,7 @@
   }
 
   .sf-cinematic__canvas {
-    min-height: 620px;
+    min-height: 600px;
   }
 
   .sf-cinematic-copy,
@@ -2041,27 +2049,28 @@
   }
 
   .sf-cinematic-copy h3 {
-    font-size: 35px;
+    font-size: 26px;
+    margin-top: 10px;
   }
 
   .sf-cinematic-copy p {
+    margin-top: 12px;
+    font-size: 11px;
     max-width: 285px;
   }
 
   .sf-table-3d {
-    top: 62%;
-
-    width: 315px;
+    top: 65%;
+    width: 280px;
   }
 
   .sf-phone-device {
-    top: 53%;
-
-    width: 205px;
+    top: 58%;
+    width: 175px;
   }
 
   .sf-phone-device__screen {
-    height: 420px;
+    height: 360px;
   }
 
   .sf-diner-route {
@@ -2083,8 +2092,7 @@
 
   .sf-kds-device {
     left: 50%;
-    top: 59%;
-
+    top: 62%;
     width: 92vw;
   }
 
@@ -2122,8 +2130,7 @@
 
   .sf-manager-device {
     left: 50%;
-    top: 58%;
-
+    top: 62%;
     width: 95vw;
   }
 
@@ -4115,11 +4122,11 @@
 
 @media (max-width: 760px) {
   .sf-product-cinematic {
-    height: 520vh;
+    height: 250vh;
   }
 
   .sf-product-sticky {
-    min-height: 640px;
+    min-height: 480px;
   }
 
   .sf-product-copy,
