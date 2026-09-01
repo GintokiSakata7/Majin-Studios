@@ -12,6 +12,9 @@ export default function ScanfeastCaseStudy() {
     <main className="sf-case-study">
       <section className="sf-case-study__intro">
         <div>
+          <a href="https://www.majinstudios.tech/" style={{ display: 'block', marginBottom: '1.5rem', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', fontSize: '0.875rem' }}>
+            ← Back to Majin Studios
+          </a>
           <span>
             MAJIN STUDIOS / CASE STUDY
           </span>

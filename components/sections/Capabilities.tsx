@@ -12,6 +12,7 @@ interface Capability {
   id: CapabilitiesStage;
   number: string;
   title: string;
+  description: string;
   items: string[];
   className: string;
 }
@@ -21,6 +22,7 @@ const capabilities: Capability[] = [
     id: 'ai',
     number: 'CAP / 01',
     title: 'AI SYSTEMS',
+    description: 'We build production AI systems including LLM applications, retrieval-augmented generation (RAG), intelligent agents, and workflow automation.',
     items: ['LLM APPLICATIONS', 'RAG', 'WORKFLOW AUTOMATION', 'EVALUATION', 'DATA PIPELINES', 'AI INTEGRATION'],
     className: 'ai',
   },
@@ -28,6 +30,7 @@ const capabilities: Capability[] = [
     id: 'agents',
     number: 'CAP / 02',
     title: 'AGENTS',
+    description: 'We engineer autonomous AI agents capable of complex planning, tool use, memory management, and multi-step execution workflows.',
     items: ['PLANNING', 'TOOL USE', 'MEMORY', 'ORCHESTRATION', 'MULTI-STEP EXECUTION', 'AUTONOMOUS WORKFLOWS'],
     className: 'agents',
   },
@@ -35,6 +38,7 @@ const capabilities: Capability[] = [
     id: 'products',
     number: 'CAP / 03',
     title: 'PRODUCTS',
+    description: 'We build high-performance full-stack web applications, SaaS platforms, real-time dashboards, and responsive interfaces.',
     items: ['SAAS', 'WEB APPLICATIONS', 'DASHBOARDS', 'PLATFORMS', 'REAL-TIME SYSTEMS', 'RESPONSIVE UX'],
     className: 'products',
   },
@@ -42,6 +46,7 @@ const capabilities: Capability[] = [
     id: 'custom',
     number: 'CAP / 04',
     title: 'CUSTOM SOFTWARE',
+    description: 'We design and build full-stack custom software products and API integrations around real-world business and operational problems.',
     items: ['BUSINESS SYSTEMS', 'INTERNAL TOOLS', 'API INTEGRATIONS', 'WORKFLOW AUTOMATION', 'CLIENT-SPECIFIC SOFTWARE', 'DEPLOYMENT'],
     className: 'custom',
   },
@@ -49,6 +54,7 @@ const capabilities: Capability[] = [
     id: 'data',
     number: 'CAP / 05',
     title: 'DATA SYSTEMS',
+    description: 'We develop scalable data infrastructure, ETL pipelines, vector databases, and real-time streaming architectures.',
     items: ['VECTOR DATABASES', 'ETL PIPELINES', 'REAL-TIME STREAMING', 'DATA WAREHOUSING', 'ANALYTICS', 'KNOWLEDGE GRAPHS'],
     className: 'data',
   },
@@ -56,6 +62,7 @@ const capabilities: Capability[] = [
     id: 'cloud',
     number: 'CAP / 06',
     title: 'CLOUD ARCHITECTURE',
+    description: 'We architect secure, scalable cloud infrastructure, serverless deployments, and automated CI/CD pipelines on AWS and GCP.',
     items: ['AWS / GCP', 'KUBERNETES', 'CI/CD PIPELINES', 'SERVERLESS', 'INFRASTRUCTURE AS CODE', 'SECURITY'],
     className: 'cloud',
   },
@@ -204,9 +211,13 @@ export function Capabilities() {
                         {capability.number}
                       </TechnicalLabel>
 
-                      <h3 className="text-heading-3 mt-3 mb-6 text-text-primary">
+                      <h3 className="text-heading-3 mt-3 mb-2 text-text-primary">
                         {capability.title}
                       </h3>
+                      
+                      <p className="text-body-sm text-text-secondary mb-6 leading-relaxed">
+                        {capability.description}
+                      </p>
 
                       <ul className="flex flex-col gap-2 mt-auto">
                         {capability.items.map((item) => (

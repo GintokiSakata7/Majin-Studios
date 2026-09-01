@@ -144,10 +144,10 @@ export function Work() {
                         href={project.links?.caseStudy || `#project-${project.id}`}
                         variant="outline"
                         withArrow
-                        external={!!project.links?.caseStudy}
+                        external={false}
                         className={styles.highlightedButton}
                       >
-                        VIEW SYSTEM
+                        {project.links?.caseStudy ? `Explore ${project.name}` : 'VIEW SYSTEM'}
                       </Button>
                     </AgentTarget>
                   </div>

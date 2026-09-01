@@ -42,10 +42,6 @@ export const metadata: Metadata = {
     'https://www.majinstudios.tech'
   ),
 
-  alternates: {
-    canonical: '/',
-  },
-
   icons: {
     icon: [
       {
@@ -161,6 +157,7 @@ export default function RootLayout({
       '@type': 'WebSite',
       '@id': 'https://www.majinstudios.tech/#website',
       name: 'Majin Studios',
+      alternateName: 'Majin',
       url: 'https://www.majinstudios.tech/',
       publisher: {
         '@id': 'https://www.majinstudios.tech/#organization',
@@ -179,8 +176,15 @@ export default function RootLayout({
         height: 1024,
       },
       image: 'https://www.majinstudios.tech/logo.jpg',
+      description: 'Majin Studios is a product engineering studio based in Hyderabad, India that builds AI systems, intelligent agents, full-stack applications, and custom software around real-world problems.',
+      email: 'hello@majin.studio',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Hyderabad',
+        addressCountry: 'India'
+      },
       sameAs: [
-        'https://in.linkedin.com/company/majin-studios',
+        'https://www.linkedin.com/company/majin-studios',
         'https://www.instagram.com/majin_studios/',
       ],
     },

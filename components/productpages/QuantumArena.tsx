@@ -342,6 +342,9 @@ export function QuantumArena() {
     <main id="top">
         <section className="wrap hero">
             <div className="hero-copy reveal">
+                <a href="https://www.majinstudios.tech/" style={{ display: 'inline-block', marginBottom: '1.5rem', color: 'var(--green)', textDecoration: 'none', fontSize: '0.75rem', letterSpacing: '2px', fontFamily: 'var(--mono)', opacity: 0.8 }}>
+                    ← BACK TO MAJIN STUDIOS
+                </a>
                 <div className="hero-label eyebrow"><span className="live-dot"></span> MAJIN STUDIOS // FIELD REPORT 001 //
                     SYSTEM OPERATIONAL</div>
                 <h1 className="hero-title">QUANTUM<br /><span className="line2">ARENA</span></h1>
