@@ -24,7 +24,6 @@ import {
 import {
   ScrollProgress,
   CustomCursor,
-  BootLoader,
   GlobalAgent,
 } from '../components/ui';
 
@@ -36,7 +35,6 @@ import { useGlobalState } from '../store/useGlobalState';
 
 export default function Home() {
   const mainRef = usePageAnimations();
-  const { hasBooted } = useGlobalState();
 
   useEffect(() => {
     /*
@@ -60,26 +58,12 @@ export default function Home() {
     }
   }, []);
 
-  // Control body scrolling based on boot sequence
-  useEffect(() => {
-    if (!hasBooted) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [hasBooted]);
-
   return (
     <>
       {/* ---------------------------------------------------
           GLOBAL EXPERIENCE CHROME
           --------------------------------------------------- */}
 
-      <BootLoader />
       <GlobalAgent />
 
       <CustomCursor />

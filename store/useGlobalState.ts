@@ -115,7 +115,7 @@ export const useGlobalState = create<GlobalState>((set) => ({
   scrollProgress: 0,
   setScrollProgress: (progress) => set({ scrollProgress: progress }),
   
-  hasBooted: false,
+  hasBooted: true,
   setHasBooted: (status) => set({ hasBooted: status }),
 
   hasSeenTutorial: false,
