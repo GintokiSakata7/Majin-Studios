@@ -1,0 +1,94 @@
+.container {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: #030405; /* Deep dark background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Background grid effect */
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Scanline effect over everything */
+.scanline {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.25) 51%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.centralLogo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  mix-blend-mode: screen;
+}
+
+.logoImage {
+  width: clamp(200px, 40vw, 400px);
+  height: auto;
+  opacity: 0;
+  filter: blur(10px);
+  transform: scale(0.95);
+  animation: logoReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.logoSub {
+  margin-top: var(--space-4, 16px);
+  font-family: var(--font-mono, monospace);
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  color: var(--text-secondary, #888);
+  opacity: 0;
+  animation: subReveal 1s ease-out 0.8s forwards;
+}
+
+@keyframes logoReveal {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: scale(1);
+  }
+}
+
+@keyframes subReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
