@@ -1,0 +1,451 @@
+/* =========================================================
+   SHOWCASE CONTAINER & HUD CHROME
+========================================================= */
+
+.showcaseWrapper {
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--line-active, rgba(255, 255, 255, 0.12));
+  background: rgba(6, 8, 12, 0.92);
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: var(--font-mono, monospace);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+}
+
+.topControlBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.85rem;
+  background: rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.windowControls {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.winDotRed {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff5f56;
+}
+
+.winDotYellow {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffbd2e;
+}
+
+.winDotGreen {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #27c93f;
+}
+
+.tabGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  overflow-x: auto;
+}
+
+.tabButton {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.tabButton:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.tabActiveCyan {
+  color: #00f0ff !important;
+  background: rgba(0, 240, 255, 0.1) !important;
+  border-color: rgba(0, 240, 255, 0.4) !important;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.15);
+}
+
+.tabActiveLime {
+  color: #00ff66 !important;
+  background: rgba(0, 255, 102, 0.1) !important;
+  border-color: rgba(0, 255, 102, 0.4) !important;
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.15);
+}
+
+.urlBar {
+  font-size: 0.58rem;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 0.2rem 0.6rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  letter-spacing: 0.05em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 140px;
+  min-width: 0;
+  flex-shrink: 1;
+}
+
+/* =========================================================
+   SCREENSHOT FRAME & DISPLAY AREA
+========================================================= */
+
+.frameViewport {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  background: #05070a;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainScreenshot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  filter: contrast(1.05) brightness(0.95);
+}
+
+.overlayGradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(5, 7, 10, 0.85) 100%);
+  pointer-events: none;
+}
+
+/* Mobile Frame Overlay */
+.mobileOverlay {
+  position: absolute;
+  bottom: -15px;
+  left: 20px;
+  width: 140px;
+  height: 250px;
+  border-radius: 16px;
+  border: 2px solid rgba(0, 240, 255, 0.4);
+  background: #000;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.2);
+  overflow: hidden;
+  z-index: 10;
+  transition: transform 0.3s ease;
+}
+
+.mobileOverlay:hover {
+  transform: translateY(-8px) scale(1.03);
+}
+
+.mobileScreenshot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* Inset Glass Detail Frame (Quantum Arena) */
+.glassDetailFrame {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  width: 150px;
+  height: 95px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 255, 102, 0.4);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 255, 102, 0.2);
+  z-index: 10;
+  transition: transform 0.3s ease;
+}
+
+.glassDetailFrame:hover {
+  transform: scale(1.04);
+}
+
+/* Floating HUD Badges */
+.floatingBadge {
+  position: absolute;
+  z-index: 15;
+  padding: 0.4rem 0.75rem;
+  background: rgba(8, 12, 18, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  max-width: calc(100% - 30px);
+  overflow: hidden;
+}
+
+.floatingBadge span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.badgeCyan {
+  border-color: rgba(0, 240, 255, 0.3);
+  color: #00f0ff;
+}
+
+.badgeLime {
+  border-color: rgba(0, 255, 102, 0.3);
+  color: #00ff66;
+}
+
+.badgeAmber {
+  border-color: rgba(255, 170, 0, 0.3);
+  color: #ffaa00;
+}
+
+/* Bottom Telemetry Footer */
+.bottomFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.6);
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.bottomFooter > div {
+  min-width: 0;
+  flex-shrink: 1;
+}
+
+.bottomFooter span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pulseDotCyan {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00f0ff;
+  box-shadow: 0 0 8px #00f0ff;
+  animation: pulseDot 1.6s infinite ease-in-out;
+}
+
+.pulseDotLime {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00ff66;
+  box-shadow: 0 0 8px #00ff66;
+  animation: pulseDot 1.6s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* =========================================================
+   TABLET RESPONSIVE
+========================================================= */
+
+/* =========================================================
+   TABLET RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+  .topControlBar {
+    padding: 0.5rem 0.65rem;
+    gap: 0.4rem;
+  }
+
+  .tabButton {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.55rem;
+  }
+
+  .frameViewport {
+    height: 300px;
+  }
+
+  .mobileOverlay {
+    width: 110px;
+    height: 190px;
+    left: 12px;
+    bottom: -10px;
+  }
+
+  .glassDetailFrame {
+    width: 120px;
+    height: 75px;
+    left: 10px;
+    bottom: 10px;
+  }
+
+  .bottomFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.56rem;
+  }
+}
+
+/* =========================================================
+   MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 640px) {
+  .topControlBar {
+    padding: 0.45rem 0.6rem;
+    gap: 0.35rem;
+  }
+
+  .windowControls span {
+    display: none;
+  }
+
+  .tabGroup {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0.25rem;
+  }
+
+  .tabGroup::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tabButton {
+    padding: 0.25rem 0.45rem;
+    font-size: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .urlBar {
+    display: none;
+  }
+
+  .frameViewport {
+    height: 250px;
+  }
+
+  .mainScreenshot {
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  /* Show a sleek mini mobile overlay on mobile so Scanfeast matches desktop */
+  .mobileOverlay {
+    display: block;
+    width: 85px;
+    height: 145px;
+    left: 10px;
+    bottom: -8px;
+    border-radius: 10px;
+    border-width: 1.5px;
+  }
+
+  /* Compact glass detail frame so Quantum Arena main screenshot is spacious */
+  .glassDetailFrame {
+    width: 105px;
+    height: 65px;
+    left: 8px;
+    bottom: 8px;
+    border-radius: 4px;
+  }
+
+  .floatingBadge {
+    font-size: 0.48rem;
+    padding: 0.2rem 0.45rem;
+    gap: 0.25rem;
+    max-width: calc(100% - 20px);
+  }
+
+  .bottomFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+    padding: 0.45rem 0.65rem;
+    font-size: 0.5rem;
+  }
+
+  .bottomFooter > div {
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .bottomFooter span {
+    white-space: normal;
+    word-break: break-word;
+  }
+}
+
+/* =========================================================
+   VERY SMALL SCREENS
+========================================================= */
+
+@media (max-width: 400px) {
+  .frameViewport {
+    height: 210px;
+  }
+
+  .mobileOverlay {
+    width: 70px;
+    height: 120px;
+    left: 6px;
+    bottom: -5px;
+  }
+
+  .glassDetailFrame {
+    display: none; /* Hide secondary inset frame on ultra-small screens to stay uncluttered */
+  }
+
+  .floatingBadge {
+    font-size: 0.44rem;
+    padding: 0.15rem 0.3rem;
+    max-width: calc(100% - 16px);
+  }
+
+  .tabButton {
+    padding: 0.2rem 0.35rem;
+    font-size: 0.46rem;
+  }
+
+  .bottomFooter {
+    font-size: 0.46rem;
+    padding: 0.35rem 0.5rem;
+  }
+}

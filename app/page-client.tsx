@@ -25,6 +25,7 @@ import {
   ScrollProgress,
   CustomCursor,
   GlobalAgent,
+  BootLoader,
 } from '../components/ui';
 
 import {
@@ -35,6 +36,19 @@ import { useGlobalState } from '../store/useGlobalState';
 
 export default function Home() {
   const mainRef = usePageAnimations();
+  const { hasBooted } = useGlobalState();
+
+  useEffect(() => {
+    if (!hasBooted) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [hasBooted]);
 
   useEffect(() => {
     /*
@@ -63,6 +77,8 @@ export default function Home() {
       {/* ---------------------------------------------------
           GLOBAL EXPERIENCE CHROME
           --------------------------------------------------- */}
+
+      <BootLoader />
 
       <GlobalAgent />
 
