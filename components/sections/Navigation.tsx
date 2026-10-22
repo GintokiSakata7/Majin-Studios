@@ -6,13 +6,13 @@ import Image from 'next/image';
 import styles from './Navigation.module.css';
 
 const NAV_LINKS = [
-  { label: 'Work', href: '#work' },
-  { label: 'Capabilities', href: '#capabilities' },
-  { label: 'Systems', href: '#systems' },
+  { label: 'Work', href: '/#work' },
+  { label: 'Capabilities', href: '/#capabilities' },
+  { label: 'Systems', href: '/#systems' },
   { label: 'Builder', href: '/tools/builder' },
-  { label: 'Studio', href: '#studio' },
-  { label: 'Why Us', href: '#why-majin' },
-  { label: 'Contact', href: '#contact' }
+  { label: 'Why Us', href: '/#why-majin' },
+  { label: 'Join Us', href: '/join-us' },
+  { label: 'Contact', href: '/#contact' }
 ];
 
 export function Navigation() {
@@ -41,7 +41,7 @@ export function Navigation() {
         className={`page-container ${styles.container}`}
       >
         <a
-          href="#home"
+          href="/"
           className={styles.brand}
           data-cursor="interactive"
         >
@@ -56,21 +56,21 @@ export function Navigation() {
 
         <div className={styles.links}>
           <a
-            href="#work"
+            href="/#work"
             className={styles.link}
           >
             Work
           </a>
 
           <a
-            href="#capabilities"
+            href="/#capabilities"
             className={styles.link}
           >
             Capabilities
           </a>
 
           <a
-            href="#systems"
+            href="/#systems"
             className={styles.link}
           >
             Systems
@@ -99,21 +99,21 @@ export function Navigation() {
           </div>
 
           <a
-            href="#studio"
-            className={styles.link}
-          >
-            Studio
-          </a>
-
-          <a
-            href="#why-majin"
+            href="/#why-majin"
             className={styles.link}
           >
             Why Us
           </a>
 
           <a
-            href="#contact"
+            href="/join-us"
+            className={styles.link}
+          >
+            Join Us
+          </a>
+
+          <a
+            href="/#contact"
             className={styles.link}
           >
             Contact

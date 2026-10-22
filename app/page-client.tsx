@@ -15,7 +15,6 @@ import {
   Systems,
   Work,
   Process,
-  Team,
   WhyMajin,
   Footer,
   Tools,
@@ -118,8 +117,6 @@ export default function Home() {
         <Tools />
 
         <Process />
-
-        <Team />
 
         <WhyMajin />
       </main>

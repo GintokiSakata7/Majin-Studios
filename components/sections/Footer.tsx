@@ -131,6 +131,15 @@ export function Footer() {
                     HELLO@MAJIN.STUDIO
                   </a>
                 </AgentTarget>
+
+                <a
+                  href="https://www.linkedin.com/in/dhanush0254"
+                  className={styles.link}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  FOUNDER: DHANUSH ↗
+                </a>
               </div>
             </div>
 
@@ -251,13 +260,17 @@ export function Footer() {
             <span>
               BUILDING INTELLIGENT SYSTEMS
             </span>
+
+            <span>
+              FOUNDER: <a href="https://www.linkedin.com/in/dhanush0254" target="_blank" rel="noopener noreferrer" className="hover:text-accent-current transition-colors underline decoration-line-structural underline-offset-4">DHANUSH</a>
+            </span>
           </div>
 
           <div
             className={styles.links}
           >
             <a
-              href="#work"
+              href="/#work"
               className={
                 styles.link
               }
@@ -266,16 +279,16 @@ export function Footer() {
             </a>
 
             <a
-              href="#studio"
+              href="/join-us"
               className={
                 styles.link
               }
             >
-              STUDIO
+              JOIN US
             </a>
 
             <a
-              href="#contact"
+              href="/#contact"
               className={
                 styles.link
               }

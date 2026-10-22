@@ -36,7 +36,6 @@ const SCENES: SceneDefinition[] = [
   { selector: '#systems', state: 'SYSTEMS', accent: 'LIME' },
   { selector: '#agents', state: 'AGENTS', accent: 'CYAN' },
   { selector: '#work', state: 'PRODUCTS', accent: 'AMBER' },
-  { selector: '#studio', state: 'TEAM', accent: 'VIOLET' },
   { selector: '#why-majin', state: 'WHY_MAJIN', accent: 'MONOCHROME' },
   { selector: '#contact', state: 'CONTACT', accent: 'MONOCHROME' },
 ];
