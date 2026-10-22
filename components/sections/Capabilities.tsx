@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import styles from './Capabilities.module.css';
-import { SectionHeading, TechnicalLabel } from '../ui';
+import { SectionHeading, TechnicalLabel, Button } from '../ui';
 import { AgentTarget } from '../ui/AgentTarget';
 import { useMotionEngine } from '../../hooks/useMotionEngine';
 import { useGlobalState } from '../../store/useGlobalState';
@@ -13,6 +13,7 @@ interface Capability {
   number: string;
   title: string;
   description: string;
+  outcome: string;
   items: string[];
   className: string;
 }
@@ -21,49 +22,55 @@ const capabilities: Capability[] = [
   {
     id: 'ai',
     number: 'CAP / 01',
-    title: 'AI SYSTEMS',
-    description: 'We build production AI systems including LLM applications, retrieval-augmented generation (RAG), intelligent agents, and workflow automation.',
-    items: ['LLM APPLICATIONS', 'RAG', 'WORKFLOW AUTOMATION', 'EVALUATION', 'DATA PIPELINES', 'AI INTEGRATION'],
+    title: 'AI SYSTEMS & AUTOMATION',
+    description: 'We engineer production AI applications, retrieval-augmented generation (RAG), and intelligent workflows that run autonomously in production.',
+    outcome: 'Reduce repetitive manual tasks and make internal systems continuously intelligent.',
+    items: ['LLM APPLICATIONS & RAG', 'WORKFLOW AUTOMATION', 'DATA PIPELINES & VECTOR DBs', 'GUARDRAILS & EVALUATION', 'AUTONOMOUS AGENTS'],
     className: 'ai',
   },
   {
     id: 'agents',
     number: 'CAP / 02',
-    title: 'AGENTS',
-    description: 'We engineer autonomous AI agents capable of complex planning, tool use, memory management, and multi-step execution workflows.',
-    items: ['PLANNING', 'TOOL USE', 'MEMORY', 'ORCHESTRATION', 'MULTI-STEP EXECUTION', 'AUTONOMOUS WORKFLOWS'],
+    title: 'AGENTS & ORCHESTRATION',
+    description: 'We design autonomous agent swarms capable of complex multi-step reasoning, real-time tool calling, memory recall, and deterministic execution.',
+    outcome: 'Delegate multi-step operational flows to verified, self-healing agent loops.',
+    items: ['MULTI-STEP PLANNING', 'TOOL INTEGRATION', 'PERSISTENT VECTOR MEMORY', 'SWARM ORCHESTRATION', 'SELF-HEALING FLOWS'],
     className: 'agents',
   },
   {
     id: 'products',
     number: 'CAP / 03',
-    title: 'PRODUCTS',
-    description: 'We build high-performance full-stack web applications, SaaS platforms, real-time dashboards, and responsive interfaces.',
-    items: ['SAAS', 'WEB APPLICATIONS', 'DASHBOARDS', 'PLATFORMS', 'REAL-TIME SYSTEMS', 'RESPONSIVE UX'],
+    title: 'DIGITAL PRODUCTS & SAAS',
+    description: 'We design and engineer high-performance web applications, customer portals, SaaS platforms, and responsive mobile interfaces.',
+    outcome: 'Turn an initial idea or manual operational workflow into a usable, scalable product.',
+    items: ['FULL-STACK WEB APPS', 'B2B SAAS PLATFORMS', 'CUSTOMER & CLIENT PORTALS', 'REAL-TIME DASHBOARDS', 'MOBILE-FIRST INTERFACES'],
     className: 'products',
   },
   {
     id: 'custom',
     number: 'CAP / 04',
-    title: 'CUSTOM SOFTWARE',
-    description: 'We design and build full-stack custom software products and API integrations around real-world business and operational problems.',
-    items: ['BUSINESS SYSTEMS', 'INTERNAL TOOLS', 'API INTEGRATIONS', 'WORKFLOW AUTOMATION', 'CLIENT-SPECIFIC SOFTWARE', 'DEPLOYMENT'],
+    title: 'CUSTOM BUSINESS SOFTWARE',
+    description: 'We build tailored operational tools, mission-critical admin consoles, and resilient API integrations around real-world business constraints.',
+    outcome: 'Eliminate fragmented spreadsheets and unify disconnected third-party tools.',
+    items: ['INTERNAL OPERATIONAL TOOLS', 'API INTEGRATIONS & GATEWAYS', 'PAYMENT & BILLING SYSTEMS', 'CUSTOM ADMIN CONSOLES'],
     className: 'custom',
   },
   {
     id: 'data',
     number: 'CAP / 05',
-    title: 'DATA SYSTEMS',
-    description: 'We develop scalable data infrastructure, ETL pipelines, vector databases, and real-time streaming architectures.',
-    items: ['VECTOR DATABASES', 'ETL PIPELINES', 'REAL-TIME STREAMING', 'DATA WAREHOUSING', 'ANALYTICS', 'KNOWLEDGE GRAPHS'],
+    title: 'BRAND & CREATIVE DESIGN',
+    description: 'We create distinct digital brand identities, design systems, interactive component libraries, and conversion-optimized UI/UX.',
+    outcome: 'Make your business instantly recognizable and interfaces effortless for high user retention.',
+    items: ['DESIGN SYSTEMS & TOKENS', 'PRODUCT UI/UX DESIGN', 'INTERACTIVE MOTION CRAFT', 'BRAND IDENTITY & GUIDELINES'],
     className: 'data',
   },
   {
     id: 'cloud',
     number: 'CAP / 06',
-    title: 'CLOUD ARCHITECTURE',
-    description: 'We architect secure, scalable cloud infrastructure, serverless deployments, and automated CI/CD pipelines on AWS and GCP.',
-    items: ['AWS / GCP', 'KUBERNETES', 'CI/CD PIPELINES', 'SERVERLESS', 'INFRASTRUCTURE AS CODE', 'SECURITY'],
+    title: 'DIGITAL GROWTH & SCALE',
+    description: 'We build high-converting landing pages, scalable cloud infrastructure, automated telemetry, and conversion-focused funnels.',
+    outcome: 'Help the business reach its target audience and turn traffic into qualified enquiries.',
+    items: ['HIGH-CONVERSION LANDING PAGES', 'ANALYTICS & CONVERSION TRACKING', 'CI/CD & SERVERLESS CLOUD', 'PERFORMANCE OPTIMIZATION'],
     className: 'cloud',
   },
 ];
@@ -215,9 +222,22 @@ export function Capabilities() {
                         {capability.title}
                       </h3>
                       
-                      <p className="text-body-sm text-text-secondary mb-6 leading-relaxed">
+                      <p className="text-body-sm text-text-secondary mb-4 leading-relaxed">
                         {capability.description}
                       </p>
+
+                      {/* Explicit Business Outcome Callout */}
+                      <div className="mb-5 p-3 rounded border border-line-structural bg-universe/80 backdrop-blur-md">
+                        <div className="flex items-center gap-2 mb-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent-current animate-pulse" />
+                          <span className="font-mono text-[9px] font-bold tracking-widest text-accent-current uppercase">
+                            OUTCOME
+                          </span>
+                        </div>
+                        <p className="font-sans text-[11.5px] text-text-secondary leading-snug">
+                          {capability.outcome}
+                        </p>
+                      </div>
 
                       <ul className="flex flex-col gap-2 mt-auto">
                         {capability.items.map((item) => (
@@ -236,6 +256,19 @@ export function Capabilities() {
                   </article>
                 );
               })}
+            </div>
+
+            {/* High-Converting Guidance Box */}
+            <div className="mt-10 p-6 rounded-lg border border-line-structural bg-surface/30 backdrop-blur-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <span className="text-accent-current text-xl">✦</span>
+                <p className="text-body-sm text-text-secondary">
+                  <strong className="text-text-primary">Not sure which service you need?</strong> Tell us the business bottleneck you&apos;re trying to solve and we&apos;ll map out the right first step together.
+                </p>
+              </div>
+              <Button href="#contact" variant="outline" withArrow>
+                START WITH A CONVERSATION
+              </Button>
             </div>
           </div>
         </div>

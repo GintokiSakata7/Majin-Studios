@@ -15,6 +15,7 @@ import {
 import {
   ScanfeastCardPreview,
   QuantumArenaCardPreview,
+  NexusAICardPreview,
 } from './visuals';
 
 import {
@@ -28,6 +29,7 @@ import {
 const projectVisuals = {
   'scanfeast-platform': ScanfeastCardPreview,
   'quantum-arena': QuantumArenaCardPreview,
+  'nexus-ai': NexusAICardPreview,
 } as const;
 
 function ProjectVisual({
@@ -109,9 +111,37 @@ export function Work() {
                       {project.tagline}
                     </p>
 
-                    <p className="mt-5 text-body text-secondary max-w-lg">
-                      {project.solution}
-                    </p>
+                    {/* Structured Problem / What We Built / Key Decisions Narrative */}
+                    <div className="mt-5 flex flex-col gap-3.5 max-w-lg border-l-2 border-line-active pl-4 py-1">
+                      <div>
+                        <span className="font-mono text-[10px] font-bold text-accent-current tracking-wider uppercase block mb-0.5">
+                          The Problem
+                        </span>
+                        <p className="text-body-sm text-text-secondary leading-relaxed">
+                          {project.problem}
+                        </p>
+                      </div>
+
+                      <div>
+                        <span className="font-mono text-[10px] font-bold text-text-primary tracking-wider uppercase block mb-0.5">
+                          What We Built
+                        </span>
+                        <p className="text-body-sm text-text-secondary leading-relaxed">
+                          {project.solution}
+                        </p>
+                      </div>
+
+                      {project.keyDecisions && (
+                        <div>
+                          <span className="font-mono text-[10px] font-bold text-accent-current tracking-wider uppercase block mb-0.5">
+                            Key Decisions
+                          </span>
+                          <p className="text-body-sm text-text-secondary leading-relaxed">
+                            {project.keyDecisions}
+                          </p>
+                        </div>
+                      )}
+                    </div>
 
                     {project.metrics &&
                       project.metrics.length >

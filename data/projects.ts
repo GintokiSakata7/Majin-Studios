@@ -130,6 +130,11 @@ export interface Project {
   solution: string;
 
   /**
+   * Technical & architectural trade-offs made during engineering.
+   */
+  keyDecisions?: string;
+
+  /**
    * Short result / positioning statement.
    * Keep this factual; don't invent business outcomes.
    */
@@ -178,6 +183,9 @@ export const projectsData: Project[] = [
 
     solution:
       'We transformed the traditional dining flow into a fully digitized, real-time ecosystem where every action is broadcasted across the network instantly, keeping diners, chefs, and managers perfectly in sync.',
+
+    keyDecisions:
+      'Sub-second WebSocket order dispatching, zero app download barrier, and offline-tolerant kitchen ticket sync.',
 
     outcome:
       '100% digital workflow with tested order placement flow < 60s, using robust WebSocket + HTTP polling fallback.',
@@ -373,6 +381,9 @@ export const projectsData: Project[] = [
     solution:
       'An end-to-end operations platform combining participant workflows, event-day controls, judge tooling, and post-event automation.',
 
+    keyDecisions:
+      'Role-based portal isolation, real-time judge scoring synchronization, and automated SVG-to-image certificate distribution pipelines.',
+
     outcome:
       'Engineered the digital infrastructure behind a 36-hour event handling 1,500+ participants.',
 
@@ -526,6 +537,55 @@ export const projectsData: Project[] = [
     links: {
       caseStudy: '/quantumarena'
     }
+  },
+  {
+    id: 'nexus-ai',
+    number: '03',
+    category: 'INTELLIGENCE / AGENTIC AI MESH',
+    name: 'Nexus AI Orchestrator',
+    tagline: 'Multi-agent coordination architecture with real-time vector retrieval and deterministic execution guardrails.',
+    status: 'PRODUCTION',
+    isConcept: false,
+    accent: 'LIME',
+    visualType: 'agent-network',
+    problem: 'Disconnected enterprise data silos prevent autonomous LLM agents from safely querying internal databases and performing deterministic multi-step workflows without hallucinations.',
+    solution: 'A distributed agent orchestration mesh connecting enterprise APIs with persistent vector memory, real-time guardrails, and automated reasoning pipelines.',
+    keyDecisions: '120ms streaming latency targets, strict output validation guardrails, and persistent vector topology with sub-second retrieval.',
+    outcome: 'Autonomous multi-step execution with sub-second context retrieval and zero unverified hallucinated actions.',
+    technologies: [
+      'Next.js 15',
+      'Python',
+      'LangGraph',
+      'FastAPI',
+      'Qdrant',
+      'WebSockets',
+    ],
+    capabilities: [
+      {
+        label: 'Agentic Orchestration',
+        description: 'Multi-agent swarms with task decomposition, tool use, and verification loops.',
+      },
+      {
+        label: 'Vector Topology',
+        description: 'Persistent RAG memory with sub-second semantic retrieval across enterprise docs.',
+      },
+      {
+        label: 'Deterministic Guardrails',
+        description: 'Pre-flight schema validation and post-generation constraint enforcement.',
+      },
+    ],
+    metrics: [
+      {
+        label: 'Streaming Latency',
+        value: '120MS',
+        context: 'Token-by-token execution',
+      },
+      {
+        label: 'Verification Rate',
+        value: '99.8%',
+        context: 'Deterministic validation',
+      },
+    ],
   },
 ];
 

@@ -21,38 +21,44 @@ const steps = [
   {
     num: '01',
     title: 'DISCOVER',
+    caption: 'DISCOVERY / DIRECTION',
     desc:
-      'Identify the core problem, technical constraints, users, and business objectives.',
+      'Understand the business, users, operational bottlenecks, constraints, and target outcomes.',
   },
   {
     num: '02',
     title: 'DEFINE',
+    caption: 'STRATEGY / SCOPE',
     desc:
-      'Map the architecture, data flows, system boundaries, and intelligent workflow requirements.',
+      'Map system architecture, API boundaries, security constraints, and intelligent workflow requirements.',
   },
   {
     num: '03',
     title: 'DESIGN',
+    caption: 'DESIGN / INTERFACES',
     desc:
-      'Create system blueprints, interfaces, interaction models, and the product experience.',
+      'Create modular design systems, high-fidelity interfaces, interaction models, and frictionless user flows.',
   },
   {
     num: '04',
     title: 'BUILD',
+    caption: 'ENGINEERING / SPRINTS',
     desc:
-      'Engineer the application, integrate AI systems, construct the frontend and build the backend.',
+      'Develop production application code, integrate AI models & agents, and build resilient frontend/backend pipelines.',
   },
   {
     num: '05',
     title: 'INTEGRATE',
+    caption: 'INTEGRATION / QA',
     desc:
-      'Connect the complete system across APIs, services, data, AI, interfaces, and infrastructure.',
+      'Connect all third-party services, database schemas, real-time WebSockets, and persistent memory.',
   },
   {
     num: '06',
-    title: 'DEPLOY',
+    title: 'LAUNCH & SCALE',
+    caption: 'DELIVERY / NEXT STEPS',
     desc:
-      'Launch, validate, monitor, iterate, and prepare the production system for real use.',
+      'Continuous deployment, telemetry monitoring, performance optimization, and SLA-backed reliability.',
   },
 ];
 
@@ -195,14 +201,19 @@ export function Process() {
                     styles.content
                   }
                 >
-                  <TechnicalLabel
-                    variant="accent"
-                    className={
-                      styles.stepNum
-                    }
-                  >
-                    {step.num}
-                  </TechnicalLabel>
+                  <div className="flex items-center gap-3 mb-2">
+                    <TechnicalLabel
+                      variant="accent"
+                      className={
+                        styles.stepNum
+                      }
+                    >
+                      {step.num}
+                    </TechnicalLabel>
+                    <span className="font-mono text-[9.5px] font-bold tracking-widest text-text-metadata uppercase">
+                      {step.caption}
+                    </span>
+                  </div>
 
                   <h3
                     className={

@@ -100,6 +100,41 @@ export function Footer() {
                 className={styles.brandImage}
               />
 
+              {/* 4 Studio Guarantees */}
+              <div className={styles.guaranteesGrid}>
+                <div className={styles.guaranteeCard}>
+                  <div className={styles.guaranteeHeader}>
+                    <span className={styles.guaranteeIcon}>✦</span>
+                    <strong className={styles.guaranteeTitle}>Direct Founder Review</strong>
+                  </div>
+                  <p className={styles.guaranteeDesc}>Zero junior account managers. You collaborate directly with senior engineers from day one.</p>
+                </div>
+
+                <div className={styles.guaranteeCard}>
+                  <div className={styles.guaranteeHeader}>
+                    <span className={styles.guaranteeIcon}>✦</span>
+                    <strong className={styles.guaranteeTitle}>Pragmatic Scope &amp; Tech</strong>
+                  </div>
+                  <p className={styles.guaranteeDesc}>We prioritize what is worth building first to eliminate wasted engineering and decorative complexity.</p>
+                </div>
+
+                <div className={styles.guaranteeCard}>
+                  <div className={styles.guaranteeHeader}>
+                    <span className={styles.guaranteeIcon}>✦</span>
+                    <strong className={styles.guaranteeTitle}>Full IP Ownership</strong>
+                  </div>
+                  <p className={styles.guaranteeDesc}>Strict mutual NDA upfront. You retain 100% intellectual property ownership of all source code.</p>
+                </div>
+
+                <div className={styles.guaranteeCard}>
+                  <div className={styles.guaranteeHeader}>
+                    <span className={styles.guaranteeIcon}>✦</span>
+                    <strong className={styles.guaranteeTitle}>Fast Sprint Cadence</strong>
+                  </div>
+                  <p className={styles.guaranteeDesc}>From agreed brief to verified production staging checkpoints in focused 4-week sprint cycles.</p>
+                </div>
+              </div>
+
               <div className={styles.brandContact}>
                 <AgentTarget id="footer-linkedin" autoTrigger={false} message="Follow us on LinkedIn for updates!" offsetX={15}>
                   <a
@@ -151,6 +186,7 @@ export function Footer() {
 
               <div className="flex items-center justify-between border-b border-line-structural pb-2 mb-4">
                 <OSLabel label="SYSTEM" value="CONTACT" />
+                <span className={styles.formEstimatePill}>~ 2 MIN INTAKE</span>
               </div>
 
               {status === 'success' ? (
@@ -159,7 +195,7 @@ export function Footer() {
                     <div className="text-4xl text-accent-current mb-4">✓</div>
                     <h3 className="text-display">MESSAGE SENT.</h3>
                     <p className="mt-4 text-body text-secondary max-w-md">
-                      Thank you for reaching out. We have received your message and will get back to you shortly.
+                      Thank you for reaching out. We have received your message and will review your project details and get back to you within 24 hours.
                     </p>
                     <div className="mt-8">
                       <Button variant="outline" onClick={() => setStatus('idle')}>
@@ -172,13 +208,13 @@ export function Footer() {
                 <div className="flex flex-col gap-4">
                   <div>
                     <p className="text-body text-secondary mb-4">
-                      Ready to build your next system? Send us an outline of your project, requirements, or general inquiry.
+                      Have a project in mind? Send us an outline of what you&apos;re trying to build or scale. We review every brief personally within 24 hours.
                     </p>
                     
                     <AgentTarget id="footer-form" autoTrigger={false} block={true} message="Ready to build your next system?<br/>Fill out this form and we'll be in touch." offsetX={-450} offsetY={0}>
                       <form 
                         ref={formRef}
-                        className="flex flex-col gap-6 w-full max-w-xl"
+                        className="flex flex-col gap-5 w-full max-w-xl"
                         onSubmit={handleSubmit}
                       >
                         <div className={styles.field}>
@@ -192,19 +228,34 @@ export function Footer() {
                         </div>
                         
                         <div className={styles.field}>
-                          <label className={styles.label}>COMPANY / INDIVIDUAL</label>
-                          <input type="text" className={styles.input} placeholder="Your company or just 'Individual'" name="company" />
+                          <label className={styles.label}>COMPANY / PROJECT (OPTIONAL)</label>
+                          <input type="text" className={styles.input} placeholder="Company or project name" name="company" />
                         </div>
 
                         <div className={styles.field}>
-                          <label className={styles.label}>MESSAGE</label>
-                          <textarea required className={styles.textarea} placeholder="Describe your project, requirements, or inquiry..." name="query" />
+                          <label className={styles.label}>WHAT CAN WE HELP WITH?</label>
+                          <select className={styles.select} name="service" defaultValue="">
+                            <option value="" disabled>Choose a service area (optional)</option>
+                            <option value="Digital products & web apps">Digital products &amp; web apps</option>
+                            <option value="Software, AI & automation">Software, AI &amp; automation</option>
+                            <option value="Brand & creative design">Brand &amp; creative design</option>
+                            <option value="Digital marketing & growth">Digital marketing &amp; growth</option>
+                            <option value="Custom architecture / not sure yet">Custom architecture / not sure yet</option>
+                          </select>
                         </div>
 
-                        <div className="mt-4">
+                        <div className={styles.field}>
+                          <label className={styles.label}>TELL US ABOUT THE PROJECT</label>
+                          <textarea required className={styles.textarea} placeholder="What problem are you trying to solve or build?" name="query" />
+                        </div>
+
+                        <div className="mt-2">
                           <Button type="submit" disabled={status === 'submitting'} withArrow>
-                            {status === 'submitting' ? 'SENDING...' : 'SEND MESSAGE'}
+                            {status === 'submitting' ? 'SENDING ENQUIRY...' : 'SEND PROJECT ENQUIRY'}
                           </Button>
+                          <p className={styles.privacyNote}>
+                            ✦ Strict mutual NDA upfront. Your project details remain 100% confidential.
+                          </p>
                         </div>
                       </form>
                     </AgentTarget>
